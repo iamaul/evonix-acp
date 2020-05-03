@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { 
     Form, 
     Grid, 
@@ -7,8 +8,45 @@ import {
     Segment,
     Icon 
 } from 'semantic-ui-react';
+import AuthContext from '../../../context/auth/authContext';
 
-const Login = () => {
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end'
+});
+
+const Login = (props) => {
+    const authContext = useContext(AuthContext);
+    const { userLogin, error, clearErrors, isAuthenticated } = authContext;
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            props.history.push('/dashboard');
+        }
+
+        if (error) {
+            error.map(err => {
+                return Toast.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: err.msg
+                });
+            });
+            clearErrors();
+        }
+    }, [error, isAuthenticated, props.history])
+
+    const [user, setUser] = useState({ usermail: '', password: '' });
+    const { usermail, password } = user;
+
+    const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+
+    const onSubmit = e => {
+        e.preventDefault();
+
+        userLogin({ usermail, password });
+    }
+
     return (
         <>
             <Grid textAlign="center" style={{ height: '80vh' }} verticalAlign="middle">
@@ -16,22 +54,26 @@ const Login = () => {
                     <Header as="h2" textAlign="center">
                         <Image src="/assets/images/evonix-logo.png" size="massive" />
                     </Header>
-                    <Form size="large">
+                    <Form size="large" onSubmit={onSubmit}>
                         <Segment stacked>
                             <Form.Input 
                                 type="text"
-                                name="usermail" 
+                                name="usermail"
+                                value={usermail} 
                                 icon="user" 
                                 iconPosition="left" 
                                 placeholder="Username or Email Address"
+                                onChange={onChange}
                                 fluid 
                             />
                             <Form.Input
                                 type="password"
                                 name="password"
+                                value={password}
                                 icon="lock"
                                 iconPosition="left"
                                 placeholder="Password"
+                                onChange={onChange}
                                 fluid
                             />
                             <Form.Button color="red" fluid size="large" content="Sign In" />

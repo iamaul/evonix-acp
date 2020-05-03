@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Icon } from 'semantic-ui-react';
+import AuthContext from '../../../context/auth/authContext';    
 
 const Navbar = () => {
+    const authContext = useContext(AuthContext);
+
+    const { user, userLoad, userLogout } = authContext;
+
+    useEffect(() => {
+        userLoad();
+    }, [])
+
+    const onLogout = () => {
+        userLogout();
+    }
+
     return (
         <>
             <Menu pointing secondary stackable>
@@ -58,10 +71,10 @@ const Navbar = () => {
                 <Menu.Menu position="right">
                     <Dropdown
                         item
-                        text="iamaul"
+                        text={user && user.name}
                     >
                         <Dropdown.Menu>
-                            <Dropdown.Item>
+                            <Dropdown.Item onClick={onLogout}>
                                 <Icon name="sign out" />
                                 Sign Out
                             </Dropdown.Item>
