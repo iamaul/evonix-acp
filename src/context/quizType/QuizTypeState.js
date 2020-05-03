@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 
 import QuizTypeContext from './quizTypeContext';
-import quizReducer from './quizTypeReducer';
+import quizTypeReducer from './quizTypeReducer';
 
 import {
     GET_QUIZ_TYPE,
@@ -23,7 +23,7 @@ const QuizTypeState = (props) => {
         error: null
     }
 
-    const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
+    const [state, dispatch] = useReducer(quizTypeReducer, INITIAL_STATE);
 
     // API Requests
     const getQuizType = async () => {
@@ -109,3 +109,5 @@ const QuizTypeState = (props) => {
         </QuizTypeContext.Provider>
     )
 }
+
+export default QuizTypeState;
