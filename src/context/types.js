@@ -1,9 +1,15 @@
-export const SET_ALERT = 'SET_ALERT';
-export const REMOVE_ALERT = 'REMOVE_ALERT';
-
 export const USER_LOADED = 'USER_LOADED';
 
 export const AUTH_ERROR = 'AUTH_ERROR';
+
+export const GET_QUIZ_TYPE = 'GET_QUIZ_TYPE';
+export const ADD_QUIZ_TYPE = 'ADD_QUIZ_TYPE';
+export const DELETE_QUIZ_TYPE = 'DELETE_QUIZ_TYPE';
+export const SET_CURRENT_QUIZ_TYPE = 'SET_CURRENT_QUIZ_TYPE';
+export const CLEAR_CURRENT_QUIZ_TYPE = 'CLEAR_CURRENT_QUIZ_TYPE';
+export const UPDATE_QUIZ_TYPE = 'UPDATE_QUIZ_TYPE';
+export const CLEAR_QUIZ_TYPE = 'CLEAR_QUIZ_TYPE';
+export const QUIZ_TYPE_ERROR = 'QUIZ_TYPE_ERROR';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';

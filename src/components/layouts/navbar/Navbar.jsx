@@ -23,7 +23,7 @@ const Navbar = () => {
                 <Menu.Item
                     as={NavLink}
                     name="Dashboard"
-                    exact to="/"
+                    exact to="/dashboard"
                 />
                 <Menu.Item
                     as={NavLink}

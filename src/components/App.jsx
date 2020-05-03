@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import AuthState from '../context/auth/AuthState';
+import QuizTypeState from '../context/quizType/QuizTypeState';
 
 import PrivateRoute from '../routes/PrivateRoute';
 
@@ -18,21 +19,23 @@ const App = () => {
     return (
         <>
             <AuthState>
-                <Router>
-                    <Container>
-                        <Switch>
-                            <Route exact path="/" component={Login} />
-                            <Fragment>
-                                <Header />
-                                <PrivateRoute exact path="/dashboard" component={Home} />
-                                <PrivateRoute exact path="/quiz/type" component={QuizType} />
-                                <PrivateRoute exact path="/quiz/question" component={Quiz} />
-                                <PrivateRoute exact path="/quiz/answer" component={QuizAnswer} />
-                                <Footer />
-                            </Fragment>
-                        </Switch>
-                    </Container>
-                </Router>
+                <QuizTypeState>
+                    <Router>
+                        <Container>
+                            <Switch>
+                                <Route exact path="/" component={Login} />
+                                <Fragment>
+                                    <Header />
+                                    <PrivateRoute exact path="/dashboard" component={Home} />
+                                    <PrivateRoute exact path="/quiz/type" component={QuizType} />
+                                    <PrivateRoute exact path="/quiz/question" component={Quiz} />
+                                    <PrivateRoute exact path="/quiz/answer" component={QuizAnswer} />
+                                    <Footer />
+                                </Fragment>
+                            </Switch>
+                        </Container>
+                    </Router>
+                </QuizTypeState>
             </AuthState>
         </>
     )
