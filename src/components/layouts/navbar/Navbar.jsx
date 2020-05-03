@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Icon } from 'semantic-ui-react';
-import AuthContext from '../../../context/auth/authContext';    
+import AuthContext from '../../../context/auth/authContext';
 
 const Navbar = () => {
     const authContext = useContext(AuthContext);
@@ -10,6 +10,7 @@ const Navbar = () => {
 
     useEffect(() => {
         userLoad();
+        // eslint-disable-next-line
     }, [])
 
     const onLogout = () => {
