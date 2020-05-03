@@ -24,7 +24,7 @@ const App = () => {
                             <Route exact path="/" component={Login} />
                             <Fragment>
                                 <Header />
-                                <PrivateRoute exact path="/" component={Home} />
+                                <PrivateRoute exact path="/dashboard" component={Home} />
                                 <PrivateRoute exact path="/quiz/type" component={QuizType} />
                                 <PrivateRoute exact path="/quiz/question" component={Quiz} />
                                 <PrivateRoute exact path="/quiz/answer" component={QuizAnswer} />
