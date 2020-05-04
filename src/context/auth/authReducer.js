@@ -4,7 +4,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    CLEAR_ERRORS
+    CLEAR_AUTH_ERRORS
 } from '../types';
 
 export default (state, action) => {
@@ -38,7 +38,7 @@ export default (state, action) => {
                 user: null,
                 error: payload
             }
-        case CLEAR_ERRORS:
+        case CLEAR_AUTH_ERRORS:
             return {
                 ...state,
                 error: null

@@ -17,7 +17,7 @@ const Toast = Swal.mixin({
 
 const Login = (props) => {
     const authContext = useContext(AuthContext);
-    const { userLogin, error, clearErrors, isAuthenticated } = authContext;
+    const { userLogin, error, clearAuthErrors, isAuthenticated } = authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -32,7 +32,7 @@ const Login = (props) => {
                     text: err.msg
                 });
             });
-            clearErrors();
+            clearAuthErrors();
         }
         // eslint-disable-next-line
     }, [error, isAuthenticated, props.history])

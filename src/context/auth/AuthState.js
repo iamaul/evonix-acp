@@ -10,7 +10,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    CLEAR_ERRORS
+    CLEAR_AUTH_ERRORS
 } from '../types';
 
 import setAuthToken from '../../utils/setAuthToken';
@@ -57,7 +57,7 @@ const AuthState = (props) => {
 
     const userLogout = () => dispatch({ type: LOGOUT });
 
-    const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+    const clearAuthErrors = () => dispatch({ type: CLEAR_AUTH_ERRORS });
 
     return (
         <AuthContext.Provider
@@ -70,7 +70,7 @@ const AuthState = (props) => {
                 userLoad,
                 userLogin,
                 userLogout,
-                clearErrors
+                clearAuthErrors
             }}
         >
             { props.children }

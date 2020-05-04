@@ -90,6 +90,10 @@ const QuizTypeState = (props) => {
         dispatch({ type: CLEAR_CURRENT_QUIZ_TYPE });
     }
 
+    const clearQuizTypeErrors = () => {
+        dispatch({ type: CLEAR_QUIZ_TYPE_ERROR });
+    }
+
     return (
         <QuizTypeContext.Provider
             value={{
@@ -102,7 +106,8 @@ const QuizTypeState = (props) => {
                 clearCurrentQuizType,
                 updateQuizType,
                 getQuizTypes,
-                clearQuizType
+                clearQuizType,
+                clearQuizTypeErrors
             }}
         >
             { props.children }

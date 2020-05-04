@@ -6,7 +6,8 @@ import {
     CLEAR_CURRENT_QUIZ_TYPE,
     UPDATE_QUIZ_TYPE,
     CLEAR_QUIZ_TYPE,
-    QUIZ_TYPE_ERROR
+    QUIZ_TYPE_ERROR,
+    CLEAR_QUIZ_TYPE_ERROR
 } from '../types';
 
 export default (state, action) => {
@@ -58,6 +59,11 @@ export default (state, action) => {
             return {
                 ...state,
                 error: payload
+            }
+        case CLEAR_QUIZ_TYPE_ERROR:
+            return {
+                ...state,
+                error: null
             }
         default: return state;
     }
