@@ -1,21 +1,34 @@
 import React, { useEffect, useContext } from 'react';
-import { Grid, Image, Transition, List } from 'semantic-ui-react';
+import { Grid, Image, Button, Transition, List } from 'semantic-ui-react';
+import Moment from 'react-moment';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
 import QuizTypeForm from './QuizTypeForm';
-import QuizTypeList from './QuizTypeList';
+// import QuizTypeList from './QuizTypeList';
 
 import Loader from '../../../layouts/loader/Loader';
 
 const QuizType = () => {
     const quizTypeContext = useContext(QuizTypeContext);
-    const { quiz_types, getQuizTypes, setLoading } = quizTypeContext;
+    const { 
+        quiz_types, 
+        getQuizTypes, 
+        setLoading,
+        deleteQuizType, 
+        setCurrentQuizType, 
+        clearCurrentQuizType 
+    } = quizTypeContext;
 
     useEffect(() => {
         getQuizTypes();
         // eslint-disable-next-line
     }, [])
+
+    const onDelete = () => {
+        deleteQuizType(id);
+        clearCurrentQuizType();
+    }
 
     return (
         <>
@@ -29,15 +42,40 @@ const QuizType = () => {
                     ) : (
                         quiz_types !== null && !setLoading ? (
                             quiz_types.map(qt => (
-                                <Transition.Group
-                                    key={qt.id}
-                                    as={List}
-                                    duration={200}
-                                    divided
-                                    size="large"
-                                    verticalAlign="middle"
-                                >
-                                    <QuizTypeList quizType={qt} />
+                                <Transition.Group duration={300}>
+                                    <List 
+                                        animated 
+                                        divided
+                                        size="large"
+                                        verticalAlign="middle"
+                                    >
+                                        <List.Item key={qt.id}>
+                                            <List.Content floated="right">
+                                                <Button.Group size="small">
+                                                    <Button
+                                                        icon="edit"
+                                                        color="blue"
+                                                        onClick={() => setCurrentQuizType(quiz_types)}
+                                                    />
+                                                    <Button
+                                                        icon="delete"
+                                                        color="red"
+                                                        onClick={onDelete}
+                                                    />
+                                                </Button.Group>
+                                            </List.Content>
+                                            <List.Content>
+                                                <List.Header>{qt.name}</List.Header>
+                                                {qt.active === 0 ? 'Inactive' : 'Active'}<br/>
+                                                {qt.created_at && qt.updated_at && (
+                                                    <small>
+                                                        Created at <Moment unix format="llll">{qt.created_at}</Moment><br/>
+                                                        Updated at <Moment unix format="llll">{qt.updated_at}</Moment>
+                                                    </small>
+                                                )}
+                                            </List.Content>
+                                        </List.Item>
+                                    </List>
                                 </Transition.Group>
                             ))
                         ) : (
