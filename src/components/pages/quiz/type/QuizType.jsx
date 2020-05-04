@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Grid, Image } from 'semantic-ui-react';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
 import QuizTypeForm from './QuizTypeForm';
 import QuizTypeList from './QuizTypeList';
+import Loader from '../../../layouts/loader/Loader';
 
 const QuizType = () => {
     const quizTypeContext = useContext(QuizTypeContext);
