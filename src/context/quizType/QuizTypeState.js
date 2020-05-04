@@ -101,7 +101,7 @@ const QuizTypeState = (props) => {
                 setCurrentQuizType,
                 clearCurrentQuizType,
                 updateQuizType,
-                getQuizType,
+                getQuizTypes,
                 clearQuizType
             }}
         >
