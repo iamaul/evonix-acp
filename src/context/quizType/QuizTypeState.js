@@ -62,7 +62,7 @@ const QuizTypeState = (props) => {
         }
     }
 
-    const updateQuizType = async id => {
+    const updateQuizType = async quizType => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ const QuizTypeState = (props) => {
         }
 
         try {
-            const res = await axios.put(`/api/v1/quiz/type/${id}`);
+            const res = await axios.put(`/api/v1/quiz/type/${quizType.id}`, quizType, config);
             dispatch({ type: UPDATE_QUIZ_TYPE, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;

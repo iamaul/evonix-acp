@@ -24,7 +24,7 @@ const QuizType = () => {
                 </Grid.Column>
                 {setLoading ? <Loader isLoading={setLoading} /> : quiz_types === null ? (
                     <Grid.Column>
-                        <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="small" />
+                        <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" />
                     </Grid.Column>
                 ) : (
                     <Grid.Column>

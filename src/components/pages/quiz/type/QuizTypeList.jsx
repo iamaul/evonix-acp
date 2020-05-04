@@ -49,8 +49,12 @@ const QuizTypeList = ({ quizType }) => {
                     <Table.Row>
                         <Table.HeaderCell>#</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
-                        <Table.HeaderCell>Created by</Table.HeaderCell>
-                        <Table.HeaderCell>Updated by</Table.HeaderCell>
+                        {user && user.id === item.created_by && (
+                            <Table.HeaderCell>Created by</Table.HeaderCell>
+                        )}
+                        {user && user.id === item.updated_by && (
+                            <Table.HeaderCell>Updated by</Table.HeaderCell>
+                        )}
                         <Table.HeaderCell>Created at</Table.HeaderCell>
                         <Table.HeaderCell>Updated at</Table.HeaderCell>
                         <Table.HeaderCell>Actions</Table.HeaderCell>
