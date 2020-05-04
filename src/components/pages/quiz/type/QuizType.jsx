@@ -17,6 +17,22 @@ const QuizType = () => {
         // eslint-disable-next-line
     }, [])
 
+    const quizType = () => {
+        return quiz_types.map((qt, i) => {
+            return (
+                <CSSTransition
+                    key={qt.id}
+                    timeout={500}
+                    classNames="item"
+                >
+                    <Grid.Column>
+                        <QuizTypeList quizType={qt} indexKey={i} />
+                    </Grid.Column>
+                </CSSTransition>
+            )
+        })
+    }
+
     return (
         <>
             {quiz_types !== null & !setLoading ? (
@@ -25,17 +41,7 @@ const QuizType = () => {
                         <QuizTypeForm />
                     </Grid.Column>
                     <TransitionGroup>
-                        {quiz_types.map((qt, i) => {(
-                            <CSSTransition
-                                key={qt.id}
-                                timeout={500}
-                                classNames="item"
-                            >
-                                <Grid.Column>
-                                    <QuizTypeList quizType={qt} indexKey={i} />
-                                </Grid.Column>
-                            </CSSTransition>
-                        )})}
+                        {quizType()}
                     </TransitionGroup>
                 </Grid>
             ) : (
