@@ -15,9 +15,9 @@ const QuizTypeList = ({ quizType }) => {
         clearCurrentQuizType();
     }
 
-    return (
-        <>
-            {quizType.map((item, i) => {
+    const fetchQuizType = () => {
+        return quizType.map((item, i) => {
+            return (
                 <List.Item key={item.id}>
                     <List.Content floated="right">
                         <Button.Group size="small">
@@ -45,7 +45,13 @@ const QuizTypeList = ({ quizType }) => {
                         </small>
                     </List.Content>
                 </List.Item>
-            })}
+            )
+        })
+    }
+
+    return (
+        <>
+            {fetchQuizType()}
         </>
     )
 }
