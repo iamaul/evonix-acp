@@ -67,10 +67,6 @@ const QuizTypeState = (props) => {
         try {
             await axios.delete(`/api/v1/quiz/type/${id}`);
             dispatch({ type: DELETE_QUIZ_TYPE, payload: id });
-            Toast.fire({
-                icon: 'success',
-                text: res.data.msg
-            });
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_TYPE_ERROR, payload: errors });
