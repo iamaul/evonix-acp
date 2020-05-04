@@ -41,6 +41,7 @@ const QuizTypeForm = () => {
     const toggleStatus = () => {
         const status = !(active);
         setQuizType({ active: status });
+        console.log(active);
     }
 
     const onSubmit = e => {
