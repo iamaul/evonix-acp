@@ -25,7 +25,7 @@ const QuizType = () => {
                         <QuizTypeForm />
                     </Grid.Column>
                     <TransitionGroup>
-                        {quiz_types.map((qt, i) => {
+                        {quiz_types.map((qt, i) => {(
                             <CSSTransition
                                 key={qt.id}
                                 timeout={500}
@@ -35,7 +35,7 @@ const QuizType = () => {
                                     <QuizTypeList quizType={qt} indexKey={i} />
                                 </Grid.Column>
                             </CSSTransition>
-                        })}
+                        )})}
                     </TransitionGroup>
                 </Grid>
             ) : (
