@@ -17,7 +17,7 @@ const QuizType = () => {
         // eslint-disable-next-line
     }, [])
 
-    const quizType = () => {
+    const renderList = () => {
         return quiz_types.map((qt, i) => {
             return (
                 <CSSTransition
@@ -43,7 +43,7 @@ const QuizType = () => {
                     <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
                     ) : (
                         <TransitionGroup>
-                            {quizType()}
+                            {renderList()}
                         </TransitionGroup>
                     )
                 }

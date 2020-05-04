@@ -45,7 +45,7 @@ const QuizTypeList = ({ quizType, indexKey }) => {
                 </Table.Header>
 
                 <Table.Body>
-                    {fetchQuiz()}
+                    {fetchQuiz}
                 </Table.Body>
             </Table>
         </>
