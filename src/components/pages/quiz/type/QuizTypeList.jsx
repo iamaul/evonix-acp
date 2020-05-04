@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button } from 'semantic-ui-react';
+import { Button, List } from 'semantic-ui-react';
 import Moment from 'react-moment';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
@@ -9,47 +9,43 @@ const QuizTypeList = ({ quizType }) => {
     const quizTypeContext = useContext(QuizTypeContext);
 
     const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType } = quizTypeContext;
-    const { id, name, active, created_at, updated_at } = quizType;
 
-    const onDelete = () => {
+    const onDelete = (id) => {
         deleteQuizType(id);
         clearCurrentQuizType();
     }
 
     return (
         <>
-            <Table basic stackable size="small">
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Name</Table.HeaderCell>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
-                        <Table.HeaderCell>Created at</Table.HeaderCell>
-                        <Table.HeaderCell>Updated at</Table.HeaderCell>
-                        <Table.HeaderCell>Actions</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                    <Table.Row>
-                        {name && (
-                            <Table.Cell>{name}</Table.Cell>
-                        )}
-                        {active && (
-                            <Table.Cell>{active == 0 ? 'Inactive' : 'Active'}</Table.Cell>
-                        )}
-                        {created_at && (
-                            <Table.Cell><Moment unix format="lll">{created_at}</Moment></Table.Cell>
-                        )}
-                        {updated_at && (
-                            <Table.Cell><Moment unix format="lll">{updated_at}</Moment></Table.Cell>
-                        )}
-                        <Table.Cell>
-                            <Button icon="edit" color="blue" size="small" onClick={() => setCurrentQuizType(quizType)} />{' '}
-                            <Button icon="delete" color="red" size="small" onClick={onDelete} />
-                        </Table.Cell>
-                    </Table.Row>
-                </Table.Body>
-            </Table>
+            {quizType.map((item, i) => {
+                <List.Item key={item.id}>
+                    <List.Content floated="right">
+                        <Button.Group size="small">
+                            <Button
+                                icon="edit"
+                                color="blue"
+                                onClick={() => setCurrentQuizType(quizType)}
+                            />
+                            <Button
+                                icon="delete"
+                                color="red"
+                                onClick={onDelete(item.id)}
+                            />
+                        </Button.Group>
+                    </List.Content>
+                    {`#${i}. `}
+                    <List.Content>
+                        <List.Header>
+                            {item.name}
+                        </List.Header>
+                        {item.status === 0 ? 'Inactive' : 'Active'}<br/>
+                        <small>
+                            Created at <Moment unix format="lll">{item.created_at}</Moment><br/>
+                            Updated at <Moment unix format="lll">{item.updated_at}</Moment>
+                        </small>
+                    </List.Content>
+                </List.Item>
+            })}
         </>
     )
 }

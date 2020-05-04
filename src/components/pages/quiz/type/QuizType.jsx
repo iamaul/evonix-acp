@@ -1,12 +1,10 @@
 import React, { useEffect, useContext } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid, Image, Transition, List } from 'semantic-ui-react';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
 import QuizTypeForm from './QuizTypeForm';
 import QuizTypeList from './QuizTypeList';
-import Loader from '../../../layouts/loader/Loader';
 
 const QuizType = () => {
     const quizTypeContext = useContext(QuizTypeContext);
@@ -23,24 +21,21 @@ const QuizType = () => {
                 <Grid.Column>
                     <QuizTypeForm />
                 </Grid.Column>
-                {setLoading ? <Loader isLoading={setLoading} /> : quiz_types !== null && !setLoading ? (
-                    quiz_types.map(qt => (
-                        <Grid.Column>
-                            <TransitionGroup>
-                                <CSSTransition
-                                    key={qt.id}
-                                    timeout={500}
-                                    classNames="item"
-                                >
-                                    <QuizTypeList quizType={qt} />
-                                </CSSTransition>
-                            </TransitionGroup>
-                        </Grid.Column>
-                    ))
-                ) : (
-                    <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
-                    )
-                }
+                <Grid.Column>
+                    {quiz_types !== null && !setLoading ? (
+                        <Transition.Group
+                            as={List}
+                            duration={500}
+                            divided
+                            size="large"
+                            verticalAlign="middle"
+                        >
+                            <QuizTypeList quizType={quiz_types} />
+                        </Transition.Group>
+                    ) : (
+                        <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
+                    )}
+                </Grid.Column>
             </Grid>
         </>
     )
