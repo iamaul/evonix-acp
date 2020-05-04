@@ -6,7 +6,7 @@ import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
 import QuizTypeForm from './QuizTypeForm';
 import QuizTypeList from './QuizTypeList';
-// import Loader from '../../../layouts/loader/Loader';
+import Loader from '../../../layouts/loader/Loader';
 
 const QuizType = () => {
     const quizTypeContext = useContext(QuizTypeContext);
