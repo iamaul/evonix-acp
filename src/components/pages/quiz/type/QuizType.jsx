@@ -1,34 +1,21 @@
 import React, { useEffect, useContext } from 'react';
-import { Grid, Image, Button, Transition, List } from 'semantic-ui-react';
-import Moment from 'react-moment';
+import { Grid, Image, Transition, List } from 'semantic-ui-react';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
 import QuizTypeForm from './QuizTypeForm';
-// import QuizTypeList from './QuizTypeList';
+import QuizTypeList from './QuizTypeList';
 
 import Loader from '../../../layouts/loader/Loader';
 
 const QuizType = () => {
     const quizTypeContext = useContext(QuizTypeContext);
-    const { 
-        quiz_types, 
-        getQuizTypes, 
-        setLoading,
-        deleteQuizType, 
-        setCurrentQuizType, 
-        clearCurrentQuizType 
-    } = quizTypeContext;
+    const { quiz_types, getQuizTypes, setLoading } = quizTypeContext;
 
     useEffect(() => {
         getQuizTypes();
         // eslint-disable-next-line
     }, [])
-
-    const onDelete = () => {
-        deleteQuizType(id);
-        clearCurrentQuizType();
-    }
 
     return (
         <>
@@ -50,30 +37,7 @@ const QuizType = () => {
                                         verticalAlign="middle"
                                     >
                                         <List.Item key={qt.id}>
-                                            <List.Content floated="right">
-                                                <Button.Group size="small">
-                                                    <Button
-                                                        icon="edit"
-                                                        color="blue"
-                                                        onClick={() => setCurrentQuizType(quiz_types)}
-                                                    />
-                                                    <Button
-                                                        icon="delete"
-                                                        color="red"
-                                                        onClick={onDelete}
-                                                    />
-                                                </Button.Group>
-                                            </List.Content>
-                                            <List.Content>
-                                                <List.Header>{qt.name}</List.Header>
-                                                {qt.active === 0 ? 'Inactive' : 'Active'}<br/>
-                                                {qt.created_at && qt.updated_at && (
-                                                    <small>
-                                                        Created at <Moment unix format="llll">{qt.created_at}</Moment><br/>
-                                                        Updated at <Moment unix format="llll">{qt.updated_at}</Moment>
-                                                    </small>
-                                                )}
-                                            </List.Content>
+                                            <QuizTypeList quizType={qt} />
                                         </List.Item>
                                     </List>
                                 </Transition.Group>
