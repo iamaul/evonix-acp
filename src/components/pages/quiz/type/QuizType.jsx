@@ -23,7 +23,7 @@ const QuizType = () => {
                 </Grid.Column>
                 <Grid.Column>
                     {quiz_types !== null && !setLoading ? (
-                        quiz_types.map(qt => {
+                        quiz_types.map(qt => (
                             <Transition.Group
                                 key={qt.id}
                                 as={List}
@@ -34,7 +34,7 @@ const QuizType = () => {
                             >
                                 <QuizTypeList quizType={qt} />
                             </Transition.Group>
-                        })
+                        ))
                     ) : (
                         <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
                     )}
