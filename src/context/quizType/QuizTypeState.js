@@ -26,7 +26,7 @@ const QuizTypeState = (props) => {
     const [state, dispatch] = useReducer(quizTypeReducer, INITIAL_STATE);
 
     // API Requests
-    const getQuizType = async () => {
+    const getQuizTypes = async () => {
         try {
             const res = await axios.get('/api/v1/quiz/type');
             dispatch({ type: GET_QUIZ_TYPE, payload: res.data });
