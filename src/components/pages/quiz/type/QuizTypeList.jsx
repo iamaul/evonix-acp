@@ -1,19 +1,17 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button, Image } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
 import Moment from 'react-moment';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 import AuthContext from '../../../../context/auth/authContext';
-
-import Loader from '../../../layouts/loader/Loader';
 
 const QuizTypeList = ({ quizType }) => {
     const quizTypeContext = useContext(QuizTypeContext);
     const authContext = useContext(AuthContext);
 
     const { user } = authContext;
-    const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType, setLoading } = quizTypeContext;
+    const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType } = quizTypeContext;
     const { id } = quizType;
 
     const onDelete = () => {
@@ -46,27 +44,23 @@ const QuizTypeList = ({ quizType }) => {
 
     return (
         <>
-            {setLoading ? <Loader isLoading={setLoading} /> : quizType === null ? (
-                <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="small" />
-            ) : (
-                <Table basic="very" stackable size="small">
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>#</Table.HeaderCell>
-                            <Table.HeaderCell>Name</Table.HeaderCell>
-                            <Table.HeaderCell>Created by</Table.HeaderCell>
-                            <Table.HeaderCell>Updated by</Table.HeaderCell>
-                            <Table.HeaderCell>Created at</Table.HeaderCell>
-                            <Table.HeaderCell>Updated at</Table.HeaderCell>
-                            <Table.HeaderCell>Actions</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
+            <Table basic="very" stackable size="small">
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>#</Table.HeaderCell>
+                        <Table.HeaderCell>Name</Table.HeaderCell>
+                        <Table.HeaderCell>Created by</Table.HeaderCell>
+                        <Table.HeaderCell>Updated by</Table.HeaderCell>
+                        <Table.HeaderCell>Created at</Table.HeaderCell>
+                        <Table.HeaderCell>Updated at</Table.HeaderCell>
+                        <Table.HeaderCell>Actions</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
 
-                    <Table.Body>
-                        {fetchQuiz()}
-                    </Table.Body>
-                </Table>
-            )}  
+                <Table.Body>
+                    {fetchQuiz()}
+                </Table.Body>
+            </Table>
         </>
     )
 }

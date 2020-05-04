@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
@@ -17,16 +17,20 @@ const QuizType = () => {
 
     return (
         <>
-            {quiz_types !== null && !setLoading ? (
-                <Grid columns={2} padded>
+            <Grid columns={2} padded>
+                <Grid.Column>
+                    <QuizTypeForm />
+                </Grid.Column>
+                {setLoading ? <Loader isLoading={setLoading} /> : quiz_types === null ? (
                     <Grid.Column>
-                        <QuizTypeForm />
+                        <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="small" />
                     </Grid.Column>
+                ) : (
                     <Grid.Column>
                         <QuizTypeList quizType={quiz_types} />
                     </Grid.Column>
-                </Grid>
-            ) : (<Loader isLoading={setLoading} />)}  
+                )}
+            </Grid>
         </>
     )
 }
