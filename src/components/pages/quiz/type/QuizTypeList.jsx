@@ -4,57 +4,40 @@ import { Table, Button } from 'semantic-ui-react';
 import Moment from 'react-moment';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
-import AuthContext from '../../../../context/auth/authContext';
 
-const QuizTypeList = ({ quizType }) => {
+const QuizTypeList = ({ quizType, indexKey }) => {
     const quizTypeContext = useContext(QuizTypeContext);
-    const authContext = useContext(AuthContext);
 
-    const { user } = authContext;
     const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType } = quizTypeContext;
-    const { id, created_by, updated_by } = quizType;
+    const { id, name, active } = quizType;
 
     const onDelete = () => {
         deleteQuizType(id);
         clearCurrentQuizType();
     }
 
-    const fetchQuiz = () => {
-        return quizType.map((item, i) => {
-            return (
-                <Table.Row key={item.id}>
-                    <Table.Cell>{i}</Table.Cell>
-                    <Table.Cell>{item.name}</Table.Cell>
-                    {user && user.id === item.created_by && (
-                        <Table.Cell>{user && user.name}</Table.Cell>
-                    )}
-                    {user && user.id === item.updated_by && (
-                        <Table.Cell>{user && user.name}</Table.Cell>
-                    )}
-                    <Table.Cell><Moment unix format="llll">{item.created_at}</Moment></Table.Cell>
-                    <Table.Cell><Moment unix format="llll">{item.updated_at}</Moment></Table.Cell>
-                    <Table.Cell>
-                        <Button icon="edit" size="small" onClick={() => setCurrentQuizType(quizType)} />
-                        <Button icon="delete" size="small" onClick={onDelete} />
-                    </Table.Cell>
-                </Table.Row>
-            )
-        })
-    }
+    const fetchQuiz = (
+        <Table.Row>
+            <Table.Cell>{indexKey}</Table.Cell>
+            <Table.Cell>{name}</Table.Cell>
+            <Table.Cell>{active == 0 ? 'Inactive' : 'Active'}</Table.Cell>
+            <Table.Cell><Moment unix format="llll">{created_at}</Moment></Table.Cell>
+            <Table.Cell><Moment unix format="llll">{updated_at}</Moment></Table.Cell>
+            <Table.Cell>
+                <Button icon="edit" color="blue" size="small" onClick={() => setCurrentQuizType(quizType)} />{' '}
+                <Button icon="delete" color="red" size="small" onClick={onDelete} />
+            </Table.Cell>
+        </Table.Row>
+    )
 
     return (
         <>
-            <Table basic="very" stackable size="small">
+            <Table basic stackable size="small">
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>#</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
-                        {user && user.id === created_by && (
-                            <Table.HeaderCell>Created by</Table.HeaderCell>
-                        )}
-                        {user && user.id === updated_by && (
-                            <Table.HeaderCell>Updated by</Table.HeaderCell>
-                        )}
+                        <Table.HeaderCell>Status</Table.HeaderCell>
                         <Table.HeaderCell>Created at</Table.HeaderCell>
                         <Table.HeaderCell>Updated at</Table.HeaderCell>
                         <Table.HeaderCell>Actions</Table.HeaderCell>
@@ -70,7 +53,8 @@ const QuizTypeList = ({ quizType }) => {
 }
 
 QuizTypeList.propTypes = {
-    quizType: PropTypes.object.isRequired
+    quizType: PropTypes.object.isRequired,
+    indexKey: PropTypes.number.isRequired
 }
 
 export default QuizTypeList;
