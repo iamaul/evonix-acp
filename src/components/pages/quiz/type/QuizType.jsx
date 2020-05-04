@@ -24,17 +24,19 @@ const QuizType = () => {
                     <QuizTypeForm />
                 </Grid.Column>
                 {setLoading ? <Loader isLoading={setLoading} /> : quiz_types !== null && !setLoading ? (
-                    <Grid.Column>
-                        <TransitionGroup>
-                            <CSSTransition
-                                key={qt.id}
-                                timeout={500}
-                                classNames="item"
-                            >
-                                <QuizTypeList quizType={qt} />
-                            </CSSTransition>
-                        </TransitionGroup>
-                    </Grid.Column>
+                    quiz_types.map(qt => (
+                        <Grid.Column>
+                            <TransitionGroup>
+                                <CSSTransition
+                                    key={qt.id}
+                                    timeout={500}
+                                    classNames="item"
+                                >
+                                    <QuizTypeList quizType={qt} />
+                                </CSSTransition>
+                            </TransitionGroup>
+                        </Grid.Column>
+                    ))
                 ) : (
                     <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
                     )
