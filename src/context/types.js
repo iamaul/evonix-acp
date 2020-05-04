@@ -1,6 +1,12 @@
 export const USER_LOADED = 'USER_LOADED';
 
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const CLEAR_AUTH_ERRORS = 'CLEAR_AUTH_ERRORS';
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+
+export const LOGOUT = 'LOGOUT';
 
 export const GET_QUIZ_TYPE = 'GET_QUIZ_TYPE';
 export const ADD_QUIZ_TYPE = 'ADD_QUIZ_TYPE';
@@ -11,9 +17,3 @@ export const UPDATE_QUIZ_TYPE = 'UPDATE_QUIZ_TYPE';
 export const CLEAR_QUIZ_TYPE = 'CLEAR_QUIZ_TYPE';
 export const QUIZ_TYPE_ERROR = 'QUIZ_TYPE_ERROR';
 export const CLEAR_QUIZ_TYPE_ERROR = 'CLEAR_QUIZ_TYPE_ERROR';
-
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAIL = 'LOGIN_FAIL';
-
-export const LOGOUT = 'LOGOUT';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
