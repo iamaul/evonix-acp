@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Header, Form } from 'semantic-ui-react';
+import { Header, Form, Radio } from 'semantic-ui-react';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
@@ -11,13 +11,13 @@ const QuizTypeForm = () => {
         if (current_quiz_type !== null) {
             setQuizType(current_quiz_type);
         } else {
-            setQuizType({ name: '' });
+            setQuizType({ name: '', active: 1 });
         }
     }, [quizTypeContext, current_quiz_type])
 
-    const [quizType, setQuizType] = useState({ name: '' });
+    const [quizType, setQuizType] = useState({ name: '', active: 1 });
 
-    const { name } = quizType;
+    const { name, active } = quizType;
 
     const onChange = e => setQuizType({ ...quizType, [e.target.name]: e.target.value });
 
@@ -48,6 +48,15 @@ const QuizTypeForm = () => {
                     onChange={onChange}
                     fluid 
                 />
+                <Form.Field>
+                    <Radio 
+                        label="Status"
+                        name="active"
+                        value={active}
+                        checked={active === 0} 
+                        onChange={onChange}
+                    />
+                </Form.Field>
                 <Form.Button color="red" size="small" content={current_quiz_type ? 'Edit' : 'Add'} />
                 {current_quiz_type && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuizType} />

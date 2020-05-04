@@ -37,14 +37,11 @@ const QuizTypeList = ({ quizType }) => {
                     {name && (
                         <List.Header>{name}</List.Header>
                     )}
-                    {active && (
-                        active === 0 ? 'Inactive' : 'Active'
-                        (<br/>)
-                    )}
+                    {active === 0 ? 'Inactive' : 'Active'}<br/>
                     {created_at && updated_at && (
                         <small>
-                            Created at <Moment unix format="lll">{created_at}</Moment><br/>
-                            Updated at <Moment unix format="lll">{updated_at}</Moment>
+                            Created at <Moment unix format="llll">{created_at}</Moment><br/>
+                            Updated at <Moment unix format="llll">{updated_at}</Moment>
                         </small>
                     )}
                 </List.Content>

@@ -22,7 +22,7 @@ const QuizType = () => {
                     <QuizTypeForm />
                 </Grid.Column>
                 <Grid.Column>
-                    {quiz_types !== null && !setLoading ? (
+                    {quiz_types !== null ? (
                         quiz_types.map(qt => (
                             <Transition.Group
                                 key={qt.id}
