@@ -21,6 +21,29 @@ const QuizTypeList = ({ quizType }) => {
         clearCurrentQuizType();
     }
 
+    const fetchQuiz = () => {
+        return quizType.map((item, i) => {
+            return (
+                <Table.Row key={item.id}>
+                    <Table.Cell>{i}</Table.Cell>
+                    <Table.Cell>{item.name}</Table.Cell>
+                    {user && user.id === item.created_by && (
+                        <Table.Cell>{user && user.name}</Table.Cell>
+                    )}
+                    {user && user.id === item.updated_by && (
+                        <Table.Cell>{user && user.name}</Table.Cell>
+                    )}
+                    <Table.Cell><Moment unix format="llll">{item.created_at}</Moment></Table.Cell>
+                    <Table.Cell><Moment unix format="llll">{item.updated_at}</Moment></Table.Cell>
+                    <Table.Cell>
+                        <Button icon="edit" size="small" onClick={() => setCurrentQuizType(quizType)} />
+                        <Button icon="delete" size="small" onClick={onDelete} />
+                    </Table.Cell>
+                </Table.Row>
+            )
+        })
+    }
+
     return (
         <>
             {setLoading ? <Loader isLoading={setLoading} /> : quizType === null ? (
@@ -40,24 +63,7 @@ const QuizTypeList = ({ quizType }) => {
                     </Table.Header>
 
                     <Table.Body>
-                        {quizType.map((item, i) => {
-                            <Table.Row key={item.id}>
-                                <Table.Cell>{i}</Table.Cell>
-                                <Table.Cell>{item.name}</Table.Cell>
-                                {user && user.id === item.created_by && (
-                                    <Table.Cell>{user && user.name}</Table.Cell>
-                                )}
-                                {user && user.id === item.updated_by && (
-                                    <Table.Cell>{user && user.name}</Table.Cell>
-                                )}
-                                <Table.Cell><Moment unix format="llll">{item.created_at}</Moment></Table.Cell>
-                                <Table.Cell><Moment unix format="llll">{item.updated_at}</Moment></Table.Cell>
-                                <Table.Cell>
-                                    <Button icon="edit" size="small" onClick={() => setCurrentQuizType(quizType)} />
-                                    <Button icon="delete" size="small" onClick={onDelete} />
-                                </Table.Cell>
-                            </Table.Row>
-                        })}
+                        {fetchQuiz()}
                     </Table.Body>
                 </Table>
             )}  
