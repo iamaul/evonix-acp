@@ -24,28 +24,26 @@ const QuizType = () => {
                     <QuizTypeForm />
                 </Grid.Column>
                 <Grid.Column>
-                    {quiz_types !== null && quiz_types.length === 0 && !setLoading ? (
+                    {quiz_types !== null && quiz_types.length === 0 && !setLoading && (
                         <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
-                    ) : (
-                        quiz_types !== null && !setLoading ? (
-                            quiz_types.map(qt => (
-                                <Transition.Group duration={300}>
-                                    <List 
-                                        animated 
-                                        divided
-                                        size="large"
-                                        verticalAlign="middle"
-                                    >
-                                        <List.Item key={qt.id}>
-                                            <QuizTypeList quizType={qt} />
-                                        </List.Item>
-                                    </List>
-                                </Transition.Group>
-                            ))
-                        ) : (
-                            <Loader isLoading={setLoading} resizeIcon={32} />
-                        )
                     )}
+                    {quiz_types !== null && !setLoading ? (
+                        <Transition.Group
+                            as={List} 
+                            animation="scale"
+                            duration={500} 
+                            divided
+                            size="large"
+                            verticalAlign="middle"
+                        >
+                            {quiz_types.map(qt => (
+                                <List.Item key={qt.id}>
+                                    <QuizTypeList quizType={qt} />
+                                </List.Item>
+                            ))}
+                        </Transition.Group>
+                        ) : ( <Loader isLoading={setLoading} resizeIcon={32} />)
+                    }
                 </Grid.Column>
             </Grid>
         </>
