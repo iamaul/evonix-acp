@@ -9,49 +9,46 @@ const QuizTypeList = ({ quizType }) => {
     const quizTypeContext = useContext(QuizTypeContext);
 
     const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType } = quizTypeContext;
+    const { id, name, status, created_at, updated_at } = quizType;
 
-    const onDelete = (id) => {
+    const onDelete = () => {
         deleteQuizType(id);
         clearCurrentQuizType();
     }
 
-    const fetchQuizType = () => {
-        return quizType.map((item, i) => {
-            return (
-                <List.Item key={item.id}>
-                    <List.Content floated="right">
-                        <Button.Group size="small">
-                            <Button
-                                icon="edit"
-                                color="blue"
-                                onClick={() => setCurrentQuizType(quizType)}
-                            />
-                            <Button
-                                icon="delete"
-                                color="red"
-                                onClick={onDelete(item.id)}
-                            />
-                        </Button.Group>
-                    </List.Content>
-                    {`#${i}. `}
-                    <List.Content>
-                        <List.Header>
-                            {item.name}
-                        </List.Header>
-                        {item.status === 0 ? 'Inactive' : 'Active'}<br/>
-                        <small>
-                            Created at <Moment unix format="lll">{item.created_at}</Moment><br/>
-                            Updated at <Moment unix format="lll">{item.updated_at}</Moment>
-                        </small>
-                    </List.Content>
-                </List.Item>
-            )
-        })
-    }
-
     return (
         <>
-            {fetchQuizType()}
+            <List.Item>
+                <List.Content floated="right">
+                    <Button.Group size="small">
+                        <Button
+                            icon="edit"
+                            color="blue"
+                            onClick={() => setCurrentQuizType(quizType)}
+                        />
+                        <Button
+                            icon="delete"
+                            color="red"
+                            onClick={onDelete}
+                        />
+                    </Button.Group>
+                </List.Content>
+                <List.Content>
+                    {name && (
+                        <List.Header>{name}</List.Header>
+                    )}
+                    {status && (
+                        status === 0 ? 'Inactive' : 'Active'
+                        (<br/>)
+                    )}
+                    {created_at && updated_at (
+                        <small>
+                            Created at <Moment unix format="lll">{created_at}</Moment><br/>
+                            Updated at <Moment unix format="lll">{updated_at}</Moment>
+                        </small>
+                    )}
+                </List.Content>
+            </List.Item>
         </>
     )
 }
