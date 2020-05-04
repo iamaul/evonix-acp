@@ -41,7 +41,6 @@ const QuizTypeForm = () => {
     const toggleStatus = () => {
         const status = !(active);
         setQuizType({ active: status });
-        console.log(active);
     }
 
     const onSubmit = e => {
@@ -75,7 +74,7 @@ const QuizTypeForm = () => {
                     <Radio 
                         label="Status"
                         name="active"
-                        value={active}
+                        checked={active}
                         onChange={toggleStatus}
                         toggle
                     />

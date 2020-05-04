@@ -32,7 +32,7 @@ const QuizType = () => {
                                 <Transition.Group
                                     key={qt.id}
                                     as={List}
-                                    duration={500}
+                                    duration={200}
                                     divided
                                     size="large"
                                     verticalAlign="middle"
