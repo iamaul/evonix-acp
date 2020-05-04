@@ -17,34 +17,26 @@ const QuizType = () => {
         // eslint-disable-next-line
     }, [])
 
-    const renderList = () => {
-        return quiz_types.map((qt, i) => {
-            return (
-                <CSSTransition
-                    key={qt.id}
-                    timeout={500}
-                    classNames="item"
-                >
-                    <Grid.Column>
-                        <QuizTypeList quizType={qt} indexKey={i} />
-                    </Grid.Column>
-                </CSSTransition>
-            )
-        })
-    }
-
     return (
         <>
             <Grid columns={2} padded>
                 <Grid.Column>
                     <QuizTypeForm />
                 </Grid.Column>
-                {setLoading ? <Loader isLoading={setLoading} /> : quiz_types === null ? (
-                    <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
-                    ) : (
+                {setLoading ? <Loader isLoading={setLoading} /> : quiz_types !== null && !setLoading ? (
+                    <Grid.Column>
                         <TransitionGroup>
-                            {renderList()}
+                            <CSSTransition
+                                key={qt.id}
+                                timeout={500}
+                                classNames="item"
+                            >
+                                <QuizTypeList quizType={qt} />
+                            </CSSTransition>
                         </TransitionGroup>
+                    </Grid.Column>
+                ) : (
+                    <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
                     )
                 }
             </Grid>

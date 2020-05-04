@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
-const QuizTypeList = ({ quizType, indexKey }) => {
+const QuizTypeList = ({ quizType }) => {
     const quizTypeContext = useContext(QuizTypeContext);
 
     const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType } = quizTypeContext;
@@ -16,26 +16,11 @@ const QuizTypeList = ({ quizType, indexKey }) => {
         clearCurrentQuizType();
     }
 
-    const fetchQuiz = (
-        <Table.Row>
-            <Table.Cell>{indexKey}</Table.Cell>
-            <Table.Cell>{name}</Table.Cell>
-            <Table.Cell>{active == 0 ? 'Inactive' : 'Active'}</Table.Cell>
-            <Table.Cell><Moment unix format="llll">{created_at}</Moment></Table.Cell>
-            <Table.Cell><Moment unix format="llll">{updated_at}</Moment></Table.Cell>
-            <Table.Cell>
-                <Button icon="edit" color="blue" size="small" onClick={() => setCurrentQuizType(quizType)} />{' '}
-                <Button icon="delete" color="red" size="small" onClick={onDelete} />
-            </Table.Cell>
-        </Table.Row>
-    )
-
     return (
         <>
             <Table basic stackable size="small">
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>#</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
                         <Table.HeaderCell>Status</Table.HeaderCell>
                         <Table.HeaderCell>Created at</Table.HeaderCell>
@@ -45,7 +30,24 @@ const QuizTypeList = ({ quizType, indexKey }) => {
                 </Table.Header>
 
                 <Table.Body>
-                    {fetchQuiz}
+                    <Table.Row>
+                        {name && (
+                            <Table.Cell>{name}</Table.Cell>
+                        )}
+                        {active && (
+                            <Table.Cell>{active == 0 ? 'Inactive' : 'Active'}</Table.Cell>
+                        )}
+                        {created_at && (
+                            <Table.Cell><Moment unix format="lll">{created_at}</Moment></Table.Cell>
+                        )}
+                        {updated_at && (
+                            <Table.Cell><Moment unix format="lll">{updated_at}</Moment></Table.Cell>
+                        )}
+                        <Table.Cell>
+                            <Button icon="edit" color="blue" size="small" onClick={() => setCurrentQuizType(quizType)} />{' '}
+                            <Button icon="delete" color="red" size="small" onClick={onDelete} />
+                        </Table.Cell>
+                    </Table.Row>
                 </Table.Body>
             </Table>
         </>
@@ -53,8 +55,7 @@ const QuizTypeList = ({ quizType, indexKey }) => {
 }
 
 QuizTypeList.propTypes = {
-    quizType: PropTypes.object.isRequired,
-    indexKey: PropTypes.number.isRequired
+    quizType: PropTypes.object.isRequired
 }
 
 export default QuizTypeList;
