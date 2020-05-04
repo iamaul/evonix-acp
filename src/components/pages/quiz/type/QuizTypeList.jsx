@@ -12,7 +12,7 @@ const QuizTypeList = ({ quizType }) => {
 
     const { user } = authContext;
     const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType } = quizTypeContext;
-    const { id } = quizType;
+    const { id, created_by, updated_by } = quizType;
 
     const onDelete = () => {
         deleteQuizType(id);
@@ -49,10 +49,10 @@ const QuizTypeList = ({ quizType }) => {
                     <Table.Row>
                         <Table.HeaderCell>#</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
-                        {user && user.id === item.created_by && (
+                        {user && user.id === created_by && (
                             <Table.HeaderCell>Created by</Table.HeaderCell>
                         )}
-                        {user && user.id === item.updated_by && (
+                        {user && user.id === updated_by && (
                             <Table.HeaderCell>Updated by</Table.HeaderCell>
                         )}
                         <Table.HeaderCell>Created at</Table.HeaderCell>
