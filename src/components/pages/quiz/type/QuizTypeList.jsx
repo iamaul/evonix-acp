@@ -41,7 +41,7 @@ const QuizTypeList = ({ quizType }) => {
                         active === 0 ? 'Inactive' : 'Active'
                         (<br/>)
                     )}
-                    {created_at && updated_at (
+                    {created_at && updated_at && (
                         <small>
                             Created at <Moment unix format="lll">{created_at}</Moment><br/>
                             Updated at <Moment unix format="lll">{updated_at}</Moment>
