@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { Header, Form, Radio } from 'semantic-ui-react';
+import { Header, Form, Checkbox } from 'semantic-ui-react';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
@@ -36,6 +36,11 @@ const QuizTypeForm = () => {
 
     const { name, active } = quizType;
 
+    const toggleStatus = () => {
+        const status = !(active);
+        setQuizType({ active: status });
+    }
+
     const onChange = e => setQuizType({ ...quizType, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
@@ -65,15 +70,15 @@ const QuizTypeForm = () => {
                     onChange={onChange}
                     fluid 
                 />
-                <Form.Input>
-                    <Radio 
+                <Form.Field>
+                    <Checkbox
                         label="Status"
                         name="active"
                         checked={active}
-                        onChange={onChange}
+                        onChange={toggleStatus}
                         toggle
                     />
-                </Form.Input>
+                </Form.Field>
                 <Form.Button color="red" size="small" content={current_quiz_type ? 'Edit' : 'Add'} />
                 {current_quiz_type && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuizType} />
