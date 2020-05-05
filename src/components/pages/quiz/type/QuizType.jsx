@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
-import { Grid, Image, Transition, List } from 'semantic-ui-react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Grid, Image } from 'semantic-ui-react';
 
 import QuizTypeContext from '../../../../context/quizType/quizTypeContext';
 
@@ -28,20 +29,17 @@ const QuizType = () => {
                         <Image src="https://media.giphy.com/media/3o6wNXoESyQu2hlrwI/giphy.gif" size="large" centered />
                     )}
                     {quiz_types !== null && !setLoading ? (
-                        <Transition.Group
-                            as={List} 
-                            animation="scale"
-                            duration={500} 
-                            divided
-                            size="large"
-                            verticalAlign="middle"
-                        >
+                        <TransitionGroup>
                             {quiz_types.map(qt => (
-                                <List.Item key={qt.id}>
+                                <CSSTransition 
+                                    key={qt.id}
+                                    timeout={500}
+                                    classNames="item"
+                                >
                                     <QuizTypeList quizType={qt} />
-                                </List.Item>
+                                </CSSTransition>
                             ))}
-                        </Transition.Group>
+                        </TransitionGroup>
                         ) : ( <Loader isLoading={setLoading} resizeIcon={32} />)
                     }
                 </Grid.Column>

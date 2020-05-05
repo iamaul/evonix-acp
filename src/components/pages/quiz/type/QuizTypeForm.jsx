@@ -30,7 +30,7 @@ const QuizTypeForm = () => {
             });
             clearQuizTypeErrors();
         }
-    }, [quizTypeContext, current_quiz_type])
+    }, [quizTypeContext, current_quiz_type, error, clearQuizTypeErrors])
 
     const [quizType, setQuizType] = useState({ name: '', active: true });
 
@@ -70,7 +70,7 @@ const QuizTypeForm = () => {
                     onChange={onChange}
                     fluid 
                 />
-                <Form.Field>
+                <Form.Input>
                     <Radio 
                         label="Status"
                         name="active"
@@ -78,7 +78,7 @@ const QuizTypeForm = () => {
                         onChange={toggleStatus}
                         toggle
                     />
-                </Form.Field>
+                </Form.Input>
                 <Form.Button color="red" size="small" content={current_quiz_type ? 'Edit' : 'Add'} />
                 {current_quiz_type && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuizType} />
