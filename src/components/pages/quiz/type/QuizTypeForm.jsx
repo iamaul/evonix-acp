@@ -36,12 +36,12 @@ const QuizTypeForm = () => {
 
     const { name, active } = quizType;
 
+    const onChange = e => setQuizType({ ...quizType, [e.target.name]: e.target.value });
+
     const toggleStatus = () => {
         const status = !(active);
         setQuizType({ active: status });
     }
-
-    const onChange = e => setQuizType({ ...quizType, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
@@ -74,6 +74,7 @@ const QuizTypeForm = () => {
                     <Checkbox
                         label="Status"
                         name="active"
+                        value={active}
                         checked={active}
                         onChange={toggleStatus}
                         toggle

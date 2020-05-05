@@ -9,7 +9,7 @@ const QuizTypeList = ({ quizType }) => {
     const quizTypeContext = useContext(QuizTypeContext);
 
     const { deleteQuizType, setCurrentQuizType, clearCurrentQuizType } = quizTypeContext;
-    const { id, name, active, created_at, updated_at } = quizType;
+    const { id, name, active, created_at, updated_at, quizTypeCreatedBy, quizTypeUpdatedBy } = quizType;
 
     const onDelete = () => {
         deleteQuizType(id);
@@ -42,11 +42,18 @@ const QuizTypeList = ({ quizType }) => {
                     <List.Content>
                         <List.Header>{name}</List.Header>
                         {active === 0 ? 'Inactive' : 'Active'}<br/>
-                        {created_at && updated_at && (
+                        {created_at && (
                             <small>
-                                Created at <Moment unix format="llll">{created_at}</Moment><br/>
-                                Updated at <Moment unix format="llll">{updated_at}</Moment>
+                                Created at <Moment unix format="llll">{created_at}</Moment>by <b>{quizTypeCreatedBy.name}</b><br/>
                             </small>
+                        )}
+                        {updated_at && (
+                            <small>
+                                Updated at <Moment unix format="llll">{updated_at}</Moment><br/>
+                            </small>
+                        )}
+                        {quizTypeUpdatedBy.name && (
+                            <small>Last updated by <b>{quizTypeUpdatedBy.name}</b></small>
                         )}
                     </List.Content>
                 </List.Item>
