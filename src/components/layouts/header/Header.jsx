@@ -10,7 +10,7 @@ const Header = () => {
                 <Image centered src="/assets/images/evonix-logo.png" size="massive"/><br/>
                 Admin Panel
                 <Head.Subheader>
-                    To prevent hacking into your account, please make sure to log out of your account once you have done it.
+                    To prevent hacking into your account, please make sure to log out of your account once you have done with your session.
                 </Head.Subheader><br/>
             </Head>
             <Navbar />
