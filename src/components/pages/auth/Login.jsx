@@ -16,7 +16,8 @@ const Toast = Swal.mixin({
     position: 'top-end'
 });
 
-const Login = (props) => {
+const Login = () => {
+    let history = useHistory();
     const authContext = useContext(AuthContext);
     const { userLogin, error, clearAuthErrors, isAuthenticated } = authContext;
 
