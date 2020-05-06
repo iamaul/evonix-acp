@@ -11,7 +11,14 @@ const Toast = Swal.mixin({
 
 const QuizTypeForm = () => {
     const quizTypeContext = useContext(QuizTypeContext);
-    const { addQuizType, updateQuizType, clearCurrentQuizType, current_quiz_type, clearQuizTypeErrors, error } = quizTypeContext;
+    const { 
+        addQuizType, 
+        updateQuizType, 
+        clearCurrentQuizType, 
+        current_quiz_type, 
+        clearQuizTypeErrors, 
+        error 
+    } = quizTypeContext;
 
     const [quizType, setQuizType] = useState({ name: '', active: true });
 
