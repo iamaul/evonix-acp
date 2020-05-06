@@ -52,7 +52,7 @@ const QuizTypeList = ({ quizType }) => {
                                 Updated at <Moment unix format="llll">{updated_at}</Moment><br/>
                             </small>
                         )}
-                        {quizTypeUpdatedBy.name !== null && (
+                        {quizTypeUpdatedBy && (
                             <small>Last updated by <b>{quizTypeUpdatedBy.name}</b></small>
                         )}
                     </List.Content>

@@ -37,9 +37,9 @@ const Navbar = () => {
                 />
                 <Dropdown item text="Quiz">
                     <Dropdown.Menu>
-                        <Dropdown.Item as={NavLink} to="/quiz/type">Quiz Type</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to="/quiz/type">Type</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to="/quiz/question">Question</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to="/quiz/answer">Quiz Answer</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to="/quiz/answer">Answer</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
                 <Menu.Item
