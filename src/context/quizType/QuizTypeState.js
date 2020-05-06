@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 
 import QuizTypeContext from './quizTypeContext';
 import quizTypeReducer from './quizTypeReducer';
@@ -16,11 +15,6 @@ import {
     QUIZ_TYPE_ERROR,
     CLEAR_QUIZ_TYPE_ERROR
 } from '../types';
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end'
-});
 
 const QuizTypeState = (props) => {
     const INITIAL_STATE = {
@@ -53,10 +47,6 @@ const QuizTypeState = (props) => {
         try {
             const res = await axios.post('/api/v1/quiz/type', quizType, config);
             dispatch({ type: ADD_QUIZ_TYPE, payload: res.data });
-            Toast.fire({
-                icon: 'success',
-                text: res.data.msg
-            });
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_TYPE_ERROR, payload: errors });
@@ -83,10 +73,6 @@ const QuizTypeState = (props) => {
         try {
             const res = await axios.put(`/api/v1/quiz/type/${quizType.id}`, quizType, config);
             dispatch({ type: UPDATE_QUIZ_TYPE, payload: res.data });
-            Toast.fire({
-                icon: 'success',
-                text: res.data.msg
-            });
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_TYPE_ERROR, payload: errors });
