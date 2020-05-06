@@ -74,8 +74,7 @@ const QuizTypeForm = () => {
                     <Checkbox
                         label="Status"
                         name="active"
-                        value={active}
-                        checked={active === true}
+                        checked={active}
                         onChange={toggleStatus}
                         toggle
                     />
