@@ -70,16 +70,14 @@ const QuizTypeForm = () => {
                     onChange={onChange}
                     fluid 
                 />
-                <Form.Field>
-                    <Checkbox
-                        label="Status"
-                        name="active"
-                        value={active}
-                        checked={active}
-                        onChange={toggleStatus}
-                        toggle
-                    />
-                </Form.Field>
+                <Checkbox
+                    label="Status"
+                    name="active"
+                    value={active}
+                    checked={active}
+                    onChange={toggleStatus}
+                    toggle
+                />
                 <Form.Button color="red" size="small" content={current_quiz_type ? 'Edit' : 'Add'} />
                 {current_quiz_type && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuizType} />

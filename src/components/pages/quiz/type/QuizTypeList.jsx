@@ -23,6 +23,7 @@ const QuizTypeList = ({ quizType }) => {
                 divided 
                 verticalAlign="middle" 
                 size="large"
+                celled
             >
                 <List.Item>
                     <List.Content floated="right">
@@ -47,10 +48,10 @@ const QuizTypeList = ({ quizType }) => {
                                 Created at <Moment unix format="llll">{created_at}</Moment> by <b>{quizTypeCreatedBy.name}</b><br/>
                             </small>
                         )}
-                        {updated_at && (
+                        {updated_at !== 0 && (
                             <small>
-                                Updated at <Moment unix format="llll">{updated_at}</Moment><br/> {quizTypeUpdatedBy && quizTypeUpdatedBy.name && (
-                                    <>by <b>{quizTypeUpdatedBy.name}</b></>         
+                                Updated at <Moment unix format="llll">{updated_at}</Moment>{quizTypeUpdatedBy && quizTypeUpdatedBy.name && (
+                                    <> by <b>{quizTypeUpdatedBy.name}</b></>         
                                 )}
                             </small>
                         )}
