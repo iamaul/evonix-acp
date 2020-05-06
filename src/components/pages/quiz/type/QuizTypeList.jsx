@@ -44,16 +44,15 @@ const QuizTypeList = ({ quizType }) => {
                         {active === 0 ? 'Inactive' : 'Active'}<br/>
                         {created_at && (
                             <small>
-                                Created at <Moment unix format="llll">{created_at}</Moment>by <b>{quizTypeCreatedBy.name}</b><br/>
+                                Created at <Moment unix format="llll">{created_at}</Moment> by <b>{quizTypeCreatedBy.name}</b><br/>
                             </small>
                         )}
                         {updated_at && (
                             <small>
-                                Updated at <Moment unix format="llll">{updated_at}</Moment><br/>
+                                Updated at <Moment unix format="llll">{updated_at}</Moment><br/> {quizTypeUpdatedBy && quizTypeUpdatedBy.name && (
+                                    <>by <b>{quizTypeUpdatedBy.name}</b></>         
+                                )}
                             </small>
-                        )}
-                        {quizTypeUpdatedBy && (
-                            <small>Last updated by <b>{quizTypeUpdatedBy.name}</b></small>
                         )}
                     </List.Content>
                 </List.Item>
