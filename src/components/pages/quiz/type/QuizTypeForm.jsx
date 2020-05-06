@@ -13,6 +13,8 @@ const QuizTypeForm = () => {
     const quizTypeContext = useContext(QuizTypeContext);
     const { addQuizType, updateQuizType, clearCurrentQuizType, current_quiz_type, clearQuizTypeErrors, error } = quizTypeContext;
 
+    const [quizType, setQuizType] = useState({ name: '', active: true });
+
     useEffect(() => {
         if (current_quiz_type !== null) {
             setQuizType(current_quiz_type);
@@ -31,8 +33,6 @@ const QuizTypeForm = () => {
             clearQuizTypeErrors();
         }
     }, [quizTypeContext, current_quiz_type, error, clearQuizTypeErrors])
-
-    const [quizType, setQuizType] = useState({ name: '', active: true });
 
     const { name, active } = quizType;
 

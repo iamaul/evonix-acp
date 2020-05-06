@@ -15,6 +15,8 @@ import Quiz from './pages/quiz/Quiz';
 import QuizAnswer from './pages/quiz/answer/QuizAnswer';
 import Footer from './layouts/footer/Footer';
 
+import './App.css';
+
 const App = () => {
     return (
         <>
