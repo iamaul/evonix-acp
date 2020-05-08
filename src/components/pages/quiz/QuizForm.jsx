@@ -22,6 +22,7 @@ const QuizForm = () => {
 
     const imageFileRef = React.createRef();
     const [quiz, setQuiz] = useState({ title: '', question: '', image: null });
+    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
         if (current_quiz !== null) {
@@ -53,7 +54,7 @@ const QuizForm = () => {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('question', question);
-            formData.append('image', image);
+            formData.append('image', imageFile);
             console.log(formData);
             addQuiz(formData);
         } else {
@@ -63,8 +64,8 @@ const QuizForm = () => {
     }
 
     const onImageFileChange = e => {
-        setQuiz({ image: e.target.files[0] });
-        console.log(image + 'e.target.files[0] ' + e.target.files[0]);
+        setImageFile(e.target.files[0]);
+        console.log(imageFile + 'e.target.files[0] ' + e.target.files[0]);
     }
 
     const clearQuiz = () => {
