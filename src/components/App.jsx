@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import AuthState from '../context/auth/AuthState';
-import QuizTypeState from '../context/quizType/QuizTypeState';
+import QuizState from '../context/quiz/QuizState';
 
 import PrivateRoute from '../routes/PrivateRoute';
 
@@ -19,7 +19,7 @@ const App = () => {
     return (
         <>
             <AuthState>
-                <QuizTypeState>
+                <QuizState>
                     <Router>
                         <Container>
                             <Switch>
@@ -33,7 +33,7 @@ const App = () => {
                             </Switch>
                         </Container>
                     </Router>
-                </QuizTypeState>
+                </QuizState>
             </AuthState>
         </>
     )
