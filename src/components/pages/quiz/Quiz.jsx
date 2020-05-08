@@ -1,49 +1,49 @@
-import React from 'react';
-import DataTable from 'react-data-table-component';
-import { Icon, Button } from 'semantic-ui-react';
+import React, { useEffect, useContext } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Grid, Image } from 'semantic-ui-react';
 
+import QuizContext from '../../../context/quiz/quizContext';
+
+import QuizForm from './QuizForm';
 import QuizList from './QuizList';
 
+import Loader from '../../layouts/loader/Loader';
+
 const Quiz = () => {
-    const data = [{ 
-        id: 1, 
-        title: 'Conan the Barbarian', 
-        summary: 'Orphaned boy Conan is enslaved after his village is destroyed...',  
-        year: '1982', 
-        image: 'http://conan.image.png' }];
+    const quizContext = useContext(QuizContext);
+    const { quizzes, getAllQuiz, setLoading } = quizContext;
 
-    const columns = [
-        {
-            name: 'Title',
-            sortable: true,
-            cell: row => <div><div style={{ fontWeight: 700 }}>{row.title}</div>{row.summary}</div>,
-        },
-        {
-            name: 'Year',
-            selector: 'year',
-            sortable: true,
-            right: true,
-        },
-    ];
-
-    const actions = (
-        <Button color="green" icon size="small">
-            <Icon name="add" />
-        </Button>
-    )
+    useEffect(() => {
+        getAllQuiz();
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <>
-            <DataTable
-                title="Quiz List."
-                columns={columns}
-                data={data}
-                actions={actions}
-                highlightOnHover
-                sortIcon={<Icon name="caret down" />}
-                expandableRows
-                expandableRowsComponent={<QuizList data={data} />}
-            />  
+            <Grid columns={2} padded>
+                <Grid.Column>
+                    <QuizForm />
+                </Grid.Column>
+                <Grid.Column>
+                    {quizzes !== null && quizzes.length === 0 && !setLoading && (
+                        <Image src="https://i.giphy.com/media/xTeV7uMaW2bRBu15cc/giphy.webp" centered />
+                    )}
+                    {quizzes !== null && !setLoading ? (
+                        <TransitionGroup>
+                            {quizzes.map(qt => (
+                                <CSSTransition 
+                                    key={qt.id}
+                                    timeout={500}
+                                    classNames="item"
+                                >
+                                    <QuizList quiz={qt} />
+                                </CSSTransition>
+                            ))}
+                        </TransitionGroup>
+                        ) : ( <Loader isLoading={setLoading} resizeIcon={32} />)
+                    }
+                </Grid.Column>
+            </Grid>
         </>
     )
 }

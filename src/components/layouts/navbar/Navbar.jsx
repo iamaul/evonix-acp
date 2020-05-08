@@ -35,13 +35,11 @@ const Navbar = () => {
                     name="Blog"
                     exact to="/blog"
                 />
-                <Dropdown item text="Quiz">
-                    <Dropdown.Menu>
-                        <Dropdown.Item as={NavLink} to="/quiz/type">Type</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to="/quiz/question">Question</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to="/quiz/answer">Answer</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+                <Menu.Item
+                    as={NavLink}
+                    name="Quiz"
+                    exact to="/quiz"
+                />
                 <Menu.Item
                     as={NavLink}
                     name="User Applications"

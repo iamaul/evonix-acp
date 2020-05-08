@@ -8,12 +8,12 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 
 export const LOGOUT = 'LOGOUT';
 
-export const GET_QUIZ_TYPE = 'GET_QUIZ_TYPE';
-export const ADD_QUIZ_TYPE = 'ADD_QUIZ_TYPE';
-export const DELETE_QUIZ_TYPE = 'DELETE_QUIZ_TYPE';
-export const SET_CURRENT_QUIZ_TYPE = 'SET_CURRENT_QUIZ_TYPE';
-export const CLEAR_CURRENT_QUIZ_TYPE = 'CLEAR_CURRENT_QUIZ_TYPE';
-export const UPDATE_QUIZ_TYPE = 'UPDATE_QUIZ_TYPE';
-export const CLEAR_QUIZ_TYPE = 'CLEAR_QUIZ_TYPE';
-export const QUIZ_TYPE_ERROR = 'QUIZ_TYPE_ERROR';
-export const CLEAR_QUIZ_TYPE_ERROR = 'CLEAR_QUIZ_TYPE_ERROR';
+export const GET_ALL_QUIZ = 'GET_ALL_QUIZ';
+export const ADD_QUIZ = 'ADD_QUIZ';
+export const DELETE_QUIZ = 'DELETE_QUIZ';
+export const SET_CURRENT_QUIZ = 'SET_CURRENT_QUIZ';
+export const CLEAR_CURRENT_QUIZ = 'CLEAR_CURRENT_QUIZ';
+export const UPDATE_QUIZ = 'UPDATE_QUIZ';
+export const CLEAR_QUIZ = 'CLEAR_QUIZ';
+export const QUIZ_ERROR = 'QUIZ_ERROR';
+export const CLEAR_QUIZ_ERROR = 'CLEAR_QUIZ_ERROR';
