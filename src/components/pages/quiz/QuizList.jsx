@@ -16,8 +16,6 @@ const QuizList = ({ quiz }) => {
         clearCurrentQuiz();
     }
 
-    console.log(question);
-
     return (
         <>
             <List 
@@ -34,7 +32,6 @@ const QuizList = ({ quiz }) => {
                                 icon="edit"
                                 color="blue"
                                 onClick={() => setCurrentQuiz(quiz)}
-                                disabled
                             />
                             <Button
                                 icon="delete"
@@ -44,13 +41,11 @@ const QuizList = ({ quiz }) => {
                         </Button.Group>
                     </List.Content>
                     {image && (
-                        <Image avatar src={`http://101.50.3.61:5000/public/quiz/images/${image}`} />
+                        <Image avatar src={image}  />
                     )}
                     <List.Content>
                         <List.Header>{title}</List.Header>
-                        {/* {question && (
-                            {question}
-                        )}<br/> */}
+                        {question}<br/>
                         {created_at && (
                             <small>
                                 Created at <Moment unix format="llll">{created_at}</Moment>{quizCreatedBy && quizCreatedBy.name && (
@@ -59,7 +54,7 @@ const QuizList = ({ quiz }) => {
                                 <br/>
                             </small>
                         )}
-                        {updated_at && (
+                        {updated_at && updated_at > 0 && (
                             <small>
                                 Updated at <Moment unix format="llll">{updated_at}</Moment>{quizUpdatedBy && quizUpdatedBy.name && (
                                     <> by <b>{quizUpdatedBy.name}</b></>         

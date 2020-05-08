@@ -40,7 +40,7 @@ const QuizState = (props) => {
     const addQuiz = async quiz => {
         const config = {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         }
 
@@ -49,16 +49,6 @@ const QuizState = (props) => {
             dispatch({ type: ADD_QUIZ, payload: res.data });
             console.log("quiz: " + quiz);
             console.log("res.data: " + res.data);
-        } catch (error) {
-            const errors = error.response.data.errors;
-            dispatch({ type: QUIZ_ERROR, payload: errors });
-        }
-    }
-
-    const deleteQuiz = async id => {
-        try {
-            await axios.delete(`/api/v1/quiz/${id}`);
-            dispatch({ type: DELETE_QUIZ, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_ERROR, payload: errors });
@@ -75,6 +65,16 @@ const QuizState = (props) => {
         try {
             const res = await axios.put(`/api/v1/quiz/${quiz.id}`, quiz, config);
             dispatch({ type: UPDATE_QUIZ, payload: res.data });
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: QUIZ_ERROR, payload: errors });
+        }
+    }
+
+    const deleteQuiz = async id => {
+        try {
+            await axios.delete(`/api/v1/quiz/${id}`);
+            dispatch({ type: DELETE_QUIZ, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_ERROR, payload: errors });
