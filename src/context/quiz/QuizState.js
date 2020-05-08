@@ -47,6 +47,8 @@ const QuizState = (props) => {
         try {
             const res = await axios.post('/api/v1/quiz', quiz, config);
             dispatch({ type: ADD_QUIZ, payload: res.data });
+            console.log("quiz: " + quiz);
+            console.log("res.data: " + res.data);
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_ERROR, payload: errors });

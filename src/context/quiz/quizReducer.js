@@ -29,13 +29,13 @@ export default (state, action) => {
         case UPDATE_QUIZ:
             return {
                 ...state,
-                quizzes: state.quizzes.map(qt => qt.id === payload.id ? payload : qt),
+                quizzes: state.quizzes.map(quiz => quiz.id === payload.id ? payload : quiz),
                 setLoading: false
             }
         case DELETE_QUIZ:
             return {
                 ...state,
-                quizzes: state.quizzes.filter(qt => qt.id !== payload),
+                quizzes: state.quizzes.filter(quiz => quiz.id !== payload),
                 setLoading: false
             }
         case CLEAR_QUIZ:

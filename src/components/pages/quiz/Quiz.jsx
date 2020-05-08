@@ -30,13 +30,13 @@ const Quiz = () => {
                     )}
                     {quizzes !== null && !setLoading ? (
                         <TransitionGroup>
-                            {quizzes.map(qt => (
+                            {quizzes.map(quiz => (
                                 <CSSTransition 
-                                    key={qt.id}
+                                    key={quiz.id}
                                     timeout={500}
                                     classNames="item"
                                 >
-                                    <QuizList quizzes={qt} />
+                                    <QuizList quiz={quiz} />
                                 </CSSTransition>
                             ))}
                         </TransitionGroup>

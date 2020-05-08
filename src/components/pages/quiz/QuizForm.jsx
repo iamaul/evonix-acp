@@ -58,14 +58,12 @@ const QuizForm = () => {
         e.preventDefault();
 
         setQuiz({ title, question, image });
-        console.log(title + question + image);
 
         if (current_quiz === null) {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('question', question);
             formData.append('image', image);
-            console.log(formData);
             addQuiz(formData);
         } else {
             updateQuiz(quiz);
