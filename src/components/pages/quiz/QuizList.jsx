@@ -41,10 +41,10 @@ const QuizList = ({ quizzes }) => {
                             />
                         </Button.Group>
                     </List.Content>
-                    {image && (
-                        <Image avatar src={`http://101.50.3.61:5000/public/quiz/images/${image}`} />
-                    )}
                     <List.Content>
+                        {image && (
+                            <Image avatar src={`http://101.50.3.61:5000/public/quiz/images/${image}`} />
+                        )}
                         <List.Header>{title}</List.Header>
                         {question && (
                             {question}
