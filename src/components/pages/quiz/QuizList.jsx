@@ -54,7 +54,7 @@ const QuizList = ({ quiz }) => {
                                 <br/>
                             </small>
                         )}
-                        {updated_at && updated_at > 0 && (
+                        {updated_at && updated_at !== null && (
                             <small>
                                 Updated at <Moment unix format="llll">{updated_at}</Moment>{quizUpdatedBy && quizUpdatedBy.name && (
                                     <> by <b>{quizUpdatedBy.name}</b></>         
