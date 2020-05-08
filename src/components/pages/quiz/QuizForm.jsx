@@ -96,7 +96,7 @@ const QuizForm = () => {
                 <Form.Field>
                     <TextArea 
                         placeholder="Question" 
-                        value={textAreaVal} 
+                        value={question} 
                         onChange={onQuestionChange} 
                     />
                 </Form.Field>
