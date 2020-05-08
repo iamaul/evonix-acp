@@ -5,11 +5,11 @@ import Moment from 'react-moment';
 
 import QuizContext from '../../../context/quiz/quizContext';
 
-const QuizList = ({ quiz }) => {
+const QuizList = ({ quizzes }) => {
     const quizContext = useContext(QuizContext);
 
     const { deleteQuiz, setCurrentQuiz, clearCurrentQuiz } = quizContext;
-    const { id, title, question, image, created_at, updated_at, quizCreatedBy, quizUpdatedBy } = quiz; 
+    const { id, title, question, image, created_at, updated_at, quizCreatedBy, quizUpdatedBy } = quizzes; 
 
     const onDelete = () => {
         deleteQuiz(id);
@@ -31,7 +31,7 @@ const QuizList = ({ quiz }) => {
                             <Button
                                 icon="edit"
                                 color="blue"
-                                onClick={() => setCurrentQuiz(quiz)}
+                                onClick={() => setCurrentQuiz(quizzes)}
                                 disabled
                             />
                             <Button
@@ -72,7 +72,7 @@ const QuizList = ({ quiz }) => {
 }
 
 QuizList.propTypes = {
-    quiz: PropTypes.object.isRequired
+    quizzes: PropTypes.object.isRequired
 }
 
 export default QuizList;

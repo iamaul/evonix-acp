@@ -36,7 +36,7 @@ const Quiz = () => {
                                     timeout={500}
                                     classNames="item"
                                 >
-                                    <QuizList quiz={qt} />
+                                    <QuizList quizzes={qt} />
                                 </CSSTransition>
                             ))}
                         </TransitionGroup>

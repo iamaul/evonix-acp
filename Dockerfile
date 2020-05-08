@@ -1,8 +1,8 @@
 FROM node:12.16.1-alpine
 
-RUN mkdir -p /evonix-app
+RUN mkdir -p /evonix-app/admin
 
-WORKDIR /evonix-app
+WORKDIR /evonix-app/admin
 
 COPY . .
 
