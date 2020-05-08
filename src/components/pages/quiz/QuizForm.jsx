@@ -21,14 +21,17 @@ const QuizForm = () => {
     } = quizContext;
 
     const imageFileRef = React.createRef();
-    const [quiz, setQuiz] = useState({ title: '', question: '', image: null });
-    const [imageFile, setImageFile] = useState(null);
+
+    const [quiz, setQuiz] = useState({});
+    const [title, setTitle] = useState('');
+    const [image, setImage] = useState(null);
+    const [question, setQuestion] = useState('');
 
     useEffect(() => {
         if (current_quiz !== null) {
             setQuiz(current_quiz);
         } else {
-            setQuiz({ title: '', question: '', image: null });
+            setQuiz({});
         }
 
         if (error) {
@@ -43,18 +46,19 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, error, clearQuizErrors])
 
-    const { title, question, image } = quiz;
-
-    const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });
+    const onTitleChange = e => setTitle(e.target.value);
 
     const onSubmit = e => {
         e.preventDefault();
+
+        setQuiz({ title, question, image });
+        console.log(title + question + image);
 
         if (current_quiz === null) {
             const formData = new FormData();
             formData.append('title', title);
             formData.append('question', question);
-            formData.append('image', imageFile);
+            formData.append('image', image);
             console.log(formData);
             addQuiz(formData);
         } else {
@@ -63,9 +67,14 @@ const QuizForm = () => {
         clearQuiz();
     }
 
-    const onImageFileChange = e => {
-        setImageFile(e.target.files[0]);
-        console.log(imageFile + 'e.target.files[0] ' + e.target.files[0]);
+    const onImageChange = e => {
+        setImage(e.target.files[0]);
+        console.log(e.target.files[0]);
+    }
+
+    const onQuestionChange = e => {
+        setQuestion(e.target.value);
+        console.log(e.target.value);
     }
 
     const clearQuiz = () => {
@@ -81,14 +90,14 @@ const QuizForm = () => {
                     name="title" 
                     value={title}
                     placeholder="Title"
-                    onChange={onChange}
+                    onChange={onTitleChange}
                     fluid 
                 />
                 <Form.Field>
                     <TextArea 
                         placeholder="Question" 
-                        onChange={onChange} 
-                        value={question} 
+                        value={textAreaVal} 
+                        onChange={onQuestionChange} 
                     />
                 </Form.Field>
                 <Form.Field>
@@ -102,7 +111,7 @@ const QuizForm = () => {
                         ref={imageFileRef}
                         type="file"
                         hidden
-                        onChange={onImageFileChange}
+                        onChange={onImageChange}
                     />
                 </Form.Field>
                 <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} onClick={onSubmit}/>
