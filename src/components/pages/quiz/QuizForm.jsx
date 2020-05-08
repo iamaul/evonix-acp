@@ -22,10 +22,16 @@ const QuizForm = () => {
 
     const imageFileRef = React.createRef();
 
-    const [quiz, setQuiz] = useState({});
+    const INITIAL_STATE = {
+        title: '',
+        question: '',
+        image: null
+    }
+
+    const [quiz, setQuiz] = useState(INITIAL_STATE);
     const [title, setTitle] = useState('');
-    const [image, setImage] = useState(null);
     const [question, setQuestion] = useState('');
+    const [image, setImage] = useState(null);
 
     useEffect(() => {
         if (current_quiz !== null) {
