@@ -74,7 +74,7 @@ const QuizForm = () => {
     return (
         <>
             <Header as="h5">Quiz Scenario</Header>
-            <Form size="small" onSubmit={onSubmit}>
+            <Form size="small">
                 <Form.Input 
                     type="text"
                     name="title" 
@@ -100,7 +100,7 @@ const QuizForm = () => {
                         onChange={onImageFileChange}
                     />
                 </Form.Field>
-                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} />
+                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} onClick={onSubmit}/>
                 {current_quiz && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuiz} />
                 )}
