@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, createRef } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { Header, Form, TextArea, Button } from 'semantic-ui-react';
 
@@ -20,7 +20,7 @@ const QuizForm = () => {
         error 
     } = quizContext;
 
-    const imageFileRef = createRef();
+    const imageFileRef = React.createRef();
     const [quiz, setQuiz] = useState({ title: '', question: '', image: null });
 
     useEffect(() => {
@@ -64,7 +64,7 @@ const QuizForm = () => {
 
     const onImageFileChange = e => {
         setQuiz({ image: e.target.files[0] });
-        console.log(image);
+        console.log(image + 'e.target.files[0] ' + e.target.files[0]);
     }
 
     const clearQuiz = () => {
@@ -84,7 +84,11 @@ const QuizForm = () => {
                     fluid 
                 />
                 <Form.Field>
-                    <TextArea placeholder="Question" value={question} onChange={onChange} />
+                    <TextArea 
+                        placeholder="Question" 
+                        onChange={onChange} 
+                        value={question} 
+                    />
                 </Form.Field>
                 <Form.Field>
                     <Button 
