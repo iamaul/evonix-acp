@@ -48,11 +48,9 @@ const QuizList = ({ quiz }) => {
                     )}
                     <List.Content>
                         <List.Header>{title}</List.Header>
-                        <div>
-                            {question && (
-                                {question}
-                            )}<br/>
-                        </div>
+                        {question && (
+                            {question}
+                        )}<br/>
                         {created_at && (
                             <small>
                                 Created at <Moment unix format="llll">{created_at}</Moment>{quizCreatedBy && quizCreatedBy.name && (

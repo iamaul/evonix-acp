@@ -14,21 +14,15 @@ const QuizForm = () => {
     const { 
         addQuiz, 
         updateQuiz, 
-        clearCurrentQuiz, 
         current_quiz, 
-        clearQuizErrors, 
-        error 
+        clearCurrentQuiz, 
+        clearQuizErrors,
+        error
     } = quizContext;
 
     const imageFileRef = React.createRef();
 
-    const INITIAL_STATE = {
-        title: '',
-        question: '',
-        image: null
-    }
-
-    const [quiz, setQuiz] = useState(INITIAL_STATE);
+    const [quiz, setQuiz] = useState({ title: '', question: '', image: null });
     const [title, setTitle] = useState('');
     const [question, setQuestion] = useState('');
     const [image, setImage] = useState(null);
@@ -37,7 +31,7 @@ const QuizForm = () => {
         if (current_quiz !== null) {
             setQuiz(current_quiz);
         } else {
-            setQuiz({});
+            setQuiz({ title: '', question: '', image: null });
         }
 
         if (error) {
@@ -50,14 +44,16 @@ const QuizForm = () => {
             });
             clearQuizErrors();
         }
-    }, [quizContext, current_quiz, error, clearQuizErrors])
+    }, [quizContext, current_quiz, clearQuizErrors, error])
 
     const onTitleChange = e => setTitle(e.target.value);
 
     const onSubmit = e => {
         e.preventDefault();
 
-        setQuiz({ title, question, image });
+        setQuiz({ ...quiz, title, question, image });
+        console.log(quiz);
+        console.log("onSubmit: " + title + question + image);
 
         if (current_quiz === null) {
             const formData = new FormData();
