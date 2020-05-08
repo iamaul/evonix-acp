@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Button, List } from 'semantic-ui-react';
+import { Button, List, Image } from 'semantic-ui-react';
 import Moment from 'react-moment';
 
 import QuizContext from '../../../context/quiz/quizContext';
