@@ -88,7 +88,7 @@ const QuizForm = () => {
                 </Form.Field>
                 <Form.Field>
                     <Button 
-                        content={current_quiz ? image : 'Choose file'}
+                        content={current_quiz ? image : 'Choose image'}
                         labelPosition="left"
                         icon="file image"
                         onClick={() => imageFileRef.current.click()}
