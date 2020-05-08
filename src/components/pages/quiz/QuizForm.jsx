@@ -51,9 +51,9 @@ const QuizForm = () => {
     const onSubmit = e => {
         e.preventDefault();
 
-        setQuiz({ ...quiz, title, question, image });
-        console.log(quiz);
+        setQuiz({ title, question, image });
         console.log("onSubmit: " + title + question + image);
+        console.log(quiz);
 
         if (current_quiz === null) {
             const formData = new FormData();

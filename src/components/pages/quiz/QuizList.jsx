@@ -16,7 +16,7 @@ const QuizList = ({ quiz }) => {
         clearCurrentQuiz();
     }
 
-    console.log(quiz);
+    console.log(question);
 
     return (
         <>
@@ -48,9 +48,9 @@ const QuizList = ({ quiz }) => {
                     )}
                     <List.Content>
                         <List.Header>{title}</List.Header>
-                        {question && (
+                        {/* {question && (
                             {question}
-                        )}<br/>
+                        )}<br/> */}
                         {created_at && (
                             <small>
                                 Created at <Moment unix format="llll">{created_at}</Moment>{quizCreatedBy && quizCreatedBy.name && (
