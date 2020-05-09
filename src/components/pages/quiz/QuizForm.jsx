@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { Header, Form, TextArea, Button } from 'semantic-ui-react';
+import { Header, Form, TextArea } from 'semantic-ui-react';
 
 import QuizContext from '../../../context/quiz/quizContext';
 
@@ -50,12 +50,10 @@ const QuizForm = () => {
     const onImageChange = e => setImage(e.target.value);
     const onQuestionChange = e => setQuestion(e.target.value);
 
-    const { title, question, image } = quiz;
-
     const onSubmit = e => {
         e.preventDefault();
 
-        setQuiz({ ...quiz });
+        setQuiz({ ...quiz, title, question, image });
         console.log(quiz);
 
         if (current_quiz === null) {
