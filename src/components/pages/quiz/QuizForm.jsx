@@ -23,9 +23,7 @@ const QuizForm = () => {
     // const imageFileRef = React.createRef();
 
     const [quiz, setQuiz] = useState({ title: '', question: '', image: '' });
-    const [title, setTitle] = useState('');
     const [question, setQuestion] = useState('');
-    const [image, setImage] = useState('');
 
     useEffect(() => {
         if (current_quiz !== null) {
@@ -46,13 +44,15 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
-    if (title && question && image) {
-        setQuiz({ ...quiz, title, question, image });
-    }
+    const { title, image } = quiz;
+
+    const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
 
+        setQuiz({ ...quiz, question });
+        
         if (current_quiz === null) {
             addQuiz(quiz);
         } else {
@@ -74,7 +74,7 @@ const QuizForm = () => {
                     name="title" 
                     value={title}
                     placeholder="Title"
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={onChange}
                     fluid 
                 />
                 <Form.Field>
@@ -89,7 +89,7 @@ const QuizForm = () => {
                     name="image" 
                     value={image}
                     placeholder="Image URL (e.g: http://imgur.com/)"
-                    onChange={e => setImage(e.target.value)}
+                    onChange={onChange}
                     fluid 
                 />
                 {/* <Form.Field>
