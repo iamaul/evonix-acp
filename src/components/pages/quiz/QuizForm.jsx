@@ -46,13 +46,12 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
+    if (title && question && image) {
+        setQuiz({ ...quiz, title, question, image });
+    }
+
     const onSubmit = e => {
         e.preventDefault();
-
-        if (title && question && image) {
-            setQuiz({ ...quiz, title, question, image });
-            console.log(quiz);
-        }
 
         if (current_quiz === null) {
             addQuiz(quiz);
@@ -69,7 +68,7 @@ const QuizForm = () => {
     return (
         <>
             <Header as="h5">Quiz Scenario</Header>
-            <Form size="small" onSubmit={onSubmit}>
+            <Form size="small">
                 <Form.Input 
                     type="text"
                     name="title" 
@@ -107,7 +106,7 @@ const QuizForm = () => {
                         onChange={onImageChange}
                     />
                 </Form.Field> */}
-                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} />
+                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} onClick={onSubmit} />
                 {current_quiz && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuiz} />
                 )}
