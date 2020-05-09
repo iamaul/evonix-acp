@@ -46,14 +46,13 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
-    const onTitleChange = e => setTitle(e.target.value);
-    const onImageChange = e => setImage(e.target.value);
-    const onQuestionChange = e => setQuestion(e.target.value);
-
     const onSubmit = e => {
         e.preventDefault();
 
-        setQuiz({ title, question, image });
+        if (title && question && image) {
+            setQuiz({ ...quiz, title, question, image });
+            console.log(quiz);
+        }
 
         if (current_quiz === null) {
             addQuiz(quiz);
@@ -76,14 +75,14 @@ const QuizForm = () => {
                     name="title" 
                     value={title}
                     placeholder="Title"
-                    onChange={onTitleChange}
+                    onChange={e => setTitle(e.target.value)}
                     fluid 
                 />
                 <Form.Field>
                     <TextArea 
                         placeholder="Question" 
                         value={question} 
-                        onChange={onQuestionChange} 
+                        onChange={e => setQuestion(e.target.value)} 
                     />
                 </Form.Field>
                 <Form.Input 
@@ -91,7 +90,7 @@ const QuizForm = () => {
                     name="image" 
                     value={image}
                     placeholder="Image URL (e.g: http://imgur.com/)"
-                    onChange={onImageChange}
+                    onChange={e => setImage(e.target.value)}
                     fluid 
                 />
                 {/* <Form.Field>
