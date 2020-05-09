@@ -46,18 +46,11 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
-    const onTitleChange = e => {
-        setTitle(e.target.value);
-        setQuiz({ ...quiz, title });
-    }
-    const onQuestionChange = e => {
-        setQuestion(e.target.value);
-        setQuiz({ ...quiz, question });
-    }
-    const onImageChange = e => {
-        setImage(e.target.value);
-        setQuiz({ ...quiz, image });
-    }
+    const onTitleChange = e => setTitle(e.target.value);
+    const onImageChange = e => setImage(e.target.value);
+    const onQuestionChange = e => setQuestion(e.target.value);
+
+    setQuiz({ ...quiz, title, question, image });
 
     const onSubmit = e => {
         e.preventDefault();
@@ -79,7 +72,7 @@ const QuizForm = () => {
     return (
         <>
             <Header as="h5">Quiz Scenario</Header>
-            <Form size="small">
+            <Form size="small" onSubmit={onSubmit}>
                 <Form.Input 
                     type="text"
                     name="title" 
@@ -117,7 +110,7 @@ const QuizForm = () => {
                         onChange={onImageChange}
                     />
                 </Form.Field> */}
-                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} onClick={onSubmit}/>
+                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} />
                 {current_quiz && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuiz} />
                 )}
