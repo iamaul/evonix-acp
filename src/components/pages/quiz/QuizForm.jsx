@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { Header, Form, TextArea } from 'semantic-ui-react';
+import { Header, Form } from 'semantic-ui-react';
 
 import QuizContext from '../../../context/quiz/quizContext';
 
@@ -23,7 +23,6 @@ const QuizForm = () => {
     // const imageFileRef = React.createRef();
 
     const [quiz, setQuiz] = useState({ title: '', question: '', image: '' });
-    const [question, setQuestion] = useState('');
 
     useEffect(() => {
         if (current_quiz !== null) {
@@ -44,15 +43,12 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
-    const { title, image } = quiz;
-
+    const { title, question, image } = quiz;
     const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
 
-        setQuiz({ ...quiz, question });
-        
         if (current_quiz === null) {
             addQuiz(quiz);
         } else {
@@ -68,7 +64,7 @@ const QuizForm = () => {
     return (
         <>
             <Header as="h5">Quiz Scenario</Header>
-            <Form size="small">
+            <Form size="small" onSubmit={onSubmit}>
                 <Form.Input 
                     type="text"
                     name="title" 
@@ -78,10 +74,13 @@ const QuizForm = () => {
                     fluid 
                 />
                 <Form.Field>
-                    <TextArea 
-                        placeholder="Question" 
-                        value={question} 
-                        onChange={e => setQuestion(e.target.value)} 
+                    <textarea 
+                        name={question} 
+                        value={question}
+                        cols="30" 
+                        rows="10"
+                        placeholder="What's on your mind?"
+                        onChange={onChange} 
                     />
                 </Form.Field>
                 <Form.Input 
@@ -106,7 +105,7 @@ const QuizForm = () => {
                         onChange={onImageChange}
                     />
                 </Form.Field> */}
-                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} onClick={onSubmit} />
+                <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} />
                 {current_quiz && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuiz} />
                 )}
