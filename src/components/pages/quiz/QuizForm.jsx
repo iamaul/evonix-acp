@@ -50,12 +50,10 @@ const QuizForm = () => {
     const onImageChange = e => setImage(e.target.value);
     const onQuestionChange = e => setQuestion(e.target.value);
 
-    setQuiz({ ...quiz, title, question, image });
-
     const onSubmit = e => {
         e.preventDefault();
 
-        console.log(quiz);
+        setQuiz({ title, question, image });
 
         if (current_quiz === null) {
             addQuiz(quiz);
