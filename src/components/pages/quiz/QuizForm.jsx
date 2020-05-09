@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { Header, Form, TextArea } from 'semantic-ui-react';
+import { Header, Form, TextArea, Button } from 'semantic-ui-react';
 
 import QuizContext from '../../../context/quiz/quizContext';
 
@@ -22,14 +22,16 @@ const QuizForm = () => {
 
     // const imageFileRef = React.createRef();
 
-    const [quiz, setQuiz] = useState({ title: '', question: '', image: null });
-    const [questionTextArea, setQuestionTextArea] = useState('');
+    const [quiz, setQuiz] = useState({ title: '', question: '', image: '' });
+    const [title, setTitle] = useState('');
+    const [question, setQuestion] = useState('');
+    const [image, setImage] = useState('');
 
     useEffect(() => {
         if (current_quiz !== null) {
             setQuiz(current_quiz);
         } else {
-            setQuiz({ title: '', question: '', image: null });
+            setQuiz({ title: '', question: '', image: '' });
         }
 
         if (error) {
@@ -44,13 +46,16 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
+    const onTitleChange = e => setTitle(e.target.value);
+    const onImageChange = e => setImage(e.target.value);
+    const onQuestionChange = e => setQuestion(e.target.value);
+
     const { title, question, image } = quiz;
-    const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
 
-        setQuiz({ ...quiz, question: questionTextArea });
+        setQuiz({ ...quiz });
         console.log(quiz);
 
         if (current_quiz === null) {
@@ -59,10 +64,6 @@ const QuizForm = () => {
             updateQuiz(quiz);
         }
         clearQuiz();
-    }
-
-    const onQuestionChange = e => {
-        setQuestionTextArea(e.target.value);
     }
 
     const clearQuiz = () => {
@@ -78,7 +79,7 @@ const QuizForm = () => {
                     name="title" 
                     value={title}
                     placeholder="Title"
-                    onChange={onChange}
+                    onChange={onTitleChange}
                     fluid 
                 />
                 <Form.Field>
@@ -93,7 +94,7 @@ const QuizForm = () => {
                     name="image" 
                     value={image}
                     placeholder="Image URL (e.g: http://imgur.com/)"
-                    onChange={onChange}
+                    onChange={onImageChange}
                     fluid 
                 />
                 {/* <Form.Field>
