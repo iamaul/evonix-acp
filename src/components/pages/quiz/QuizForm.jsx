@@ -44,7 +44,7 @@ const QuizForm = () => {
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
     const { title, question, image } = quiz;
-    const onChange = e => setQuiz(prev => ({...prev, [e.target.name]: e.target.value }));
+    const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
@@ -75,7 +75,7 @@ const QuizForm = () => {
                 />
                 <Form.Field>
                     <textarea 
-                        name={question} 
+                        name="question"
                         value={question}
                         cols="30" 
                         rows="10"
