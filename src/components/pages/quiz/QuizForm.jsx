@@ -46,14 +46,22 @@ const QuizForm = () => {
         }
     }, [quizContext, current_quiz, clearQuizErrors, error])
 
-    const onTitleChange = e => setTitle(e.target.value);
-    const onImageChange = e => setImage(e.target.value);
-    const onQuestionChange = e => setQuestion(e.target.value);
+    const onTitleChange = e => {
+        setTitle(e.target.value);
+        setQuiz({ ...quiz, title });
+    }
+    const onQuestionChange = e => {
+        setQuestion(e.target.value);
+        setQuiz({ ...quiz, question });
+    }
+    const onImageChange = e => {
+        setImage(e.target.value);
+        setQuiz({ ...quiz, image });
+    }
 
     const onSubmit = e => {
         e.preventDefault();
 
-        setQuiz({ ...quiz, title, question, image });
         console.log(quiz);
 
         if (current_quiz === null) {
