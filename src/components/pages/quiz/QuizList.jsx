@@ -41,7 +41,7 @@ const QuizList = ({ quiz }) => {
                         </Button.Group>
                     </List.Content>
                     {image && (
-                        <Image src={image} size="tiny" />
+                        <Image src={image} size="medium" />
                     )}
                     <List.Content>
                         <List.Header>{title}</List.Header>
