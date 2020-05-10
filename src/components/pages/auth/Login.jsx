@@ -58,7 +58,7 @@ const Login = () => {
                         <Image src="/assets/images/evonix-logo.png" size="massive" />
                     </Header>
                     <Form size="large" onSubmit={onSubmit}>
-                        <Segment stacked>
+                        <Segment color="red" stacked>
                             <Form.Input 
                                 type="text"
                                 name="usermail"
