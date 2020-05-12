@@ -43,7 +43,7 @@ const Navbar = () => {
                 <Menu.Item
                     as={NavLink}
                     name="User Applications"
-                    exact to="/user-apps"
+                    exact to="/user_applications"
                 />
                 <Menu.Item
                     as={NavLink}
