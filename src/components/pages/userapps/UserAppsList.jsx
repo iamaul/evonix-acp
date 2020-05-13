@@ -33,7 +33,7 @@ const UserAppsList = ({ userapps, index }) => {
             });
             clearUserAppsErrors();
         }
-    }, [clearUserAppsErrors])
+    }, [error, clearUserAppsErrors])
 
     const { 
         userAppCreatedBy, 
@@ -70,9 +70,9 @@ const UserAppsList = ({ userapps, index }) => {
 
     let statusName = '';
     switch (userAppCreatedBy && userAppCreatedBy.status) {
-        case 1: statusName = 'Pending';
-        case 2: statusName = 'Denied';
-        case 3: statusName = 'Approved';
+        case 1: statusName = 'Pending'; break;
+        case 2: statusName = 'Denied'; break;
+        case 3: statusName = 'Approved'; break;
         default: statusName = 'Not submitted yet';
     }
 
