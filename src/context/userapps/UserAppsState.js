@@ -33,7 +33,7 @@ const UserAppsState = (props) => {
 
     const updateUserApps = async (status, id) => {
         try {
-            const res = await axios.put(`/api/v1/users/application/${status}/${id}`, config);
+            const res = await axios.put(`/api/v1/users/application/${status}/${id}`);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
