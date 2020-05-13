@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Table, Image } from 'semantic-ui-react';
 
@@ -16,6 +16,8 @@ const UserApps = () => {
         getAllUserApps();
         // eslint-disable-next-line
     },[])
+
+    console.log(user_apps);
 
     return (
         <>
@@ -51,7 +53,9 @@ const UserApps = () => {
                         </Table.Body>
                     </TransitionGroup>
                 ) : (
-                    <Loader isLoading={setLoading} />
+                    <Fragment>
+                        <Loader isLoading={setLoading} />
+                    </Fragment>
                 )}
             </Table>
         </>

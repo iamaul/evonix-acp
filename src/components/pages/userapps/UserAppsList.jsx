@@ -22,6 +22,20 @@ const UserAppsList = ({ userapps, index }) => {
     const userAppsContext = useContext(UserAppsContext);
     const { updateUserApps, error, clearUserAppsErrors } = userAppsContext;
 
+    const { 
+        user_id,
+        admin_id,
+        score, 
+        answer, 
+        created_at, 
+        updated_at,
+        users, 
+        admins, 
+        quizzes 
+    } = userapps;
+
+    console.log(userapps);
+
     useEffect(() => {
         if (error) {
             error.map(err => {
@@ -35,30 +49,15 @@ const UserAppsList = ({ userapps, index }) => {
         }
     }, [error, clearUserAppsErrors])
 
-    const { 
-        user_id,
-        userAppUser, 
-        admin_id, 
-        userAppAdmin, 
-        userAppQuiz, 
-        score, 
-        answer, 
-        created_at, 
-        updated_at 
-    } = userapps;
-
-    const onApprove = () => updateUserApps(1, user_id);
-    const onDeny = () => updateUserApps(0, user_id);
-
     const appModal = (
         <Modal trigger={<Button>View</Button>}>
             <Modal.Header>Application</Modal.Header>
             <Modal.Content image>
-                <Image wrapped size="medium" src={userAppQuiz && userAppQuiz.image} />
+                <Image wrapped size="medium" src={quizzes && quizzes.image} />
                 <Modal.Description>
-                    <Header>{userAppQuiz && userAppQuiz.title}</Header>
+                    <Header>{quizzes && quizzes.title}</Header>
                     <p style={{ textAlign: 'justify' }}>
-                        {userAppQuiz && userAppQuiz.question}
+                        {quizzes && quizzes.question}
                     </p>
                     <Divider />
                     <p style={{ textAlign: 'justify' }}>
@@ -70,23 +69,26 @@ const UserAppsList = ({ userapps, index }) => {
     )
 
     let statusName = '';
-    switch (userAppUser && userAppUser.status) {
+    switch (users && users.status) {
         case 1: statusName = 'Pending'; break;
         case 2: statusName = 'Denied'; break;
         case 3: statusName = 'Approved'; break;
         default: statusName = 'Not submitted yet';
     }
 
+    const onApprove = () => updateUserApps(1, user_id);
+    const onDeny = () => updateUserApps(0, user_id);
+
     return (
         <>
             <Table.Row>
                 <Table.Cell>{index}</Table.Cell>
-                <Table.Cell>{userAppUser && userAppUser.name}</Table.Cell>
+                <Table.Cell>{users && users.name}</Table.Cell>
                 <Table.Cell>{score}</Table.Cell>
                 <Table.Cell>{appModal}</Table.Cell>
                 <Table.Cell>{statusName}</Table.Cell>
                 <Table.Cell>
-                    {admin_id ? userAppAdmin && userAppAdmin.name : ('Nobody')}
+                    {admin_id ? admins && admins.name : ('Nobody')}
                 </Table.Cell>
                 <Table.Cell>
                     {created_at && (
