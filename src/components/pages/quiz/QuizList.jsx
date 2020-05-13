@@ -45,7 +45,7 @@ const QuizList = ({ quiz }) => {
                     )}
                     <List.Content>
                         <List.Header>{title}</List.Header>
-                        {question}<br/>
+                        <p style={{ textAlign: 'justify' }}>{question}</p>
                         {created_at && (
                             <small>
                                 Created at <Moment unix format="llll">{created_at}</Moment>{quizCreatedBy && quizCreatedBy.name && (
