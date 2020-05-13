@@ -36,9 +36,9 @@ const UserAppsList = ({ userapps, index }) => {
     }, [error, clearUserAppsErrors])
 
     const { 
-        userAppCreatedBy, 
+        userAppUser, 
         admin_id, 
-        userAppApprovedBy, 
+        userAppAdmin, 
         userAppQuiz, 
         score, 
         answer, 
@@ -46,8 +46,8 @@ const UserAppsList = ({ userapps, index }) => {
         updated_at 
     } = userapps;
 
-    const onApprove = () => updateUserApps(1, userAppCreatedBy.id);
-    const onDeny = () => updateUserApps(0, userAppCreatedBy.id);
+    const onApprove = () => updateUserApps(1, userAppUser && userAppUser.id);
+    const onDeny = () => updateUserApps(0, userAppUser && userAppAdmin.id);
 
     const appModal = (
         <Modal trigger={<Button>View</Button>}>
@@ -69,7 +69,7 @@ const UserAppsList = ({ userapps, index }) => {
     )
 
     let statusName = '';
-    switch (userAppCreatedBy && userAppCreatedBy.status) {
+    switch (userAppUser && userAppUser.status) {
         case 1: statusName = 'Pending'; break;
         case 2: statusName = 'Denied'; break;
         case 3: statusName = 'Approved'; break;
@@ -80,12 +80,12 @@ const UserAppsList = ({ userapps, index }) => {
         <>
             <Table.Row>
                 <Table.Cell>{index}</Table.Cell>
-                <Table.Cell>{userAppCreatedBy && userAppCreatedBy.name}</Table.Cell>
+                <Table.Cell>{userAppUser && userAppUser.name}</Table.Cell>
                 <Table.Cell>{score}</Table.Cell>
                 <Table.Cell>{appModal}</Table.Cell>
                 <Table.Cell>{statusName}</Table.Cell>
                 <Table.Cell>
-                    {admin_id ? userAppApprovedBy && userAppApprovedBy.name : ('Nobody')}
+                    {admin_id ? userAppAdmin && userAppAdmin.name : ('Nobody')}
                 </Table.Cell>
                 <Table.Cell>
                     {created_at && (

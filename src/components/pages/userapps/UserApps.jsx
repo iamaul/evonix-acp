@@ -8,7 +8,7 @@ import UserAppsList from './UserAppsList';
 
 import Loader from '../../layouts/loader/Loader';
 
-const UserApps = props => {
+const UserApps = () => {
     const userAppsContext = useContext(UserAppsContext);
     const { user_apps, getAllUserApps, setLoading } = userAppsContext;
 

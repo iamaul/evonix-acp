@@ -32,12 +32,6 @@ const UserAppsState = (props) => {
     }
 
     const updateUserApps = async (status, id) => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
         try {
             const res = await axios.put(`/api/v1/users/application/${status}/${id}`, config);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });
@@ -56,8 +50,8 @@ const UserAppsState = (props) => {
             value={{
                 user_apps: state.user_apps,
                 error: state.error,
-                updateUserApps,
                 getAllUserApps,
+                updateUserApps,
                 clearUserAppsErrors
             }}
         >
