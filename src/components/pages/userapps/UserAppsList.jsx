@@ -54,6 +54,7 @@ const UserAppsList = ({ userapps, index }) => {
             id: id,
             index: index,
             user: userAppUser.name,
+            user_id: userAppUser.id,
             score: score,
             answer: answer,
             quizTitle: userAppQuiz.title,
@@ -121,27 +122,27 @@ const UserAppsList = ({ userapps, index }) => {
         },
         {
             name: 'Action',
-            cell: () => <Button.Group size="small">
+            cell: row => <Button.Group size="small">
                             {userAppUser.status !== 3 && (
                                 <Button
                                     icon="checkmark"
                                     color="green"
-                                    onClick={onApprove}
+                                    onClick={onApprove(row.id, row.user_id)}
                                 />
                             )}
                             {userAppUser.status !== 2 && (
                                 <Button
                                     icon="delete"
                                     color="red"
-                                    onClick={onDeny}
+                                    onClick={onDeny(row.id, row.user_id)}
                                 />
                             )}
                         </Button.Group>
         }
     ];
 
-    const onApprove = () => updateUserApps(1, id, user_id);
-    const onDeny = () => updateUserApps(0, id, user_id);
+    const onApprove = (id, userid) => updateUserApps(1, id, userid);
+    const onDeny = (id, userid) => updateUserApps(0, id, userid);
 
     return (
         <DataTable
