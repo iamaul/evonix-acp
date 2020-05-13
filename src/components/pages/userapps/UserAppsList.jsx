@@ -103,7 +103,6 @@ const UserAppsList = ({ userapps, index }) => {
         },
         {
             name: 'Status',
-            selector: 'status',
             sortable: true,
             cell: row => {row.status === 1 ? (<Label color="yellow">Pending</Label>) : 
                 row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}
@@ -114,12 +113,10 @@ const UserAppsList = ({ userapps, index }) => {
         },
         {
             name: 'Created at',
-            selector: 'created_at',
             cell: row => <Moment unix format="llll">{row.created_at}</Moment>
         },
         {
             name: 'Updated at',
-            selector: 'updated_at',
             cell: row => {row.updated_at !== null ? (<Moment unix format="llll">{row.updated_at}</Moment>) : 'No update'}
         },
         {
