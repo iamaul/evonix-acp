@@ -41,7 +41,7 @@ const UserApps = () => {
                     </Table.Header>
                     <Table.Body>
                         {user_apps.map((uapp, index) => (
-                            <UserAppsList key={uapp.id} userapps={uapp} index={index} />
+                            <UserAppsList key={uapp.id} userapps={uapp} index={index+1} />
                         ))}
                     </Table.Body>
                 </Table>
