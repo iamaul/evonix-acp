@@ -51,7 +51,7 @@ const UserAppsList = ({ userapps, index }) => {
 
     const appModal = (
         <Modal trigger={<Button>View</Button>}>
-            <Modal.Header>Application</Modal.Header>
+            <Modal.Header>{userAppUser && userAppUser.name}'s Application</Modal.Header>
             <Modal.Content image>
                 <Image wrapped size="huge" src={userAppQuiz && userAppQuiz.image} />
                 <Modal.Description>
