@@ -7,7 +7,8 @@ import {
     Header,
     Image,
     Modal, 
-    Divider
+    Divider,
+    Label
 } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
 
@@ -30,12 +31,10 @@ const UserAppsList = ({ userapps, index }) => {
         answer, 
         created_at, 
         updated_at,
-        users, 
-        admins, 
-        quizzes 
+        userAppUser, 
+        userAppAdmin, 
+        userAppQuiz 
     } = userapps;
-
-    console.log(userapps);
 
     useEffect(() => {
         if (error) {
@@ -54,13 +53,14 @@ const UserAppsList = ({ userapps, index }) => {
         <Modal trigger={<Button>View</Button>}>
             <Modal.Header>Application</Modal.Header>
             <Modal.Content image>
-                <Image wrapped size="medium" src={quizzes && quizzes.image} />
+                <Image wrapped size="large" src={userAppQuiz && userAppQuiz.image} />
                 <Modal.Description>
-                    <Header>{quizzes && quizzes.title}</Header>
+                    <Header>{userAppQuiz && userAppQuiz.title}</Header>
                     <p style={{ textAlign: 'justify' }}>
-                        {quizzes && quizzes.question}
+                        {userAppQuiz && userAppQuiz.question}
                     </p>
                     <Divider />
+                    <Header as="h5">Answer</Header>
                     <p style={{ textAlign: 'justify' }}>
                         {answer}
                     </p>
@@ -70,11 +70,11 @@ const UserAppsList = ({ userapps, index }) => {
     )
 
     let statusName = '';
-    switch (users && users.status) {
-        case 1: statusName = 'Pending'; break;
-        case 2: statusName = 'Denied'; break;
-        case 3: statusName = 'Approved'; break;
-        default: statusName = 'Not submitted yet';
+    switch (userAppUser && userAppUser.status) {
+        case 1: statusName = <Label color="yellow">Pending</Label>; break;
+        case 2: statusName = <Label color="red">Denied</Label>; break;
+        case 3: statusName = <Label color="green">Approved</Label>; break;
+        default: statusName = <Label>Not submitted yet</Label>;
     }
 
     const onApprove = () => updateUserApps(1, id, user_id);
@@ -84,12 +84,12 @@ const UserAppsList = ({ userapps, index }) => {
         <>
             <Table.Row>
                 <Table.Cell>{index}</Table.Cell>
-                <Table.Cell>{users && users.name}</Table.Cell>
+                <Table.Cell>{userAppUser && userAppUser.name}</Table.Cell>
                 <Table.Cell>{score}</Table.Cell>
                 <Table.Cell>{appModal}</Table.Cell>
                 <Table.Cell>{statusName}</Table.Cell>
                 <Table.Cell>
-                    {admin_id ? admins && admins.name : ('Nobody')}
+                    {admin_id ? userAppAdmin && userAppAdmin.name : ('Nobody')}
                 </Table.Cell>
                 <Table.Cell>
                     {created_at && (
@@ -106,10 +106,12 @@ const UserAppsList = ({ userapps, index }) => {
                     <Button.Group size="small">
                         <Button
                             icon="checkmark"
+                            color="green"
                             onClick={onApprove}
                         />
                         <Button
                             icon="delete"
+                            color="red"
                             onClick={onDeny}
                         />
                     </Button.Group>
