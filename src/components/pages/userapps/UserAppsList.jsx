@@ -23,6 +23,7 @@ const UserAppsList = ({ userapps, index }) => {
     const { updateUserApps, error, clearUserAppsErrors } = userAppsContext;
 
     const { 
+        id,
         user_id,
         admin_id,
         score, 
@@ -76,8 +77,8 @@ const UserAppsList = ({ userapps, index }) => {
         default: statusName = 'Not submitted yet';
     }
 
-    const onApprove = () => updateUserApps(1, user_id);
-    const onDeny = () => updateUserApps(0, user_id);
+    const onApprove = () => updateUserApps(1, id, user_id);
+    const onDeny = () => updateUserApps(0, id, user_id);
 
     return (
         <>

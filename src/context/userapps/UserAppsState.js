@@ -31,9 +31,9 @@ const UserAppsState = (props) => {
         }
     }
 
-    const updateUserApps = async (status, id) => {
+    const updateUserApps = async (status, id, user_id) => {
         try {
-            const res = await axios.put(`/api/v1/users/application/${status}/${id}`);
+            const res = await axios.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
