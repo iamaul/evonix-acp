@@ -53,7 +53,7 @@ const UserAppsList = ({ userapps, index }) => {
         <Modal trigger={<Button>View</Button>}>
             <Modal.Header>Application</Modal.Header>
             <Modal.Content image>
-                <Image size="mini" src={userAppQuiz && userAppQuiz.image} />
+                <Image wrapped size="huge" src={userAppQuiz && userAppQuiz.image} />
                 <Modal.Description>
                     <Header>{userAppQuiz && userAppQuiz.title}</Header>
                     <p style={{ textAlign: 'justify' }}>
