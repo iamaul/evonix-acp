@@ -123,14 +123,14 @@ const UserAppsList = ({ userapps, index }) => {
         {
             name: 'Action',
             cell: row => <Button.Group size="small">
-                            {userAppUser.status !== 3 && (
+                            {row.status !== 3 && (
                                 <Button
                                     icon="checkmark"
                                     color="green"
                                     onClick={onApprove(row.id, row.user_id)}
                                 />
                             )}
-                            {userAppUser.status !== 2 && (
+                            {row.status !== 2 && (
                                 <Button
                                     icon="delete"
                                     color="red"
