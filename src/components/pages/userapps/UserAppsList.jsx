@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { 
@@ -20,7 +20,7 @@ const Toast = Swal.mixin({
 
 const UserAppsList = ({ userapps, index }) => {
     const userAppsContext = useContext(UserAppsContext);
-    const { updateUserApps, clearUserAppsErrors } = userAppsContext;
+    const { updateUserApps, error, clearUserAppsErrors } = userAppsContext;
 
     useEffect(() => {
         if (error) {
