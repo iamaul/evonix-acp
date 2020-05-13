@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import MUIDataTable from "mui-datatables";
+import DataTable from 'react-data-table-component';
 import { 
     Button,
     Header,
@@ -50,7 +50,7 @@ const UserAppsList = ({ userapps, index }) => {
     }, [error, clearUserAppsErrors])
 
     const appModal = (
-        <Modal trigger={<Button>View</Button>}>
+        <Modal trigger={<Button size="small">View</Button>}>
             <Modal.Header>{userAppUser.name}'s Application</Modal.Header>
             <Modal.Content image>
                 <Image wrapped size="huge" src={userAppQuiz.image} />
@@ -69,122 +69,89 @@ const UserAppsList = ({ userapps, index }) => {
         </Modal>  
     )
 
-    let statusName = '';
-    switch (userAppUser.status) {
-        case 1: statusName = <Label color="yellow">Pending</Label>; break;
-        case 2: statusName = <Label color="red">Denied</Label>; break;
-        case 3: statusName = <Label color="green">Approved</Label>; break;
-        default: statusName = <Label>Not submitted yet</Label>;
-    }
-
     const columns = [
         {
-            name: "index",
-            label: "#",
-            options: {
-                filter: false,
-                sort: true,
-            }
+            name: '#',
+            selector: 'index',
+            sortable: true
         },
         {
-            name: "user",
-            label: "User",
-            options: {
-                filter: true,
-                sort: true,
-            }
+            name: 'User',
+            selector: 'user',
+            sortable: true
         },
         {
-            name: "score",
-            label: "Score",
-            options: {
-                filter: true,
-                sort: true,
-            }
+            name: 'Score',
+            selector: 'score',
+            sortable: true
         },
         {
-            name: "application",
-            label: "Application"
+            name: 'Application',
+            cell: () => {appModal}
         },
         {
-            name: "status",
-            label: "Status",
-            options: {
-                filter: true,
-                sort: true,
-            }
+            name: 'Status',
+            selector: 'status',
+            sortable: true,
+            cell: row => {row.status === 1 ? (<Label color="yellow">Pending</Label>) : 
+                row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}
         },
         {
-            name: "approved",
-            label: "Approved By"
+            name: 'Approved by',
+            cell: row => {row.approved_id ? userAppAdmin.name : 'Nobody'}
         },
         {
-            name: "created_at",
-            label: "Created at",
-            options: {
-                filter: false,
-                sort: true,
-            }
+            name: 'Created at',
+            selector: 'created_at',
+            cell: row => <Moment unix format="llll">{row.created_at}</Moment>
         },
         {
-            name: "updated_at",
-            label: "Updated at",
-            options: {
-                filter: false,
-                sort: true,
-            }
+            name: 'Updated at',
+            selector: 'updated_at',
+            cell: row => {row.updated_at !== null ? (<Moment unix format="llll">{row.updated_at}</Moment>) : 'No update'}
         },
         {
-            name: "actions",
-            label: "Actions"
+            name: 'Action',
+            cell: () => <Button.Group size="small">
+                            {userAppUser.status !== 3 && (
+                                <Button
+                                    icon="checkmark"
+                                    color="green"
+                                    onClick={onApprove}
+                                />
+                            )}
+                            {userAppUser.status !== 2 && (
+                                <Button
+                                    icon="delete"
+                                    color="red"
+                                    onClick={onDeny}
+                                />
+                            )}
+                        </Button.Group>
         }
     ];
 
     const data = [
-        { 
-            index, 
-            user: userAppUser.name, 
-            score, 
-            application: appModal, 
-            status: statusName,
-            approved: (admin_id ? userAppAdmin.name : ('Nobody')),
-            created_at: (<Moment unix format="llll">{created_at}</Moment>),
-            updated_at: (<Moment unix format="llll">{updated_at}</Moment>),
-            actions: (
-                <Button.Group size="small">
-                    {userAppUser.status !== 3 && (
-                        <Button
-                            icon="checkmark"
-                            color="green"
-                            onClick={onApprove}
-                        />
-                    )}
-                    {userAppUser.status !== 2 && (
-                        <Button
-                            icon="delete"
-                            color="red"
-                            onClick={onDeny}
-                        />
-                    )}
-                </Button.Group>
-            )
+        {
+            index: index,
+            user: userAppUser.name,
+            score: score,
+            status: userAppUser.status,
+            approved_id: admin_id,
+            created_at: created_at,
+            updated_at: updated_at
         }
     ];
-
-    const options = {
-        filterType: "dropdown",
-        responsive: "scroll"
-    };
 
     const onApprove = () => updateUserApps(1, id, user_id);
     const onDeny = () => updateUserApps(0, id, user_id);
 
     return (
-        <MUIDataTable
-            title={"User Applications"}
-            data={data}
+        <DataTable
+            title="User Applications"
             columns={columns}
-            options={options}
+            data={data}
+            pagination
         />
     )
 }
