@@ -36,6 +36,7 @@ const UserAppsList = ({ userapps, index }) => {
     }, [error, clearUserAppsErrors])
 
     const { 
+        user_id,
         userAppUser, 
         admin_id, 
         userAppAdmin, 
@@ -46,8 +47,8 @@ const UserAppsList = ({ userapps, index }) => {
         updated_at 
     } = userapps;
 
-    const onApprove = () => updateUserApps(1, userAppUser && userAppUser.id);
-    const onDeny = () => updateUserApps(0, userAppUser && userAppAdmin.id);
+    const onApprove = () => updateUserApps(1, user_id);
+    const onDeny = () => updateUserApps(0, user_id);
 
     const appModal = (
         <Modal trigger={<Button>View</Button>}>
