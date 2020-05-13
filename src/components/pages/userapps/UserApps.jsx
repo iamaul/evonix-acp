@@ -40,17 +40,9 @@ const UserApps = () => {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        <TransitionGroup>
-                            {user_apps.map((uapp, index) => (
-                                <CSSTransition
-                                    key={uapp.id}
-                                    timeout={500}
-                                    classNames="item"
-                                >
-                                    <UserAppsList userapps={uapp} index={index} />
-                                </CSSTransition>
-                            ))}
-                        </TransitionGroup>
+                        {user_apps.map((uapp, index) => (
+                            <UserAppsList key={uapp.id} userapps={uapp} index={index} />
+                        ))}
                     </Table.Body>
                 </Table>
             ) : (
