@@ -49,26 +49,22 @@ const UserAppsList = ({ userapps, index }) => {
         }
     }, [error, clearUserAppsErrors])
 
-    const appModal = (
-        <Modal trigger={<Button size="small">View</Button>}>
-            <Modal.Header>{userAppUser.name}'s Application</Modal.Header>
-            <Modal.Content image>
-                <Image wrapped size="huge" src={userAppQuiz.image} />
-                <Modal.Description>
-                    <Header>{userAppQuiz.title}</Header>
-                    <p style={{ textAlign: 'justify' }}>
-                        {userAppQuiz.question}
-                    </p>
-                    <Divider />
-                    <Header as="h3">The Answer</Header>
-                    <p style={{ textAlign: 'justify' }}>
-                        {answer}
-                    </p>
-                </Modal.Description>
-            </Modal.Content>
-        </Modal>  
-    )
-
+    const data = [
+        {
+            id: id,
+            index: index,
+            user: userAppUser.name,
+            score: score,
+            answer: answer,
+            quizTitle: userAppQuiz.title,
+            quizImage: userAppQuiz.image,
+            quizQuestion: userAppQuiz.question,
+            status: userAppUser.status,
+            approved_id: admin_id,
+            created_at: created_at,
+            updated_at: updated_at
+        }
+    ];
     const columns = [
         {
             name: '#',
@@ -87,7 +83,23 @@ const UserAppsList = ({ userapps, index }) => {
         },
         {
             name: 'Application',
-            cell: () => {appModal}
+            cell: row => <Modal trigger={<Button size="small">View</Button>}>
+                            <Modal.Header>{row.user}'s Application</Modal.Header>
+                            <Modal.Content image>
+                                <Image wrapped size="huge" src={row.quizImage} />
+                                <Modal.Description>
+                                    <Header>{row.quizTitle}</Header>
+                                    <p style={{ textAlign: 'justify' }}>
+                                        {row.quizQuestion}
+                                    </p>
+                                    <Divider />
+                                    <Header as="h3">The Answer</Header>
+                                    <p style={{ textAlign: 'justify' }}>
+                                        {row.answer}
+                                    </p>
+                                </Modal.Description>
+                            </Modal.Content>
+                        </Modal>
         },
         {
             name: 'Status',
@@ -131,18 +143,6 @@ const UserAppsList = ({ userapps, index }) => {
         }
     ];
 
-    const data = [
-        {
-            index: index,
-            user: userAppUser.name,
-            score: score,
-            status: userAppUser.status,
-            approved_id: admin_id,
-            created_at: created_at,
-            updated_at: updated_at
-        }
-    ];
-
     const onApprove = () => updateUserApps(1, id, user_id);
     const onDeny = () => updateUserApps(0, id, user_id);
 
@@ -152,6 +152,7 @@ const UserAppsList = ({ userapps, index }) => {
             columns={columns}
             data={data}
             pagination
+            highlightOnHover
         />
     )
 }
