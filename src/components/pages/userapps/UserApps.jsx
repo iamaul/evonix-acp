@@ -1,9 +1,11 @@
 import React, { useEffect, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
-import { Modal, Button, Image, Header, Divider, Label } from 'semantic-ui-react';
+import { Modal, Image, Header, Divider, Label } from 'semantic-ui-react';
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
+
+import ActionButton from './ActionButton';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -15,6 +17,10 @@ const UserApps = () => {
         getAllUserApps();
         // eslint-disable-next-line
     },[])
+
+    const Button = () => (
+        <button type="button">Download</button>
+    )
 
     const columns = [
         {
@@ -61,35 +67,20 @@ const UserApps = () => {
         },
         {
             name: 'Created at',
-            cell: row => <div><Moment unix format="llll">{row.created_at}</Moment></div>
+            sortable: true,
+            cell: row => <div><Moment unix format="lll">{row.created_at}</Moment></div>
         },
         {
             name: 'Updated at',
-            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="llll">{row.updated_at}</Moment>) : 'No update'}</div>
+            sortable: true,
+            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="lll">{row.updated_at}</Moment>) : 'No update'}</div>
+        },
+        {
+            name: 'Action',
+            button: true,
+            cell: row => <ActionButton id={row.id} user_id={row.userAppUser.user_id} status={row.userAppUser.status} />
         }
-        // {
-        //     name: 'Action',
-        //     cell: row => <Button.Group size="small">
-        //                     {row.userAppUser.status !== 3 && (
-        //                         <Button
-        //                             icon="checkmark"
-        //                             color="green"
-        //                             onClick={onApprove(row.id, row.user_id)}
-        //                         />
-        //                     )}
-        //                     {row.userAppUser.status !== 2 && (
-        //                         <Button
-        //                             icon="delete"
-        //                             color="red"
-        //                             onClick={onDeny(row.id, row.user_id)}
-        //                         />
-        //                     )}
-        //                 </Button.Group>
-        // }
     ];
-
-    // const onApprove = (id, userid) => updateUserApps(1, id, userid);
-    // const onDeny = (id, userid) => updateUserApps(0, id, userid);
 
     return (
         <>
