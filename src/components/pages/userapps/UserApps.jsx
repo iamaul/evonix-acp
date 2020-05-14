@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useMemo, useCallback } from 'react';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import { Modal, Button, Image, Header, Divider, Label } from 'semantic-ui-react';
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
 
-import ActionButton from './ActionButton';
+// import ActionButton from './ActionButton';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -13,12 +13,20 @@ const UserApps = () => {
     const userAppsContext = useContext(UserAppsContext);
     const { user_apps, getAllUserApps, setLoading } = userAppsContext;
 
+    const [thing, setThing] = useState();
+    const handleAction = value => {
+        setThing(value);
+        console.log(value);
+    }
+
     useEffect(() => {
         getAllUserApps();
         // eslint-disable-next-line
     },[])
 
-    const columns = [
+    const updateState = useCallback(state => console.log(state));
+
+    const columns = useMemo(() => [
         {
             name: 'User',
             sortable: true,
@@ -73,12 +81,12 @@ const UserApps = () => {
         },
         {
             name: 'Action',
+            cell: () => <Button onClick={handleAction}>Action</Button>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
-            cell: row => <ActionButton id={row.id} user_id={row.user_id} status={row.userAppUser && row.userAppUser.status} />
         }
-    ];
+    ]);
 
     return (
         <>
@@ -92,6 +100,8 @@ const UserApps = () => {
                     data={user_apps}
                     pagination
                     highlightOnHover
+                    onSelectedRowsChange={updateState}
+                    selectableRows
                 />
             ) : (
                 <Loader isLoading={setLoading} />
