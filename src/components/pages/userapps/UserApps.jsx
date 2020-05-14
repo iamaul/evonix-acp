@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
-import { Modal, Image, Header, Divider, Label } from 'semantic-ui-react';
+import { Modal, Button, Image, Header, Divider, Label } from 'semantic-ui-react';
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
 
