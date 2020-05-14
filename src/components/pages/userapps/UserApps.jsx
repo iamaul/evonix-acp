@@ -73,6 +73,8 @@ const UserApps = () => {
         },
         {
             name: 'Action',
+            ignoreRowClick: true,
+            allowOverflow: true,
             button: true,
             cell: row => <ActionButton id={row.id} user_id={row.user_id} status={row.userAppUser && row.userAppUser.status} />
         }
