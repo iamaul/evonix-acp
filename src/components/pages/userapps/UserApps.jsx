@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo, useCallback, useState } from 'react';
+import React, { useEffect, useContext, useMemo, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import { Modal, Button, Image, Header, Divider, Label } from 'semantic-ui-react';
@@ -23,8 +23,6 @@ const UserApps = () => {
         getAllUserApps();
         // eslint-disable-next-line
     },[])
-
-    const updateState = useCallback(state => console.log(state));
 
     const columns = useMemo(() => [
         {
@@ -100,8 +98,7 @@ const UserApps = () => {
                     data={user_apps}
                     pagination
                     highlightOnHover
-                    onSelectedRowsChange={updateState}
-                    selectableRows
+                    onSelectedRowsChange={handleAction}
                 />
             ) : (
                 <Loader isLoading={setLoading} />
