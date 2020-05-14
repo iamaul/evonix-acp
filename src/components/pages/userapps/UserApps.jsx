@@ -79,10 +79,7 @@ const UserApps = () => {
         },
         {
             name: 'Action',
-            cell: () => <Button onClick={handleAction}>Action</Button>,
-            ignoreRowClick: true,
-            allowOverflow: true,
-            button: true,
+            cell: () => <Button onClick={handleAction}>Action</Button>
         }
     ]);
 
@@ -98,7 +95,7 @@ const UserApps = () => {
                     data={user_apps}
                     pagination
                     highlightOnHover
-                    onSelectedRowsChange={handleAction}
+                    onRowClicked={row => handleAction(row)}
                 />
             ) : (
                 <Loader isLoading={setLoading} />
