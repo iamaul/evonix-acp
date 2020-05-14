@@ -66,6 +66,7 @@ const UserAppsList = ({ userapps, index }) => {
             updated_at: updated_at
         }
     ];
+
     const columns = [
         {
             name: '#',
@@ -84,7 +85,7 @@ const UserAppsList = ({ userapps, index }) => {
         },
         {
             name: 'Application',
-            cell: row => <Modal trigger={<Button size="small">View</Button>}>
+            cell: row => <div><Modal trigger={<Button size="small">View</Button>}>
                             <Modal.Header>{row.user}'s Application</Modal.Header>
                             <Modal.Content image>
                                 <Image wrapped size="huge" src={row.quizImage} />
@@ -100,25 +101,25 @@ const UserAppsList = ({ userapps, index }) => {
                                     </p>
                                 </Modal.Description>
                             </Modal.Content>
-                        </Modal>
+                        </Modal></div>
         },
         {
             name: 'Status',
             sortable: true,
-            cell: row => {row.status === 1 ? (<Label color="yellow">Pending</Label>) : 
-                row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}
+            cell: row => <div>{row.status === 1 ? (<Label color="yellow">Pending</Label>) : 
+                row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
         },
         {
             name: 'Approved by',
-            cell: row => {row.approved_id ? userAppAdmin.name : 'Nobody'}
+            cell: row => <div>{row.approved_id ? userAppAdmin.name : 'Nobody'}</div>
         },
         {
             name: 'Created at',
-            cell: row => <Moment unix format="llll">{row.created_at}</Moment>
+            cell: row => <div><Moment unix format="llll">{row.created_at}</Moment></div>
         },
         {
             name: 'Updated at',
-            cell: row => {row.updated_at !== null ? (<Moment unix format="llll">{row.updated_at}</Moment>) : 'No update'}
+            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="llll">{row.updated_at}</Moment>) : 'No update'}</div>
         },
         {
             name: 'Action',
