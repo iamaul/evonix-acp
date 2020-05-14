@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'semantic-ui-react';
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
