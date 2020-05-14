@@ -20,7 +20,7 @@ const UserApps = () => {
         {
             name: 'User',
             sortable: true,
-            cell: row => <div>{row.userAppUser.name}</div>
+            cell: row => <div>{row.userAppUser && row.userAppUser.name}</div>
         },
         {
             name: 'Score',
@@ -31,13 +31,13 @@ const UserApps = () => {
             name: 'Application',
             cell: row => <div>
                             <Modal trigger={<Button size="small">View</Button>}>
-                                <Modal.Header>{row.userAppUser.name}'s Application</Modal.Header>
+                                <Modal.Header>{row.userAppUser && row.userAppUser.name}'s Application</Modal.Header>
                                 <Modal.Content image>
-                                    <Image wrapped size="huge" src={row.userAppQuiz.image} />
+                                    <Image wrapped size="huge" src={row.userAppQuiz && row.userAppQuiz.image} />
                                     <Modal.Description>
-                                        <Header>{row.userAppQuiz.title}</Header>
+                                        <Header>{row.userAppQuiz && row.userAppQuiz.title}</Header>
                                         <p style={{ textAlign: 'justify' }}>
-                                            {row.userAppQuiz.question}
+                                            {row.userAppQuiz && row.userAppQuiz.question}
                                         </p>
                                         <Divider />
                                         <Header as="h3">The Answer</Header>
@@ -52,12 +52,12 @@ const UserApps = () => {
         {
             name: 'Status',
             sortable: true,
-            cell: row => <div>{row.userAppUser.status === 1 ? (<Label color="yellow">Pending</Label>) : 
-                row.userAppUser.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
+            cell: row => <div>{row.userAppUser && row.userAppUser.status === 1 ? (<Label color="yellow">Pending</Label>) : 
+                row.userAppUser && row.userAppUser.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
         },
         {
             name: 'Approved by',
-            cell: row => <div>{row.admin_id ? row.userAppAdmin.name : 'Nobody'}</div>
+            cell: row => <div>{row.admin_id ? row.userAppAdmin && row.userAppAdmin.name : 'Nobody'}</div>
         },
         {
             name: 'Created at',
@@ -70,14 +70,14 @@ const UserApps = () => {
         {
             name: 'Action',
             cell: row => <Button.Group size="small">
-                            {row.userAppUser.status !== 3 && (
+                            {row.userAppUser && row.userAppUser.status !== 3 && (
                                 <Button
                                     icon="checkmark"
                                     color="green"
                                     onClick={onApprove(row.id, row.user_id)}
                                 />
                             )}
-                            {row.userAppUser.status !== 2 && (
+                            {row.userAppUser && row.userAppUser.status !== 2 && (
                                 <Button
                                     icon="delete"
                                     color="red"
