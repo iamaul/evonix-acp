@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useMemo, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import Moment from 'react-moment';
+import moment from 'moment';
 import { Modal, Button, Image, Header, Divider, Label } from 'semantic-ui-react';
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
@@ -13,10 +13,11 @@ const UserApps = () => {
     const userAppsContext = useContext(UserAppsContext);
     const { user_apps, getAllUserApps, setLoading } = userAppsContext;
 
-    const [thing, setThing] = useState();
-    const handleAction = value => {
-        setThing(value);
-        console.log(value);
+    const [thing, setThing] = useState('');
+    const handleAction = row => {
+        setThing(row);
+        console.log(row);
+        console.log(thing);
     }
 
     useEffect(() => {
@@ -69,17 +70,20 @@ const UserApps = () => {
         },
         {
             name: 'Created at',
+            selector: 'created_at',
             sortable: true,
-            cell: row => <div><Moment unix format="lll">{row.created_at}</Moment></div>
+            format: row => moment(row.created_at).format('lll')
         },
         {
             name: 'Updated at',
+            selector: 'updated_at',
             sortable: true,
-            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="lll">{row.updated_at}</Moment>) : 'No update'}</div>
+            format: row => moment(row.created_at).format('lll')
         },
         {
             name: 'Action',
-            cell: () => <Button onClick={handleAction}>Action</Button>
+            allowOverflow: true,
+            cell: (row) => <Button onClick={handleAction(row)}>Action</Button>
         }
     ]);
 
