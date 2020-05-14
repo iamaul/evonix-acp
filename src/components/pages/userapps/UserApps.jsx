@@ -18,10 +18,6 @@ const UserApps = () => {
         // eslint-disable-next-line
     },[])
 
-    const Button = () => (
-        <button type="button">Download</button>
-    )
-
     const columns = [
         {
             name: 'User',
@@ -78,7 +74,7 @@ const UserApps = () => {
         {
             name: 'Action',
             button: true,
-            cell: row => <ActionButton id={row.id} user_id={row.userAppUser.user_id} status={row.userAppUser.status} />
+            cell: row => <ActionButton id={row.id} user_id={row.user_id} status={row.userAppUser.status} />
         }
     ];
 
