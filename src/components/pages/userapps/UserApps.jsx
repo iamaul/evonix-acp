@@ -22,7 +22,7 @@ const UserApps = () => {
         {
             name: 'User',
             sortable: true,
-            cell: row => <div>{row.userAppUser.name}</div>
+            cell: row => <div>{row.userAppUser && row.userAppUser.name}</div>
         },
         {
             name: 'Score',
@@ -33,7 +33,7 @@ const UserApps = () => {
             name: 'Application',
             cell: row => <div>
                             <Modal trigger={<Button size="small">View</Button>}>
-                                <Modal.Header>{row.userAppUser.name}'s Application</Modal.Header>
+                                <Modal.Header>{row.userAppUser && row.userAppUser.name}'s Application</Modal.Header>
                                 <Modal.Content image>
                                     <Image wrapped size="huge" src={row.userAppQuiz.image} />
                                     <Modal.Description>

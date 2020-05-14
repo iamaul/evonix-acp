@@ -7,8 +7,12 @@ const ActionButton = ({ id, user_id, status }) => {
     const userAppsContext = useContext(UserAppsContext);
     const { updateUserApps } = userAppsContext;
 
-    const onApprove = (id, userid) => updateUserApps(1, id, userid);
-    const onDeny = (id, userid) => updateUserApps(0, id, userid);
+    const onApprove = (id, userid) => {
+        updateUserApps(1, id, userid);
+    }
+    const onDeny = (id, userid) => {
+        updateUserApps(0, id, userid);
+    }
 
     return (
         <>
