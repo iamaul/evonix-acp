@@ -21,15 +21,18 @@ const UserApps = () => {
 
     useEffect(() => {
         getAllUserApps();
-        // eslint-disable-next-line
-    },[])
+    }, [getAllUserApps])
 
     const onUserApprove = useCallback((status, id, user_id) => {
         updateUserApps(status, id, user_id);
+        console.log(`approved ${status}, ${id}, ${user_id}`);
+        // eslint-disable-next-line
     }, []);
 
     const onUserDeny = useCallback((status, id, user_id) => {
         updateUserApps(status, id, user_id);
+        console.log(`denied ${status}, ${id}, ${user_id}`);
+        // eslint-disable-next-line
     }, []);
 
     const columns = useMemo(() => [
@@ -79,13 +82,13 @@ const UserApps = () => {
             name: 'Created at',
             selector: 'created_at',
             sortable: true,
-            cell: row => <div><Moment unix format="ll">{row.created_at}</Moment></div>
+            cell: row => <div><Moment unix format="lll">{row.created_at}</Moment></div>
         },
         {
             name: 'Updated at',
             selector: 'updated_at',
             sortable: true,
-            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="ll">{row.created_at}</Moment>) : 'No update'}</div>
+            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="lll">{row.created_at}</Moment>) : 'No update'}</div>
         },
         {
             name: 'Action',
@@ -108,7 +111,8 @@ const UserApps = () => {
                 </Button.Group> 
             )
         }
-    ], [onUserApprove, onUserDeny]);
+        // eslint-disable-next-line
+    ], []);
 
     return (
         <>
