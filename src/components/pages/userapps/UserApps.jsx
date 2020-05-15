@@ -26,11 +26,11 @@ const UserApps = () => {
 
     const onUserApprove = useCallback((status, id, user_id) => {
         updateUserApps(status, id, user_id);
-    }, [status, id, user_id]);
+    }, []);
 
     const onUserDeny = useCallback((status, id, user_id) => {
         updateUserApps(status, id, user_id);
-    }, [status, id, user_id]);
+    }, []);
 
     const columns = useMemo(() => [
         {
