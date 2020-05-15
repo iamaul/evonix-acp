@@ -21,7 +21,6 @@ const UserApps = () => {
 
     useEffect(() => {
         getAllUserApps();
-        // eslint-disable-next-line
     }, [])
 
     const onUserApprove = useCallback((status, id, user_id) => {
@@ -101,12 +100,12 @@ const UserApps = () => {
                         <Button
                             icon="checkmark"
                             color="green"
-                            onClick={() => onUserApprove(1, row.id, row.user_id)}
+                            onClick={() => onUserApprove(3, row.id, row.user_id)}
                         />
                         <Button
                             icon="delete"
                             color="red"
-                            onClick={() => onUserDeny(0, row.id, row.user_id)}
+                            onClick={() => onUserDeny(2, row.id, row.user_id)}
                         />
                     </div>)}
                 </Button.Group> 
