@@ -3,7 +3,7 @@ import { Button } from 'semantic-ui-react';
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
 
-const ActionButton = ({ id, user_id, status }) => {
+const ActionButton = ({ data }) => {
     const userAppsContext = useContext(UserAppsContext);
     const { updateUserApps } = userAppsContext;
 
@@ -17,18 +17,18 @@ const ActionButton = ({ id, user_id, status }) => {
     return (
         <>
             <Button.Group size="small">
-                {status !== 3 && (
+                {data.userAppUser.status !== 3 && (
                     <Button
                         icon="checkmark"
                         color="green"
-                        onClick={onApprove(id, user_id)}
+                        onClick={onApprove(data.id, data.user_id)}
                     />
                 )}
-                {status !== 2 && (
+                {data.userAppUser.status !== 2 && (
                     <Button
                         icon="delete"
                         color="red"
-                        onClick={onDeny(id, user_id)}
+                        onClick={onDeny(data.id, data.user_id)}
                     />
                 )}
             </Button.Group>  

@@ -5,20 +5,13 @@ import { Modal, Button, Image, Header, Divider, Label } from 'semantic-ui-react'
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
 
-// import ActionButton from './ActionButton';
+import ActionButton from './ActionButton';
 
 import Loader from '../../layouts/loader/Loader';
 
 const UserApps = () => {
     const userAppsContext = useContext(UserAppsContext);
     const { user_apps, getAllUserApps, setLoading } = userAppsContext;
-
-    const [thing, setThing] = useState('');
-    const handleAction = row => {
-        setThing(row);
-        console.log(row);
-        console.log(thing);
-    }
 
     useEffect(() => {
         getAllUserApps();
@@ -79,13 +72,8 @@ const UserApps = () => {
             selector: 'updated_at',
             sortable: true,
             format: row => moment(row.created_at).format('lll')
-        },
-        {
-            name: 'Action',
-            allowOverflow: true,
-            cell: (row) => <Button onClick={handleAction(row)}>Action</Button>
         }
-    ]);
+    ], []);
 
     return (
         <>
@@ -97,9 +85,11 @@ const UserApps = () => {
                     title="User Applications"
                     columns={columns}
                     data={user_apps}
+                    expandableRows
                     pagination
                     highlightOnHover
-                    onRowClicked={row => handleAction(row)}
+                    defaultSortField="created_at"
+                    expandableRowsComponent={<ActionButton />}
                 />
             ) : (
                 <Loader isLoading={setLoading} />
