@@ -7,7 +7,7 @@ import UserAppsContext from '../../../context/userapps/userAppsContext';
 
 import Loader from '../../layouts/loader/Loader';
 
-const expandedData = ({ data }) => (
+const ExpandedData = ({ data }) => (
     <div>
         <p><Moment unix format="LLLL">{data.created_at}</Moment></p>
         <Divider hidden />
@@ -36,7 +36,7 @@ const UserApps = () => {
         {
             name: 'User',
             sortable: true,
-            cell: row => <div>{row.userAppUser.name}</div>
+            cell: row => <div>{row.userAppUser && row.userAppUser.name}</div>
         },
         {
             name: 'Score',
@@ -122,7 +122,7 @@ const UserApps = () => {
                     data={user_apps}
                     pagination
                     expandableRows
-                    expandableRowsComponent={<expandedData />}
+                    expandableRowsComponent={<ExpandedData />}
                     highlightOnHover
                     defaultSortField="created_at"
                 />
