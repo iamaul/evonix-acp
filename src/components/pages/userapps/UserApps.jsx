@@ -24,13 +24,13 @@ const UserApps = () => {
         // eslint-disable-next-line
     },[])
 
-    const onUserApprove = useCallback((id, user_id) => {
-        updateUserApps(1, id, user_id);
-    }, []);
+    const onUserApprove = useCallback((status, id, user_id) => {
+        updateUserApps(status, id, user_id);
+    }, [status, id, user_id]);
 
-    const onUserDeny = useCallback((id, user_id) => {
-        updateUserApps(0, id, user_id);
-    }, []);
+    const onUserDeny = useCallback((status, id, user_id) => {
+        updateUserApps(status, id, user_id);
+    }, [status, id, user_id]);
 
     const columns = useMemo(() => [
         {
@@ -97,18 +97,18 @@ const UserApps = () => {
                         <Button
                             icon="checkmark"
                             color="green"
-                            onClick={() => onUserApprove(row.id, row.user_id)}
+                            onClick={() => onUserApprove(1, row.id, row.user_id)}
                         />
                         <Button
                             icon="delete"
                             color="red"
-                            onClick={() => onUserDeny(row.id, row.user_id)}
+                            onClick={() => onUserDeny(0, row.id, row.user_id)}
                         />
                     </div>)}
                 </Button.Group> 
             )
         }
-    ], []);
+    ], [onUserApprove, onUserDeny]);
 
     return (
         <>
