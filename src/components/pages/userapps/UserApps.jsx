@@ -21,7 +21,8 @@ const UserApps = () => {
 
     useEffect(() => {
         getAllUserApps();
-    }, [getAllUserApps])
+        // eslint-disable-next-line
+    }, [])
 
     const onUserApprove = useCallback((status, id, user_id) => {
         updateUserApps(status, id, user_id);
