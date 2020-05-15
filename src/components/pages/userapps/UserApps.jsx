@@ -7,6 +7,14 @@ import UserAppsContext from '../../../context/userapps/userAppsContext';
 
 import Loader from '../../layouts/loader/Loader';
 
+const expandedData = ({ data }) => (
+    <div>
+        <p><Moment unix format="LLLL">{data.created_at}</Moment></p>
+        <Divider hidden />
+        <Image src={data.userAppQuiz.image} size="small" />
+    </div>
+);
+
 const UserApps = () => {
     const userAppsContext = useContext(UserAppsContext);
     const { user_apps, getAllUserApps, updateUserApps, setLoading } = userAppsContext;
@@ -21,14 +29,14 @@ const UserApps = () => {
     }, []);
 
     const onUserDeny = useCallback((id, user_id) => {
-        updateUserApps(1, id, user_id);
+        updateUserApps(0, id, user_id);
     }, []);
 
     const columns = useMemo(() => [
         {
             name: 'User',
             sortable: true,
-            cell: row => <div>{row.userAppUser && row.userAppUser.name}</div>
+            cell: row => <div>{row.userAppUser.name}</div>
         },
         {
             name: 'Score',
@@ -71,13 +79,13 @@ const UserApps = () => {
             name: 'Created at',
             selector: 'created_at',
             sortable: true,
-            cell: row => <div><Moment unix format="llll">{row.created_at}</Moment></div>
+            cell: row => <div><Moment unix format="ll">{row.created_at}</Moment></div>
         },
         {
             name: 'Updated at',
             selector: 'updated_at',
             sortable: true,
-            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="llll">{row.created_at}</Moment>) : 'No update'}</div>
+            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="ll">{row.created_at}</Moment>) : 'No update'}</div>
         },
         {
             name: 'Action',
@@ -113,6 +121,8 @@ const UserApps = () => {
                     columns={columns}
                     data={user_apps}
                     pagination
+                    expandableRows
+                    expandableRowsComponent={<expandedData />}
                     highlightOnHover
                     defaultSortField="created_at"
                 />
