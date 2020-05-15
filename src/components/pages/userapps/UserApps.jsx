@@ -72,6 +72,16 @@ const UserApps = () => {
             selector: 'updated_at',
             sortable: true,
             format: row => moment(row.created_at).format('lll')
+        },
+        {
+            name: "Action",
+            cell: row => (
+                <ActionButton
+                    id={row.id}
+                    user_id={row.user_id}
+                    status={row.userAppUser && row.userAppUser.status}
+                />
+            )
         }
     ], []);
 
@@ -85,11 +95,9 @@ const UserApps = () => {
                     title="User Applications"
                     columns={columns}
                     data={user_apps}
-                    expandableRows
                     pagination
                     highlightOnHover
                     defaultSortField="created_at"
-                    expandableRowsComponent={<ActionButton />}
                 />
             ) : (
                 <Loader isLoading={setLoading} />
