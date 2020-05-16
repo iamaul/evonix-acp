@@ -21,17 +21,16 @@ const UserApps = () => {
 
     useEffect(() => {
         getAllUserApps();
+        // eslint-disable-next-line
     }, [])
 
     const onUserApprove = useCallback((status, id, user_id) => {
         updateUserApps(status, id, user_id);
-        console.log(`approved ${status}, ${id}, ${user_id}`);
         // eslint-disable-next-line
     }, []);
 
     const onUserDeny = useCallback((status, id, user_id) => {
         updateUserApps(status, id, user_id);
-        console.log(`denied ${status}, ${id}, ${user_id}`);
         // eslint-disable-next-line
     }, []);
 
@@ -70,6 +69,7 @@ const UserApps = () => {
         },
         {
             name: 'Status',
+            selector: row.userAppUser.status,
             sortable: true,
             cell: row => <div>{row.userAppUser && row.userAppUser.status === 1 ? (<Label color="yellow">Pending</Label>) : 
                 row.userAppUser && row.userAppUser.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
