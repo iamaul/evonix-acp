@@ -10,11 +10,6 @@ export default (state, action) => {
 
     switch (type) {
         case GET_ALL_USER_APPS:
-            return {
-                ...state,
-                user_apps: payload,
-                setLoading: false
-            }
         case UPDATE_USER_APPS:
             return {
                 ...state,
