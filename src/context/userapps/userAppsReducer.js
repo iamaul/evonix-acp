@@ -18,7 +18,7 @@ export default (state, action) => {
         case UPDATE_USER_APPS:
             return {
                 ...state,
-                user_apps: state.user_apps.map(uapp => uapp.id === payload.id ? payload : uapp),
+                user_apps: payload,
                 setLoading: false
             }
         case USER_APPS_ERROR:
