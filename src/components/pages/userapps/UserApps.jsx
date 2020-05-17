@@ -69,9 +69,10 @@ const UserApps = () => {
         },
         {
             name: 'Status',
-            sortable: false,
-            cell: row => <div>{row.userAppUser && row.userAppUser.status === 1 ? (<Label color="yellow">Pending</Label>) : 
-                row.userAppUser && row.userAppUser.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
+            selector: 'status',
+            sortable: true,
+            cell: row => <div>{!row.status ? (<Label color="yellow">Pending</Label>) : 
+                row.status === 1 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
         },
         {
             name: 'Approved by',
@@ -95,16 +96,16 @@ const UserApps = () => {
             button: true,
             cell: (row) => (
                 <Button.Group size="small">
-                    {row.userAppUser && row.userAppUser.status === 1 && (<div>
+                    {!row.status && (<div>
                         <Button
                             icon="checkmark"
                             color="green"
-                            onClick={() => onUserApprove(3, row.id, row.user_id)}
+                            onClick={() => onUserApprove(2, row.id, row.user_id)}
                         />
                         <Button
                             icon="delete"
                             color="red"
-                            onClick={() => onUserDeny(2, row.id, row.user_id)}
+                            onClick={() => onUserDeny(1, row.id, row.user_id)}
                         />
                     </div>)}
                 </Button.Group> 
