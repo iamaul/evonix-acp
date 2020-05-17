@@ -71,8 +71,8 @@ const UserApps = () => {
             name: 'Status',
             selector: 'status',
             sortable: true,
-            cell: row => <div>{!row.status ? (<Label color="yellow">Pending</Label>) : 
-                row.status === 1 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
+            cell: row => <div>{row.status ? (<Label color="yellow">Pending</Label>) : 
+                row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
         },
         {
             name: 'Approved by',
