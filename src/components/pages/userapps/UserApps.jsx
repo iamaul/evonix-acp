@@ -100,12 +100,12 @@ const UserApps = () => {
                         <Button
                             icon="checkmark"
                             color="green"
-                            onClick={() => onUserApprove(2, row.id, row.user_id)}
+                            onClick={() => onUserApprove(3, row.id, row.user_id)}
                         />
                         <Button
                             icon="delete"
                             color="red"
-                            onClick={() => onUserDeny(1, row.id, row.user_id)}
+                            onClick={() => onUserDeny(2, row.id, row.user_id)}
                         />
                     </div>)}
                 </Button.Group> 
