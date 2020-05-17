@@ -96,7 +96,7 @@ const UserApps = () => {
             button: true,
             cell: (row) => (
                 <Button.Group size="small">
-                    {!row.status && (<div>
+                    {row.status && (<div>
                         <Button
                             icon="checkmark"
                             color="green"
