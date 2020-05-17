@@ -69,14 +69,15 @@ const UserApps = () => {
         },
         {
             name: 'Status',
-            selector: 'status',
-            sortable: true,
-            cell: row => <div>{row.status ? (<Label color="yellow">Pending</Label>) : 
-                row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}</div>
+            // selector: 'status',
+            cell: row => <div>
+                            {row.status ? (<Label color="yellow">Pending</Label>) : 
+                                row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}
+                        </div>
         },
         {
-            name: 'Approved by',
-            cell: row => <div>{row.admin_id ? row.userAppAdmin && row.userAppAdmin.name : 'Nobody'}</div>
+            name: 'Responded by',
+            cell: row => <div>{row.admin_id ? row.userAppAdmin && row.userAppAdmin.name : 'None'}</div>
         },
         {
             name: 'Created at',
