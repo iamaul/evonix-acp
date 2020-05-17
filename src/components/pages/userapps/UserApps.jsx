@@ -69,9 +69,10 @@ const UserApps = () => {
         },
         {
             name: 'Status',
-            // selector: 'status',
+            selector: 'status',
+            sortable: true,
             cell: row => <div>
-                            {row.status ? (<Label color="yellow">Pending</Label>) : 
+                            {row.status === 1 ? (<Label color="yellow">Pending</Label>) : 
                                 row.status === 2 ? (<Label color="red">Denied</Label>) : (<Label color="green">Approved</Label>)}
                         </div>
         },
@@ -97,7 +98,7 @@ const UserApps = () => {
             button: true,
             cell: (row) => (
                 <Button.Group size="small">
-                    {row.status && (<div>
+                    {row.status === 1 && (<div>
                         <Button
                             icon="checkmark"
                             color="green"
