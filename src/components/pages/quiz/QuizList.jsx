@@ -22,7 +22,7 @@ const QuizList = ({ quiz }) => {
                 animated 
                 divided 
                 verticalAlign="middle" 
-                size="large"
+                size="medium"
                 celled
             >
                 <List.Item>

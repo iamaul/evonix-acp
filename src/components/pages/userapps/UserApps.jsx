@@ -48,7 +48,7 @@ const UserApps = () => {
         {
             name: 'Application',
             cell: row => <div>
-                            <Modal trigger={<Button size="small">View</Button>}>
+                            <Modal trigger={<Button size="small">View</Button>} dimmer="blurring">
                                 <Modal.Header>{row.userAppUser && row.userAppUser.name}'s Application</Modal.Header>
                                 <Modal.Content image>
                                     <Image wrapped size="huge" src={row.userAppQuiz && row.userAppQuiz.image} />
@@ -90,11 +90,10 @@ const UserApps = () => {
             name: 'Updated at',
             selector: 'updated_at',
             sortable: true,
-            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="lll">{row.created_at}</Moment>) : 'No update'}</div>
+            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="lll">{row.updated_at}</Moment>) : 'No update'}</div>
         },
         {
             name: 'Action',
-            sortable: false,
             button: true,
             cell: (row) => (
                 <Button.Group size="small">
