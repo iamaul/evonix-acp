@@ -63,7 +63,7 @@ const QuizForm = () => {
     
     return (
         <>
-            <Header as="h5">Quiz Scenario</Header>
+            <Header as="h3">Quiz Form</Header>
             <Form size="small" onSubmit={onSubmit}>
                 <Form.Input 
                     type="text"

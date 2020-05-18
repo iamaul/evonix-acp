@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { Button, List, Image } from 'semantic-ui-react';
 
-import QuizContext from '../../../context/quiz/quizContext';
+import QuizContext from '../../../../context/quiz/quizContext';
 
 const QuizList = ({ quiz }) => {
     const quizContext = useContext(QuizContext);

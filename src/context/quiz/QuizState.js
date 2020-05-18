@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
+import history from '../../components/history';
 
 import QuizContext from './quizContext';
 import quizReducer from './quizReducer';
@@ -47,6 +48,7 @@ const QuizState = (props) => {
         try {
             const res = await axios.post('/api/v1/quiz', quiz, config);
             dispatch({ type: ADD_QUIZ, payload: res.data });
+            history.push('/quiz');
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_ERROR, payload: errors });
@@ -63,6 +65,7 @@ const QuizState = (props) => {
         try {
             const res = await axios.put(`/api/v1/quiz/${quiz.id}`, quiz, config);
             dispatch({ type: UPDATE_QUIZ, payload: res.data });
+            history.push('/quiz');
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: QUIZ_ERROR, payload: errors });
