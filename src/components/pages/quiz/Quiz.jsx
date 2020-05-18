@@ -11,6 +11,7 @@ import Loader from '../../layouts/loader/Loader';
 const ExpandedData = ({ data }) => (
     <div>
         <Image src={data.image} size="medium" />
+        <p>{data.title}</p>
         <Divider hidden />
         <p>{data.question}</p>
     </div>
@@ -47,7 +48,7 @@ const Quiz = () => {
             selector: 'title',
             sortable: true,
             style: {
-                fontWeight: 500
+                fontWeight: 'bold'
             }
         },
         {
