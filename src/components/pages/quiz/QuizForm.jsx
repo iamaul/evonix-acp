@@ -79,7 +79,7 @@ const QuizForm = () => {
                         value={question}
                         cols="30" 
                         rows="10"
-                        placeholder="What's on your mind?"
+                        placeholder="Question"
                         onChange={onChange} 
                     />
                 </Form.Field>
