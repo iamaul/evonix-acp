@@ -11,7 +11,7 @@ import Loader from '../../layouts/loader/Loader';
 const ExpandedData = ({ data }) => (
     <div>
         <Image src={data.image} size="medium" />
-        <p>{data.title}</p>
+        <p><b>{data.title}</b></p>
         <Divider hidden />
         <p>{data.question}</p>
     </div>
