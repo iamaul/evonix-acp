@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
-import { Button, Image } from 'semantic-ui-react';
+import { Button, Image, Divider } from 'semantic-ui-react';
 
 import QuizContext from '../../../context/quiz/quizContext';
 
@@ -116,6 +116,7 @@ const Quiz = () => {
                     expandableRowsComponent={<ExpandedData />}
                     highlightOnHover
                     defaultSortField="created_at"
+                    actions={actions}
                 />
             ) : (
                 <Loader isLoading={setLoading} />
