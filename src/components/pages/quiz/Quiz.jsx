@@ -13,7 +13,7 @@ const Quiz = () => {
     const quizContext = useContext(QuizContext);
     const { quizzes, getAllQuiz, setLoading } = quizContext;
 
-    const calculations = {
+    const calculationsObj = {
         topPassed: false,
         bottomPassed: false,
         topVisible: false,
@@ -21,7 +21,7 @@ const Quiz = () => {
     }
 
     const contextRef = createRef();
-    const [calculations, setCalculations] = useState(calculations);
+    const [calculations, setCalculations] = useState(calculationsObj);
 
     useEffect(() => {
         getAllQuiz();
@@ -37,7 +37,7 @@ const Quiz = () => {
                             <QuizForm />
                         </Grid.Column>
                     </Sticky>
-                    <Visibility offset={[10, 10]} onUpdate={setCalculations(calculations)}>
+                    <Visibility offset={[10, 10]} onUpdate={setCalculations(calculationsObj)}>
                         <Grid.Column>
                             {quizzes !== null && quizzes.length === 0 && !setLoading && (
                                 <Image src="https://i.giphy.com/media/xTeV7uMaW2bRBu15cc/giphy.webp" centered />
