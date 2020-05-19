@@ -98,9 +98,10 @@ const UserApps = () => {
         {
             name: 'Action',
             button: true,
+            width: '100px',
             cell: (row) => (
-                <Button.Group size="small">
-                    {row.status === 1 && (<div>
+                row.status === 1 && (
+                    <Button.Group size="small">
                         <Button animated="fade" color="green" onClick={() => onUserApprove(3, row.id, row.user_id)}>
                             <Button.Content visible><Icon name="checkmark" /></Button.Content>
                             <Button.Content hidden>Approve</Button.Content>
@@ -109,8 +110,8 @@ const UserApps = () => {
                             <Button.Content visible><Icon name="delete" /></Button.Content>
                             <Button.Content hidden>Deny</Button.Content>
                         </Button>
-                    </div>)}
-                </Button.Group> 
+                    </Button.Group>
+                ) 
             )
         }
         // eslint-disable-next-line
