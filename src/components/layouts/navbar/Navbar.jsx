@@ -50,14 +50,14 @@ const Navbar = () => {
                     name="Users"
                     exact to="/users"
                 />
-                <Menu.Item
+                {/* <Menu.Item
                     as={NavLink}
                     name="Characters"
                     exact to="/characters"
-                />
+                /> */}
                 <Menu.Item
                     as={NavLink}
-                    name="Bans"
+                    name="Banlist"
                     exact to="/banlist"
                 />
                 <Dropdown item text="Config">

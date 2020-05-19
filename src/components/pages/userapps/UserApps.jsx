@@ -101,16 +101,14 @@ const UserApps = () => {
             cell: (row) => (
                 <Button.Group size="small">
                     {row.status === 1 && (<div>
-                        <Button
-                            icon="checkmark"
-                            color="green"
-                            onClick={() => onUserApprove(3, row.id, row.user_id)}
-                        />
-                        <Button
-                            icon="delete"
-                            color="red"
-                            onClick={() => onUserDeny(2, row.id, row.user_id)}
-                        />
+                        <Button animated="fade" color="green" onClick={() => onUserApprove(3, row.id, row.user_id)}>
+                            <Button.Content visible><Icon name="checkmark" /></Button.Content>
+                            <Button.Content hidden>Approve</Button.Content>
+                        </Button>
+                        <Button animated="fade" color="red" onClick={() => onUserDeny(2, row.id, row.user_id)}>
+                            <Button.Content visible><Icon name="delete" /></Button.Content>
+                            <Button.Content hidden>Deny</Button.Content>
+                        </Button>
                     </div>)}
                 </Button.Group> 
             )

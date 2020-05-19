@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
-import { Button, Image, Divider } from 'semantic-ui-react';
+import { Button, Image } from 'semantic-ui-react';
 
 import QuizContext from '../../../context/quiz/quizContext';
 
@@ -11,8 +11,7 @@ import Loader from '../../layouts/loader/Loader';
 const ExpandedData = ({ data }) => (
     <div>
         <Image src={data.image} size="medium" />
-        <p>{data.title}</p>
-        <Divider hidden />
+        <p><b>{data.title}</b></p>
         <p>{data.question}</p>
     </div>
 );
@@ -80,17 +79,14 @@ const Quiz = () => {
             button: true,
             cell: (row) => (
                 <Button.Group size="small">
-                    <Button
-                        icon="edit"
-                        as={Link}
-                        onClick={() => setCurrentQuiz(row)}
-                        to="/quiz/form"
-                    />
-                    <Button
-                        icon="delete"
-                        color="red"
-                        onClick={() => onQuizDelete(row.id)}
-                    />
+                    <Button animated="fade" as={Link} onClick={() => setCurrentQuiz(row)} to="/quiz/form">
+                        <Button.Content visible><Icon name="edit" /></Button.Content>
+                        <Button.Content hidden>Edit</Button.Content>
+                    </Button>
+                    <Button animated="fade" color="red" onClick={() => onQuizDelete(row.id)}>
+                        <Button.Content visible><Icon name="delete" /></Button.Content>
+                        <Button.Content hidden>Delete</Button.Content>
+                    </Button>
                 </Button.Group> 
             )
         }
