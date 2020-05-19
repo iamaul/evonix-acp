@@ -10,7 +10,7 @@ import Loader from '../../layouts/loader/Loader';
 const ExpandedData = ({ data }) => (
     <div>
         <p>
-            Created at <Moment unix format="LLLL">{data.created_at}</Moment>, {data.updated_at !== null && (<>
+            Created at <Moment unix format="LLLL">{data.created_at}</Moment>{data.updated_at !== null && (<><br/>
                 Last updated on <Moment unix format="LLLL">{data.updated_at}</Moment>
             </>)} 
         </p>
@@ -41,7 +41,6 @@ const UserApps = () => {
     const columns = useMemo(() => [
         {
             name: 'User',
-            sortable: true,
             cell: row => <div>{row.userAppUser && row.userAppUser.name}</div>
         },
         {

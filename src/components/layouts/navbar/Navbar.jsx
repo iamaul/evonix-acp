@@ -30,11 +30,11 @@ const Navbar = () => {
                     name="News"
                     exact to="/news"
                 />
-                <Menu.Item
+                {/* <Menu.Item
                     as={NavLink}
                     name="Blog"
                     exact to="/blog"
-                />
+                /> */}
                 <Menu.Item
                     as={NavLink}
                     name="Quiz"
