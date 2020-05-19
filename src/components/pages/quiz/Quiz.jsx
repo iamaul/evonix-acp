@@ -96,9 +96,6 @@ const Quiz = () => {
 
     return (
         <>
-            {quizzes !== null && quizzes.length === 0 && !setLoading && (
-                <Image src="https://media.giphy.com/media/giXLnhxp60zEEIkq8K/giphy-downsized.gif" centered />
-            )}
             {quizzes !== null && !setLoading ? (
                 <DataTable
                     title="Quiz Scenario"

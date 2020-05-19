@@ -119,9 +119,6 @@ const UserApps = () => {
 
     return (
         <>
-            {user_apps !== null && user_apps.length === 0 && !setLoading && (
-                <Image src="https://media.giphy.com/media/giXLnhxp60zEEIkq8K/giphy-downsized.gif" centered />
-            )}
             {user_apps !== null && !setLoading ? (
                 <DataTable
                     title="User Applications"

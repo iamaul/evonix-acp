@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useMemo, useCallback } from 'react';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
-import { Button, Image, Icon } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 import BanContext from '../../../context/ban/banContext';
 
@@ -63,9 +63,6 @@ const Banlist = () => {
 
     return (
         <>
-            {banlist !== null && banlist.length === 0 && !setLoading && (
-                <Image src="https://media.giphy.com/media/giXLnhxp60zEEIkq8K/giphy-downsized.gif" centered />
-            )}
             {banlist !== null && !setLoading ? (
                 <DataTable
                     title="Banlist"
