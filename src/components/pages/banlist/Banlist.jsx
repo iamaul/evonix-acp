@@ -51,7 +51,6 @@ const Banlist = () => {
         {
             name: 'Action',
             button: true,
-            allowOverflow: true,
             cell: (row) => (
                     <Button animated="fade" color="red" onClick={() => onBanDelete(row.id)}>
                         <Button.Content visible><Icon name="delete" /></Button.Content>

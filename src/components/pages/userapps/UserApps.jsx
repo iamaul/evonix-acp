@@ -99,7 +99,6 @@ const UserApps = () => {
             name: 'Action',
             button: true,
             allowOverflow: true,
-            width: '80px',
             cell: (row) => (
                 row.status === 1 && (
                     <Button.Group size="small">

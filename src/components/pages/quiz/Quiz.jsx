@@ -78,7 +78,6 @@ const Quiz = () => {
             name: 'Action',
             button: true,
             allowOverflow: true,
-            width: '80px',
             cell: (row) => (
                 <Button.Group size="small">
                     <Button animated="fade" as={Link} onClick={() => setCurrentQuiz(row)} to="/quiz/form">
