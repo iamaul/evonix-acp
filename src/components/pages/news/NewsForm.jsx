@@ -23,13 +23,14 @@ const NewsForm = () => {
 
     // const imageFileRef = React.createRef();
 
-    const [news, setNews] = useState({ title: '', content: '', image: '' });
+    const [news, setNews] = useState({ title: '', image: '' });
+    const [content, setContent] = useState({ content: '' });
 
     useEffect(() => {
         if (current_news !== null) {
             setNews(current_news);
         } else {
-            setNews({ title: '', content: '', image: '' });
+            setNews({ title: '', image: '' });
         }
 
         if (error) {
@@ -44,22 +45,20 @@ const NewsForm = () => {
         }
     }, [newsContext, current_news, clearNewsErrors, error])
 
-    const { title, content, image } = news;
+    const { title, image } = news;
     const onChange = e => setNews({ ...news, [e.target.name]: e.target.value });
     const onEditorChange = (content, editor) => {
-        setNews({ content });
+        setContent({ content });
         console.log(content);
     }
 
     const onSubmit = e => {
         e.preventDefault();
 
-        console.log(content);
-
         if (current_news === null) {
-            addNews(news);
+            addNews(title, content, image);
         } else {
-            updateNews(news);
+            updateNews(title, content, image);
         }
         clearNews();
     }
