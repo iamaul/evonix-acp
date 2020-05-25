@@ -29,3 +29,13 @@ export const GET_ALL_BAN_LIST = 'GET_ALL_BAN_LIST';
 export const DELETE_BAN = 'DELETE_BAN';
 export const BAN_ERROR = 'BAN_ERROR';
 export const CLEAR_BAN_ERROR = 'CLEAR_BAN_ERROR';
+
+export const GET_ALL_NEWS = 'GET_ALL_NEWS';
+export const ADD_NEWS = 'ADD_NEWS';
+export const DELETE_NEWS = 'DELETE_NEWS';
+export const SET_CURRENT_NEWS = 'SET_CURRENT_NEWS';
+export const CLEAR_CURRENT_NEWS = 'CLEAR_CURRENT_NEWS';
+export const UPDATE_NEWS = 'UPDATE_NEWS';
+export const CLEAR_NEWS = 'CLEAR_NEWS';
+export const NEWS_ERROR = 'NEWS_ERROR';
+export const CLEAR_NEWS_ERROR = 'CLEAR_NEWS_ERROR';
