@@ -45,7 +45,7 @@ const NewsForm = () => {
     }, [newsContext, current_news, clearNewsErrors, error])
 
     const { title, content, image } = news;
-    const onChange = (e, target) => setNews({ ...news, [target.name]: target.value });
+    const onChange = e => setNews({ ...news, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
