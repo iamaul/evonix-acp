@@ -38,14 +38,12 @@ const NewsState = (props) => {
         }
     }
 
-    const addNews = async (title, content, image) => {
+    const addNews = async news => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-
-        const news = { title, content, image };
 
         try {
             const res = await axios.post('/api/v1/news', news, config);
@@ -57,14 +55,12 @@ const NewsState = (props) => {
         }
     }
 
-    const updateNews = async (title, content, image) => {
+    const updateNews = async news => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-
-        const news = { title, content, image };
 
         try {
             const res = await axios.put(`/api/v1/news/${news.id}`, news, config);

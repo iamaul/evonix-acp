@@ -23,14 +23,13 @@ const NewsForm = () => {
 
     // const imageFileRef = React.createRef();
 
-    const [news, setNews] = useState({ title: '', image: '' });
-    const [content, setContent] = useState({ content: '' });
+    const [news, setNews] = useState({ title: '', content: '', image: '' });
 
     useEffect(() => {
         if (current_news !== null) {
             setNews(current_news);
         } else {
-            setNews({ title: '', image: '' });
+            setNews({ title: '', content: '', image: '' });
         }
 
         if (error) {
@@ -45,20 +44,16 @@ const NewsForm = () => {
         }
     }, [newsContext, current_news, clearNewsErrors, error])
 
-    const { title, image } = news;
-    const onChange = e => setNews({ ...news, [e.target.name]: e.target.value });
-    const onEditorChange = (content, editor) => {
-        setContent({ content });
-        console.log(content);
-    }
+    const { title, content, image } = news;
+    const onChange = (e, target) => setNews({ ...news, [target.name]: target.value });
 
     const onSubmit = e => {
         e.preventDefault();
 
         if (current_news === null) {
-            addNews(title, content, image);
+            addNews(news);
         } else {
-            updateNews(title, content, image);
+            updateNews(news);
         }
         clearNews();
     }
@@ -82,6 +77,7 @@ const NewsForm = () => {
                 <Form.Field>
                     <Editor
                         apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
+                        textareaName="content"
                         init={{
                             height: 500,
                             menubar: false,
@@ -92,7 +88,8 @@ const NewsForm = () => {
                             ],
                             toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen preview save print | insertfile image media template link anchor codesample | ltr rtl'
                         }}
-                        onEditorChange={onEditorChange}
+                        value={content}
+                        onEditorChange={onChange}
                     />
                 </Form.Field>
                 <Form.Input 
