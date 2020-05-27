@@ -23,6 +23,9 @@ const NewsForm = () => {
 
     // const imageFileRef = React.createRef();
 
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [image, setImage] = useState('');
     const [news, setNews] = useState({ title: '', content: '', image: '' });
 
     useEffect(() => {
@@ -44,11 +47,13 @@ const NewsForm = () => {
         }
     }, [newsContext, current_news, clearNewsErrors, error])
 
-    const { title, content, image } = news;
-    const onChange = e => setNews({ ...news, [e.target.name]: e.target.value });
+    const onEditorChange = (content) => setContent(content);
 
     const onSubmit = e => {
         e.preventDefault();
+
+        setNews({ title, content, image });
+        console.log(news);
 
         if (current_news === null) {
             addNews(news);
@@ -71,7 +76,7 @@ const NewsForm = () => {
                     name="title" 
                     value={title}
                     placeholder="Title"
-                    onChange={onChange}
+                    onChange={() => setTitle(title)}
                     fluid 
                 />
                 <Form.Field>
@@ -87,8 +92,7 @@ const NewsForm = () => {
                             ],
                             toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen preview save print | insertfile image media template link anchor codesample | ltr rtl'
                         }}
-                        value={content}
-                        onChange={e => setNews({ content: e.target.getContent() })}
+                        onEditorChange={onEditorChange}
                     />
                 </Form.Field>
                 <Form.Input 
@@ -96,7 +100,7 @@ const NewsForm = () => {
                     name="image" 
                     value={image}
                     placeholder="Image URL (e.g: http://imgur.com/)"
-                    onChange={onChange}
+                    onChange={() => setImage(image)}
                     fluid 
                 />
                 {/* <Form.Field>
