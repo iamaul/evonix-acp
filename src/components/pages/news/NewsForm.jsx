@@ -23,18 +23,24 @@ const NewsForm = () => {
 
     // const imageFileRef = React.createRef();
 
+    const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState('');
-    const [news, setNews] = useState({ title: '', content: '', image: '' });
 
     useEffect(() => {
         if (current_news !== null) {
-            const { title, content, image } = current_news;
+            const { id, title, content, image } = current_news;
+            setId(id);
             setTitle(title);
             setContent(content);
             setImage(image);
             // setNews(current_news);
+        } else {
+            setId('');
+            setTitle('');
+            setContent('');
+            setImage('');
         }
 
         if (error) {
@@ -56,14 +62,13 @@ const NewsForm = () => {
     const onSubmit = e => {
         e.preventDefault();
 
-        setNews({ title, content, image });
-        console.log(news);
-        console.log(`title: ${title}, content: ${content}, image: ${image}`);
+        const newsAdd = { title, content, image };
+        const newsUpdate = { id, title, content, image };
 
         if (current_news === null) {
-            addNews(news);
+            addNews(newsAdd);
         } else {
-            updateNews(news);
+            updateNews(newsUpdate);
         }
         clearNews();
     }
