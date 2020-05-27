@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
+import parse from 'html-react-parser';
 import { Button, Image, Icon, Divider } from 'semantic-ui-react';
 
 import NewsContext from '../../../context/news/newsContext';
@@ -11,8 +12,11 @@ import Loader from '../../layouts/loader/Loader';
 const ExpandedData = ({ data }) => (
     <div>
         <Image src={data.image} size="medium" />
+        <p><b>{data.title}</b> - Created at <Moment unix format="LLLL">{data.created_at}</Moment>{data.updated_at !== null && (<><br/>
+                Last updated on <Moment unix format="LLLL">{data.updated_at}</Moment>
+            </>)}</p>
         <Divider hidden />
-        <p style={{ textAlign: 'justify' }}>{data.content}</p>
+        <p style={{ textAlign: 'justify' }}>{parse(data.content)}</p>
     </div>
 );
 

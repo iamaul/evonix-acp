@@ -88,6 +88,7 @@ const NewsForm = () => {
                 <Form.Field>
                     <Editor
                         apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
+                        initialValue={content ? content : null}
                         init={{
                             height: 500,
                             menubar: false,
