@@ -77,7 +77,6 @@ const NewsForm = () => {
                 <Form.Field>
                     <Editor
                         apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
-                        textareaName="content"
                         init={{
                             height: 500,
                             menubar: false,
@@ -89,7 +88,7 @@ const NewsForm = () => {
                             toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen preview save print | insertfile image media template link anchor codesample | ltr rtl'
                         }}
                         value={content}
-                        onChange={onChange}
+                        onChange={e => setNews({ content: e.target.getContent() })}
                     />
                 </Form.Field>
                 <Form.Input 
