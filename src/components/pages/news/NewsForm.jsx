@@ -35,11 +35,6 @@ const NewsForm = () => {
             setContent(content);
             setImage(image);
             // setNews(current_news);
-        } else {
-            setTitle('');
-            setContent('');
-            setImage('');
-            setNews({ title: '', content: '', image: '' });
         }
 
         if (error) {
@@ -54,13 +49,16 @@ const NewsForm = () => {
         }
     }, [newsContext, current_news, clearNewsErrors, error])
 
-    const onEditorChange = (content) => setContent(content);
+    const onTitleChange = e => setTitle(e.target.value); 
+    const onEditorChange = content => setContent(content);
+    const onImageChange = e => setImage(e.target.value);
 
     const onSubmit = e => {
         e.preventDefault();
 
         setNews({ title, content, image });
         console.log(news);
+        console.log(`title: ${title}, content: ${content}, image: ${image}`);
 
         if (current_news === null) {
             addNews(news);
@@ -83,7 +81,7 @@ const NewsForm = () => {
                     name="title" 
                     value={title}
                     placeholder="Title"
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={onTitleChange}
                     fluid 
                 />
                 <Form.Field>
@@ -108,7 +106,7 @@ const NewsForm = () => {
                     name="image" 
                     value={image}
                     placeholder="Image URL (e.g: http://imgur.com/)"
-                    onChange={e => setImage(e.target.value)}
+                    onChange={onImageChange}
                     fluid 
                 />
                 {/* <Form.Field>
