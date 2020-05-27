@@ -30,9 +30,15 @@ const NewsForm = () => {
 
     useEffect(() => {
         if (current_news !== null) {
-            setNews(current_news);
+            const { title, content, image } = current_news;
+            setTitle(title);
+            setContent(content);
+            setImage(image);
+            // setNews(current_news);
         } else {
-            setNews({ title: '', content: '', image: '' });
+            setTitle('');
+            setContent('');
+            setImage('');
         }
 
         if (error) {
