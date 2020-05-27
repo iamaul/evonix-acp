@@ -39,6 +39,7 @@ const NewsForm = () => {
             setTitle('');
             setContent('');
             setImage('');
+            setNews({ title: '', content: '', image: '' });
         }
 
         if (error) {

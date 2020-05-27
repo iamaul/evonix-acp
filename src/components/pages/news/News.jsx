@@ -12,11 +12,11 @@ import Loader from '../../layouts/loader/Loader';
 const ExpandedData = ({ data }) => (
     <div>
         <Image src={data.image} size="medium" />
-        <p><b>{data.title}</b> - Created at <Moment unix format="LLLL">{data.created_at}</Moment>{data.updated_at !== null && (<><br/>
+        <p><b>{data.title}</b><br/>Created at <Moment unix format="LLLL">{data.created_at}</Moment>{data.updated_at !== null && (<><br/>
                 Last updated on <Moment unix format="LLLL">{data.updated_at}</Moment>
             </>)}</p>
         <Divider hidden />
-        <p style={{ textAlign: 'justify' }}>{parse(data.content)}</p>
+        {parse(data.content)}
     </div>
 );
 
@@ -75,13 +75,13 @@ const News = () => {
             name: 'Created at',
             selector: 'created_at',
             sortable: true,
-            cell: row => <div><Moment unix format="lll">{row.created_at}</Moment></div>
+            cell: row => <div><Moment unix format="ll">{row.created_at}</Moment></div>
         },
         {
             name: 'Updated at',
             selector: 'updated_at',
             sortable: true,
-            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="lll">{row.updated_at}</Moment>) : 'No update'}</div>
+            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="ll">{row.updated_at}</Moment>) : 'No update'}</div>
         },
         {
             name: 'Action',
