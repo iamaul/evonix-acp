@@ -82,7 +82,7 @@ const NewsForm = () => {
                     name="title" 
                     value={title}
                     placeholder="Title"
-                    onChange={() => setTitle(title)}
+                    onChange={e => setTitle(e.target.value)}
                     fluid 
                 />
                 <Form.Field>
@@ -106,7 +106,7 @@ const NewsForm = () => {
                     name="image" 
                     value={image}
                     placeholder="Image URL (e.g: http://imgur.com/)"
-                    onChange={() => setImage(image)}
+                    onChange={e => setImage(e.target.value)}
                     fluid 
                 />
                 {/* <Form.Field>
