@@ -75,13 +75,13 @@ const News = () => {
             name: 'Created at',
             selector: 'created_at',
             sortable: true,
-            cell: row => <div><Moment unix format="ll">{row.created_at}</Moment></div>
+            cell: row => <div><Moment unix format="lll">{row.created_at}</Moment></div>
         },
         {
             name: 'Updated at',
             selector: 'updated_at',
             sortable: true,
-            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="ll">{row.updated_at}</Moment>) : 'No update'}</div>
+            cell: row => <div>{row.updated_at !== null ? (<Moment unix format="lll">{row.updated_at}</Moment>) : 'No update'}</div>
         },
         {
             name: 'Action',
