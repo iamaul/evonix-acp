@@ -11,6 +11,10 @@ import Loader from '../../layouts/loader/Loader';
 const ExpandedData = ({ data }) => (
     <div>
         <Image src={data.image} size="medium" />
+        <p><b>{data.title}</b><br/>Created at <Moment unix format="LLLL">{data.created_at}</Moment>{data.updated_at !== null && (<><br/>
+                Last updated on <Moment unix format="LLLL">{data.updated_at}</Moment>
+            </>)}</p>
+        <Divider hidden />
         <p><b>{data.title}</b></p>
         <p>{data.question}</p>
     </div>
