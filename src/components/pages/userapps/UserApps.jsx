@@ -55,6 +55,7 @@ const UserApps = () => {
                                 <Modal.Header>{row.userAppUser && row.userAppUser.name}'s Application</Modal.Header>
                                 <Modal.Content>
                                     <Image size="massive" src={row.userAppQuiz && row.userAppQuiz.image} centered />
+                                    <Divider hidden />
                                     <Modal.Description>
                                         <Header>{row.userAppQuiz && row.userAppQuiz.title}</Header>
                                         <p style={{ textAlign: 'justify' }}>
