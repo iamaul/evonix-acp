@@ -15,7 +15,6 @@ const ExpandedData = ({ data }) => (
                 Last updated on <Moment unix format="LLLL">{data.updated_at}</Moment>
             </>)}</p>
         <Divider hidden />
-        <p><b>{data.title}</b></p>
         <p>{data.question}</p>
     </div>
 );
