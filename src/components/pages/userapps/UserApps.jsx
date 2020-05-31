@@ -14,8 +14,6 @@ const ExpandedData = ({ data }) => (
                 Last updated on <Moment unix format="LLLL">{data.updated_at}</Moment>
             </>)} 
         </p>
-        <Divider hidden />
-        <Image src={data.userAppQuiz.image} size="small" />
     </div>
 );
 
