@@ -49,7 +49,7 @@ const UserApps = () => {
         {
             name: 'Application',
             cell: row => <div>
-                            <Modal trigger={<Button size="small">View</Button>}>
+                            <Modal trigger={<Button size="small">Show</Button>}>
                                 <Modal.Header>{row.userAppUser && row.userAppUser.name}'s Application</Modal.Header>
                                 <Modal.Content>
                                     <Image size="massive" src={row.userAppQuiz && row.userAppQuiz.image} centered />
