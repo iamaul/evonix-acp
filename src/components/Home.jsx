@@ -44,7 +44,7 @@ const Home = () => {
             <Container>
                 <Statistic.Group size="small" widths="3">
                     <Statistic>
-                        { total_characters !== null && setLoading ? (
+                        { total_characters !== null && !setLoading ? (
                             <Statistic.Value>
                                 <NumberFormat value={total_characters} displayType={'text'} thousandSeparator={true} />
                             </Statistic.Value> ) : (<Loader isLoading={setLoading} />)
@@ -76,9 +76,9 @@ const Home = () => {
                                 <Header as="h3">Most Handled Assistance</Header>
                                 <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_assistances}>
                                     <PolarGrid />
-                                    <PolarAngleAxis dataKey={group_by_assistances.handler} />
+                                    <PolarAngleAxis dataKey={group_by_assistances && group_by_assistances.handler} />
                                     <PolarRadiusAxis/>
-                                    <Radar name="Mike" dataKey={group_by_assistances.count_handler} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                                    <Radar name="Mike" dataKey={group_by_assistances && group_by_assistances.count_handler} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>
@@ -89,9 +89,9 @@ const Home = () => {
                                 <Header as="h3">Most Handled Report</Header>
                                 <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_reports}>
                                     <PolarGrid />
-                                    <PolarAngleAxis dataKey={group_by_reports.handler} />
+                                    <PolarAngleAxis dataKey={group_by_reports && group_by_reports.handler} />
                                     <PolarRadiusAxis/>
-                                    <Radar name="Mike" dataKey={group_by_reports.count_handler} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+                                    <Radar name="Mike" dataKey={group_by_reports && group_by_reports.count_handler} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>
