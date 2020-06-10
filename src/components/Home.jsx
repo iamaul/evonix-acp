@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Container, Statistic, Divider, Header } from 'semantic-ui-react';
+import { Container, Statistic, Divider, Header, Grid } from 'semantic-ui-react';
 import NumberFormat from 'react-number-format';
 import {
     ResponsiveContainer,
