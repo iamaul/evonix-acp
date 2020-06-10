@@ -7,7 +7,8 @@ import {
     RadarChart, 
     PolarGrid, 
     PolarAngleAxis, 
-    PolarRadiusAxis
+    PolarRadiusAxis,
+    Tooltip
 } from 'recharts';
 
 import StatsContext from '../context/stats/statsContext';
@@ -77,7 +78,8 @@ const Home = () => {
                                 <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_assistances}>
                                     <PolarGrid />
                                     <PolarAngleAxis dataKey="handler" />
-                                    <PolarRadiusAxis/>
+                                    <PolarRadiusAxis />
+                                    <Tooltip />
                                     <Radar name="Mike" dataKey="count_handler" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
@@ -90,7 +92,8 @@ const Home = () => {
                                 <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_reports}>
                                     <PolarGrid />
                                     <PolarAngleAxis dataKey="handler" />
-                                    <PolarRadiusAxis/>
+                                    <PolarRadiusAxis />
+                                    <Tooltip />
                                     <Radar name="Mike" dataKey="count_handler" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
