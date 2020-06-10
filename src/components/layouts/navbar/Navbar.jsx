@@ -30,11 +30,6 @@ const Navbar = () => {
                     name="News"
                     exact to="/news"
                 />
-                {/* <Menu.Item
-                    as={NavLink}
-                    name="Blog"
-                    exact to="/blog"
-                /> */}
                 <Menu.Item
                     as={NavLink}
                     name="Quiz"
@@ -50,23 +45,11 @@ const Navbar = () => {
                     name="Users"
                     exact to="/users"
                 />
-                {/* <Menu.Item
-                    as={NavLink}
-                    name="Characters"
-                    exact to="/characters"
-                /> */}
                 <Menu.Item
                     as={NavLink}
                     name="Banlist"
                     exact to="/banlist"
                 />
-                <Dropdown item text="Config">
-                    <Dropdown.Menu>
-                        <Dropdown.Item as={NavLink} to="/config/ucp">UCP Settings</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to="/config/teamspeak">Teamspeak</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to="/config/server">Game Server</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
                 <Menu.Menu position="right">
                     <Dropdown
                         item

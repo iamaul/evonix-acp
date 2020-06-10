@@ -9,6 +9,7 @@ import QuizState from '../context/quiz/QuizState';
 import UserAppsState from '../context/userapps/UserAppsState';
 import BanState from '../context/ban/BanState';
 import NewsState from '../context/news/NewsState';
+import StatsState from '../context/stats/StatsState';
 
 import PrivateRoute from '../routes/PrivateRoute';
 
@@ -33,24 +34,26 @@ const App = () => {
                     <UserAppsState>
                         <BanState>
                             <NewsState>
-                                <Router history={history}>
-                                    <Container>
-                                        <Switch>
-                                            <Route exact path="/" component={Login} />
-                                            <Fragment>
-                                                <Header />
-                                                <PrivateRoute exact path="/dashboard" component={Home} />
-                                                <PrivateRoute exact path="/news" component={News} />
-                                                <PrivateRoute exact path="/news/form" component={NewsForm} />
-                                                <PrivateRoute exact path="/quiz" component={Quiz} />
-                                                <PrivateRoute exact path="/quiz/form" component={QuizForm} />
-                                                <PrivateRoute exact path="/user_applications" component={UserApps} />
-                                                <PrivateRoute exact path="/banlist" component={Banlist} />
-                                                <Footer />
-                                            </Fragment>
-                                        </Switch>
-                                    </Container>
-                                </Router>
+                                <StatsState>
+                                    <Router history={history}>
+                                        <Container>
+                                            <Switch>
+                                                <Route exact path="/" component={Login} />
+                                                <Fragment>
+                                                    <Header />
+                                                    <PrivateRoute exact path="/dashboard" component={Home} />
+                                                    <PrivateRoute exact path="/news" component={News} />
+                                                    <PrivateRoute exact path="/news/form" component={NewsForm} />
+                                                    <PrivateRoute exact path="/quiz" component={Quiz} />
+                                                    <PrivateRoute exact path="/quiz/form" component={QuizForm} />
+                                                    <PrivateRoute exact path="/user_applications" component={UserApps} />
+                                                    <PrivateRoute exact path="/banlist" component={Banlist} />
+                                                    <Footer />
+                                                </Fragment>
+                                            </Switch>
+                                        </Container>
+                                    </Router>
+                                </StatsState>
                             </NewsState>
                         </BanState>
                     </UserAppsState>

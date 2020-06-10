@@ -52,7 +52,7 @@ const Banlist = () => {
             name: 'Action',
             button: true,
             cell: (row) => (
-                    <Button animated="fade" color="red" onClick={() => onBanDelete(row.id)}>
+                    <Button animated="fade" color="red" size="small" onClick={() => onBanDelete(row.id)}>
                         <Button.Content visible><Icon name="delete" /></Button.Content>
                         <Button.Content hidden>Unban</Button.Content>
                     </Button>

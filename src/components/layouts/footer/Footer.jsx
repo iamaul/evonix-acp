@@ -4,7 +4,7 @@ import { Icon } from 'semantic-ui-react';
 const Footer = () => (
     <>
         <footer>
-            <p><Icon name="copyright outline" /> 2020 EvoniX Community.</p>
+            <p><Icon name="copyright outline" /> 2020 EvoniX ACP.</p>
         </footer>
         <style>{`
             footer {
