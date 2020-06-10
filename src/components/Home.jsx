@@ -39,9 +39,6 @@ const Home = () => {
         // eslint-disable-next-line
     }, []);
 
-    const dataAssistance = [group_by_assistances];
-    const dataReport = [group_by_reports];
-
     return (
         <>
             <Container>
@@ -77,7 +74,7 @@ const Home = () => {
                         <ResponsiveContainer>
                             { group_by_assistances !== null && !setLoading ? (<>
                                 <Header as="h3">Most Handled Assistance</Header>
-                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={dataAssistance}>
+                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_assistances}>
                                     <PolarGrid />
                                     <PolarAngleAxis dataKey="handler" />
                                     <PolarRadiusAxis/>
@@ -90,7 +87,7 @@ const Home = () => {
                         <ResponsiveContainer>
                             { group_by_reports !== null && !setLoading ? (<>
                                 <Header as="h3">Most Handled Report</Header>
-                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={dataReport}>
+                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_reports}>
                                     <PolarGrid />
                                     <PolarAngleAxis dataKey="handler" />
                                     <PolarRadiusAxis/>
