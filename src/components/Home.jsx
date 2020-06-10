@@ -39,6 +39,9 @@ const Home = () => {
         // eslint-disable-next-line
     }, []);
 
+    const dataAssistance = [group_by_assistances];
+    const dataReport = [group_by_reports];
+
     return (
         <>
             <Container>
@@ -74,11 +77,11 @@ const Home = () => {
                         <ResponsiveContainer>
                             { group_by_assistances !== null && !setLoading ? (<>
                                 <Header as="h3">Most Handled Assistance</Header>
-                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_assistances}>
+                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={dataAssistance}>
                                     <PolarGrid />
-                                    <PolarAngleAxis dataKey={group_by_assistances && group_by_assistances.handler} />
+                                    <PolarAngleAxis dataKey="handler" />
                                     <PolarRadiusAxis/>
-                                    <Radar name="Mike" dataKey={group_by_assistances && group_by_assistances.count_handler} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                                    <Radar name="Mike" dataKey="count_handler" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>
@@ -87,11 +90,11 @@ const Home = () => {
                         <ResponsiveContainer>
                             { group_by_reports !== null && !setLoading ? (<>
                                 <Header as="h3">Most Handled Report</Header>
-                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_reports}>
+                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={dataReport}>
                                     <PolarGrid />
-                                    <PolarAngleAxis dataKey={group_by_reports && group_by_reports.handler} />
+                                    <PolarAngleAxis dataKey="handler" />
                                     <PolarRadiusAxis/>
-                                    <Radar name="Mike" dataKey={group_by_reports && group_by_reports.count_handler} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+                                    <Radar name="Mike" dataKey="count_handler" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>
