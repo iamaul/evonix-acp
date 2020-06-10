@@ -70,7 +70,7 @@ const Home = () => {
                     </Statistic>
                 </Statistic.Group>
                 <Divider hidden />
-                <Grid columns={2} padded>
+                <Grid columns={2} stackable>
                     <Grid.Column>
                         <ResponsiveContainer>
                             { group_by_assistances !== null && !setLoading ? (<>
