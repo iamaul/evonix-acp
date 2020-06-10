@@ -80,7 +80,7 @@ const Home = () => {
                                     <PolarAngleAxis dataKey="handler" />
                                     <PolarRadiusAxis />
                                     <Tooltip />
-                                    <Radar name="Mike" dataKey="count_handler" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                                    <Radar name="total handle" dataKey="count_handler" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>
@@ -94,7 +94,7 @@ const Home = () => {
                                     <PolarAngleAxis dataKey="handler" />
                                     <PolarRadiusAxis />
                                     <Tooltip />
-                                    <Radar name="Mike" dataKey="count_handler" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+                                    <Radar name="total handle" dataKey="count_handler" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>
