@@ -23,7 +23,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.1.1",
-    "sweetalert2": "^9.14.0"
+    "sweetalert2": "^9.14.4"
   },
   "scripts": {
     "start": "react-scripts start",

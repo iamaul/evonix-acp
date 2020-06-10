@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Container, Statistic, Divider } from 'semantic-ui-react';
+import NumberFormat from 'react-number-format';
 import {
     ResponsiveContainer,
     Radar, 
