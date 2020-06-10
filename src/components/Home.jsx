@@ -36,15 +36,8 @@ const Home = () => {
         getCountServerAssistances();
         getCountServerGroupByReports();
         getCountServerReports();
-    }, [getCountServerCharacters, 
-        getCountServerGroupByAssistances, 
-        getCountServerAssistances,
-        getCountServerGroupByReports,
-        getCountServerReports
-    ]);
-
-    console.log(group_by_assistances);
-    console.log(group_by_reports);
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>
@@ -64,7 +57,7 @@ const Home = () => {
                                 <NumberFormat value={total_assistances} displayType={'text'} thousandSeparator={true} />
                             </Statistic.Value> ) : (<Loader isLoading={setLoading} />)
                         }
-                        <Statistic.Label>Total Request Assistances</Statistic.Label>
+                        <Statistic.Label>Total Assistance</Statistic.Label>
                     </Statistic>
                     <Statistic>
                         { total_reports !== null && !setLoading ? (
@@ -72,7 +65,7 @@ const Home = () => {
                                 <NumberFormat value={total_reports} displayType={'text'} thousandSeparator={true} />
                             </Statistic.Value> ) : (<Loader isLoading={setLoading} />)
                         }
-                        <Statistic.Label>Total Reports</Statistic.Label>
+                        <Statistic.Label>Total Report</Statistic.Label>
                     </Statistic>
                 </Statistic.Group>
                 <Divider hidden />
@@ -83,9 +76,9 @@ const Home = () => {
                                 <Header as="h3">Most Handled Assistance</Header>
                                 <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_assistances}>
                                     <PolarGrid />
-                                    <PolarAngleAxis dataKey={group_by_assistances && group_by_assistances.handler} />
+                                    <PolarAngleAxis dataKey={group_by_assistances.handler} />
                                     <PolarRadiusAxis/>
-                                    <Radar name="Mike" dataKey={group_by_assistances && group_by_assistances.count_handler} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                                    <Radar name="Mike" dataKey={group_by_assistances.count_handler} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>
@@ -96,9 +89,9 @@ const Home = () => {
                                 <Header as="h3">Most Handled Report</Header>
                                 <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_reports}>
                                     <PolarGrid />
-                                    <PolarAngleAxis dataKey={group_by_reports && group_by_reports.handler} />
+                                    <PolarAngleAxis dataKey={group_by_reports.handler} />
                                     <PolarRadiusAxis/>
-                                    <Radar name="Mike" dataKey={group_by_reports && group_by_reports.count_handler} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+                                    <Radar name="Mike" dataKey={group_by_reports.count_handler} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
                                 </RadarChart>
                             </>) : (<Loader isLoading={setLoading} />)}
                         </ResponsiveContainer>

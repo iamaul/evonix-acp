@@ -88,6 +88,8 @@ const StatsState = (props) => {
                 total_characters: state.total_characters,
                 total_assistances: state.total_assistances,
                 total_reports: state.total_reports,
+                group_by_assistances: state.group_by_assistances,
+                group_by_reports: state.group_by_reports,
                 error: state.error,
                 getCountServerCharacters,
                 getCountServerGroupByAssistances,
