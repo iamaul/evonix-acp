@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 
-import StatsContext from './StatsContext';
+import StatsContext from './statsContext';
 import statsReducer from './statsReducer';
 
 import {
