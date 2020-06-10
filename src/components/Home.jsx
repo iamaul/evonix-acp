@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Container, Statistic, Divider } from 'semantic-ui-react';
+import { Container, Statistic, Divider, Header } from 'semantic-ui-react';
 import NumberFormat from 'react-number-format';
 import {
     ResponsiveContainer,
@@ -36,55 +36,71 @@ const Home = () => {
         getCountServerAssistances();
         getCountServerGroupByReports();
         getCountServerReports();
-        // eslint-disable-next-line
-    }, []);
+    }, [getCountServerCharacters, 
+        getCountServerGroupByAssistances, 
+        getCountServerAssistances,
+        getCountServerGroupByReports,
+        getCountServerReports
+    ]);
 
     return (
         <>
             <Container>
                 <Statistic.Group size="small" widths="3">
                     <Statistic>
-                        { setLoading ? (<Loader isLoading={setLoading} />) : (
+                        { total_characters !== null && setLoading ? (
                             <Statistic.Value>
                                 <NumberFormat value={total_characters} displayType={'text'} thousandSeparator={true} />
-                            </Statistic.Value> )
+                            </Statistic.Value> ) : (<Loader isLoading={setLoading} />)
                         }
                         <Statistic.Label>Characters</Statistic.Label>
                     </Statistic>
                     <Statistic>
-                        { setLoading ? (<Loader isLoading={setLoading} />) : (
+                        { total_assistances !== null && !setLoading ? (
                             <Statistic.Value>
                                 <NumberFormat value={total_assistances} displayType={'text'} thousandSeparator={true} />
-                            </Statistic.Value> )
+                            </Statistic.Value> ) : (<Loader isLoading={setLoading} />)
                         }
                         <Statistic.Label>Total Request Assistances</Statistic.Label>
                     </Statistic>
                     <Statistic>
-                        { setLoading ? (<Loader isLoading={setLoading} />) : (
+                        { total_reports !== null && !setLoading ? (
                             <Statistic.Value>
                                 <NumberFormat value={total_reports} displayType={'text'} thousandSeparator={true} />
-                            </Statistic.Value> )
+                            </Statistic.Value> ) : (<Loader isLoading={setLoading} />)
                         }
                         <Statistic.Label>Total Reports</Statistic.Label>
                     </Statistic>
                 </Statistic.Group>
                 <Divider hidden />
-                <Divider hidden />
-                <ResponsiveContainer>
-                    <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_assistances}>
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey={group_by_assistances.handler} />
-                        <PolarRadiusAxis/>
-                        <Radar name="Mike" dataKey={group_by_assistances.count_handler} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6}/>
-                    </RadarChart>
-                    <Divider />
-                    <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_reports}>
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey={group_by_reports.handler} />
-                        <PolarRadiusAxis/>
-                        <Radar name="Mike" dataKey={group_by_reports.count_handler} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
-                    </RadarChart>
-                </ResponsiveContainer>
+                <Grid columns={2} padded>
+                    <Grid.Column>
+                        <ResponsiveContainer>
+                            { group_by_assistances !== null && !setLoading ? (<>
+                                <Header as="h3">Most Handled Assistance</Header>
+                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_assistances}>
+                                    <PolarGrid />
+                                    <PolarAngleAxis dataKey={group_by_assistances.handler} />
+                                    <PolarRadiusAxis/>
+                                    <Radar name="Mike" dataKey={group_by_assistances.count_handler} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                                </RadarChart>
+                            </>) : (<Loader isLoading={setLoading} />)}
+                        </ResponsiveContainer>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <ResponsiveContainer>
+                            { group_by_reports !== null && !setLoading ? (<>
+                                <Header as="h3">Most Handled Report</Header>
+                                <RadarChart cx={300} cy={250} outerRadius={150} width={600} height={500} data={group_by_reports}>
+                                    <PolarGrid />
+                                    <PolarAngleAxis dataKey={group_by_reports.handler} />
+                                    <PolarRadiusAxis/>
+                                    <Radar name="Mike" dataKey={group_by_reports.count_handler} stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6}/>
+                                </RadarChart>
+                            </>) : (<Loader isLoading={setLoading} />)}
+                        </ResponsiveContainer>
+                    </Grid.Column>
+                </Grid>
             </Container>
         </>
     )
