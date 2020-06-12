@@ -6,10 +6,8 @@ WORKDIR /evonix-app/admin
 
 COPY . .
 
-RUN npm install
-RUN npm run build
-RUN npm install -g serve
-
-CMD serve -s build
+RUN npm install && npm run build
 
 EXPOSE 3001
+
+CMD ["npm", "run", "start"]
