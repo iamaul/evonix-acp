@@ -30,7 +30,7 @@ const StatsState = (props) => {
     // API Requests
     const getCountServerCharacters = async () => {
         try {
-            const res = await axios.get('/api/v1/server/stats/characters');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/server/stats/characters');
             dispatch({ type: COUNT_SERVER_CHARACTERS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -40,7 +40,7 @@ const StatsState = (props) => {
 
     const getCountServerGroupByAssistances = async () => {
         try {
-            const res = await axios.get('/api/v1/server/stats/assistances/admin');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/server/stats/assistances/admin');
             dispatch({ type: GROUP_BY_ASSISTANCES, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -50,7 +50,7 @@ const StatsState = (props) => {
 
     const getCountServerAssistances = async () => {
         try {
-            const res = await axios.get('/api/v1/server/stats/assistances');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/server/stats/assistances');
             dispatch({ type: COUNT_SERVER_ASSISTANCES, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -60,7 +60,7 @@ const StatsState = (props) => {
 
     const getCountServerGroupByReports = async () => {
         try {
-            const res = await axios.get('/api/v1/server/stats/reports/admin');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/server/stats/reports/admin');
             dispatch({ type: GROUP_BY_REPORTS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -70,7 +70,7 @@ const StatsState = (props) => {
 
     const getCountServerReports = async () => {
         try {
-            const res = await axios.get('/api/v1/server/stats/reports');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/server/stats/reports');
             dispatch({ type: COUNT_SERVER_REPORTS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;

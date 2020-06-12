@@ -23,7 +23,7 @@ const BanState = (props) => {
     // API Requests
     const getBanlist = async () => {
         try {
-            const res = await axios.get('/api/v1/ban');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/ban');
             dispatch({ type: GET_ALL_BAN_LIST, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -33,7 +33,7 @@ const BanState = (props) => {
 
     const deleteBan = async id => {
         try {
-            await axios.delete(`/api/v1/ban/${id}`);
+            await axios.delete(`http://167.99.65.76:5000/api/v1/ban/${id}`);
             dispatch({ type: DELETE_BAN, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;

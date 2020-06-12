@@ -30,7 +30,7 @@ const NewsState = (props) => {
     // API Requests
     const getAllNews = async () => {
         try {
-            const res = await axios.get('/api/v1/news');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/news');
             dispatch({ type: GET_ALL_NEWS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -46,7 +46,7 @@ const NewsState = (props) => {
         }
 
         try {
-            const res = await axios.post('/api/v1/news', news, config);
+            const res = await axios.post('http://167.99.65.76:5000/api/v1/news', news, config);
             dispatch({ type: ADD_NEWS, payload: res.data });
             history.push('/news');
         } catch (error) {
@@ -63,7 +63,7 @@ const NewsState = (props) => {
         }
 
         try {
-            const res = await axios.put(`/api/v1/news/${news.id}`, news, config);
+            const res = await axios.put(`http://167.99.65.76:5000/api/v1/news/${news.id}`, news, config);
             dispatch({ type: UPDATE_NEWS, payload: res.data });
             history.push('/news');
         } catch (error) {
@@ -74,7 +74,7 @@ const NewsState = (props) => {
 
     const deleteNews = async id => {
         try {
-            await axios.delete(`/api/v1/news/${id}`);
+            await axios.delete(`http://167.99.65.76:5000/api/v1/news/${id}`);
             dispatch({ type: DELETE_NEWS, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;

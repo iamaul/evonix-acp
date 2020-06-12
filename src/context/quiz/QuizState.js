@@ -30,7 +30,7 @@ const QuizState = (props) => {
     // API Requests
     const getAllQuiz = async () => {
         try {
-            const res = await axios.get('/api/v1/quiz');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/quiz');
             dispatch({ type: GET_ALL_QUIZ, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -46,7 +46,7 @@ const QuizState = (props) => {
         }
 
         try {
-            const res = await axios.post('/api/v1/quiz', quiz, config);
+            const res = await axios.post('http://167.99.65.76:5000/api/v1/quiz', quiz, config);
             dispatch({ type: ADD_QUIZ, payload: res.data });
             history.push('/quiz');
         } catch (error) {
@@ -63,7 +63,7 @@ const QuizState = (props) => {
         }
 
         try {
-            const res = await axios.put(`/api/v1/quiz/${quiz.id}`, quiz, config);
+            const res = await axios.put(`http://167.99.65.76:5000/api/v1/quiz/${quiz.id}`, quiz, config);
             dispatch({ type: UPDATE_QUIZ, payload: res.data });
             history.push('/quiz');
         } catch (error) {
@@ -74,7 +74,7 @@ const QuizState = (props) => {
 
     const deleteQuiz = async id => {
         try {
-            await axios.delete(`/api/v1/quiz/${id}`);
+            await axios.delete(`http://167.99.65.76:5000/api/v1/quiz/${id}`);
             dispatch({ type: DELETE_QUIZ, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;

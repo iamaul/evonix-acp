@@ -23,7 +23,7 @@ const UserAppsState = (props) => {
     // API Requests
     const getAllUserApps = async () => {
         try {
-            const res = await axios.get('/api/v1/users/application');
+            const res = await axios.get('http://167.99.65.76:5000/api/v1/users/application');
             dispatch({ type: GET_ALL_USER_APPS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -33,7 +33,7 @@ const UserAppsState = (props) => {
 
     const updateUserApps = async (status, id, user_id) => {
         try {
-            const res = await axios.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
+            const res = await axios.put(`http://167.99.65.76:5000/api/v1/users/application/${status}/${id}/${user_id}`);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
