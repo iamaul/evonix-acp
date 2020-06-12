@@ -86,7 +86,7 @@ const Login = () => {
             </Grid>
             <footer>
                 <p>     
-                    <Icon name="copyright outline" /> 2020 EvoniX Community.
+                    <Icon name="copyright outline" /> 2020 EvoniX ACP.
                 </p>
             </footer>
             <style>{`
