@@ -46,7 +46,7 @@ const AuthState = (props) => {
         }
 
         try {
-            const res = await api.post('auth/admin', formBody, config);
+            const res = await api.post('auth', formBody, config);
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
             userLoad();
         } catch (error) {
