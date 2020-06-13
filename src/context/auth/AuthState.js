@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
-import axios from 'axios';
 
+import api from '../../api/api';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 
@@ -31,7 +31,7 @@ const AuthState = (props) => {
         setAuthToken(localStorage.token);
 
         try {
-            const res = await axios.get('http://167.99.65.76:5000/api/v1/auth');
+            const res = await api.get('auth/admin');
             dispatch({ type: USER_LOADED, payload: res.data });
         } catch (error) {
             dispatch({ type: AUTH_ERROR });
@@ -46,7 +46,7 @@ const AuthState = (props) => {
         }
 
         try {
-            const res = await axios.post('http://167.99.65.76:5000/api/v1/auth', formBody, config);
+            const res = await api.post('auth', formBody, config);
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
             userLoad();
         } catch (error) {
