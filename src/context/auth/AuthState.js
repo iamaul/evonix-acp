@@ -31,7 +31,7 @@ const AuthState = (props) => {
         setAuthToken(localStorage.token);
 
         try {
-            const res = await api.get('auth/admin');
+            const res = await api.get('auth');
             dispatch({ type: USER_LOADED, payload: res.data });
         } catch (error) {
             dispatch({ type: AUTH_ERROR });
@@ -46,7 +46,7 @@ const AuthState = (props) => {
         }
 
         try {
-            const res = await api.post('auth', formBody, config);
+            const res = await api.post('auth/admin', formBody, config);
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
             userLoad();
         } catch (error) {
