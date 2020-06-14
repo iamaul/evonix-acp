@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 
 import history from '../../components/history';
-import api from '../../api/api';
+import api from '../../utils/api';
 import QuizContext from './quizContext';
 import quizReducer from './quizReducer';
 
@@ -30,7 +30,7 @@ const QuizState = (props) => {
     // API Requests
     const getAllQuiz = async () => {
         try {
-            const res = await api.get('quiz');
+            const res = await api.get('/api/v1/quiz');
             dispatch({ type: GET_ALL_QUIZ, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -46,7 +46,7 @@ const QuizState = (props) => {
         }
 
         try {
-            const res = await api.post('quiz', quiz, config);
+            const res = await api.post('/api/v1/quiz', quiz, config);
             dispatch({ type: ADD_QUIZ, payload: res.data });
             history.push('/quiz');
         } catch (error) {
@@ -63,7 +63,7 @@ const QuizState = (props) => {
         }
 
         try {
-            const res = await api.put(`quiz/${quiz.id}`, quiz, config);
+            const res = await api.put(`/api/v1/quiz/${quiz.id}`, quiz, config);
             dispatch({ type: UPDATE_QUIZ, payload: res.data });
             history.push('/quiz');
         } catch (error) {
@@ -74,7 +74,7 @@ const QuizState = (props) => {
 
     const deleteQuiz = async id => {
         try {
-            await api.delete(`quiz/${id}`);
+            await api.delete(`/api/v1/quiz/${id}`);
             dispatch({ type: DELETE_QUIZ, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;

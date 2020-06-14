@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import api from '../../api/api';
+import api from '../../utils/api';
 import UserAppsContext from './userAppsContext';
 import userAppsReducer from './userAppsReducer';
 
@@ -23,7 +23,7 @@ const UserAppsState = (props) => {
     // API Requests
     const getAllUserApps = async () => {
         try {
-            const res = await api.get('users/application');
+            const res = await api.get('/api/v1/users/application');
             dispatch({ type: GET_ALL_USER_APPS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -33,7 +33,7 @@ const UserAppsState = (props) => {
 
     const updateUserApps = async (status, id, user_id) => {
         try {
-            const res = await api.put(`users/application/${status}/${id}/${user_id}`);
+            const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import api from '../../api/api';
+import api from '../../utils/api';
 import BanContext from './banContext';
 import banReducer from './banReducer';
 
@@ -23,7 +23,7 @@ const BanState = (props) => {
     // API Requests
     const getBanlist = async () => {
         try {
-            const res = await api.get('ban');
+            const res = await api.get('/api/v1/ban');
             dispatch({ type: GET_ALL_BAN_LIST, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -33,7 +33,7 @@ const BanState = (props) => {
 
     const deleteBan = async id => {
         try {
-            await api.delete(`ban/${id}`);
+            await api.delete(`/api/v1/ban/${id}`);
             dispatch({ type: DELETE_BAN, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;

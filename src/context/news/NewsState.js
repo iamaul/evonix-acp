@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 
 import history from '../../components/history';
-import api from '../../api/api';
+import api from '../../utils/api';
 import NewsContext from './newsContext';
 import newsReducer from './newsReducer';
 
@@ -30,7 +30,7 @@ const NewsState = (props) => {
     // API Requests
     const getAllNews = async () => {
         try {
-            const res = await api.get('news');
+            const res = await api.get('/api/v1/news');
             dispatch({ type: GET_ALL_NEWS, payload: res.data });
         } catch (error) {
             const errors = error.response.data.errors;
@@ -46,7 +46,7 @@ const NewsState = (props) => {
         }
 
         try {
-            const res = await api.post('news', news, config);
+            const res = await api.post('/api/v1/news', news, config);
             dispatch({ type: ADD_NEWS, payload: res.data });
             history.push('/news');
         } catch (error) {
@@ -63,7 +63,7 @@ const NewsState = (props) => {
         }
 
         try {
-            const res = await api.put(`news/${news.id}`, news, config);
+            const res = await api.put(`/api/v1/news/${news.id}`, news, config);
             dispatch({ type: UPDATE_NEWS, payload: res.data });
             history.push('/news');
         } catch (error) {
@@ -74,7 +74,7 @@ const NewsState = (props) => {
 
     const deleteNews = async id => {
         try {
-            await api.delete(`news/${id}`);
+            await api.delete(`/api/v1/news/${id}`);
             dispatch({ type: DELETE_NEWS, payload: id });
         } catch (error) {
             const errors = error.response.data.errors;
