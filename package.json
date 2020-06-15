@@ -23,7 +23,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.1.1",
-    "sweetalert2": "^9.15.0"
+    "sweetalert2": "^9.15.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,5 +45,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://api:5000"
 }
