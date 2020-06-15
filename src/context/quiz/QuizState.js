@@ -39,14 +39,8 @@ const QuizState = (props) => {
     }
 
     const addQuiz = async quiz => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
         try {
-            const res = await api.post('/api/v1/quiz', quiz, config);
+            const res = await api.post('/api/v1/quiz', quiz);
             dispatch({ type: ADD_QUIZ, payload: res.data });
             history.push('/quiz');
         } catch (error) {
@@ -56,14 +50,8 @@ const QuizState = (props) => {
     }
 
     const updateQuiz = async quiz => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
         try {
-            const res = await api.put(`/api/v1/quiz/${quiz.id}`, quiz, config);
+            const res = await api.put(`/api/v1/quiz/${quiz.id}`, quiz);
             dispatch({ type: UPDATE_QUIZ, payload: res.data });
             history.push('/quiz');
         } catch (error) {

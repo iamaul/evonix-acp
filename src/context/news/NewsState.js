@@ -39,14 +39,8 @@ const NewsState = (props) => {
     }
 
     const addNews = async news => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
         try {
-            const res = await api.post('/api/v1/news', news, config);
+            const res = await api.post('/api/v1/news', news);
             dispatch({ type: ADD_NEWS, payload: res.data });
             history.push('/news');
         } catch (error) {
@@ -56,14 +50,8 @@ const NewsState = (props) => {
     }
 
     const updateNews = async news => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
         try {
-            const res = await api.put(`/api/v1/news/${news.id}`, news, config);
+            const res = await api.put(`/api/v1/news/${news.id}`, news);
             dispatch({ type: UPDATE_NEWS, payload: res.data });
             history.push('/news');
         } catch (error) {
