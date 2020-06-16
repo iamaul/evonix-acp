@@ -15,6 +15,36 @@ import {
 
 import setAuthToken from '../../utils/setAuthToken';
 
+export const useAuth = () => {
+    const { state, dispatch } = useContext(AuthContext);
+    return [state, dispatch];
+};
+
+// API Requests
+const userLoad = async dispatch => {
+    try {
+        const res = await api.get('/api/v1/auth');
+        dispatch({ type: USER_LOADED, payload: res.data });
+    } catch (error) {
+        dispatch({ type: AUTH_ERROR });
+    }
+}
+
+const userLogin = async (dispatch, formBody) => {
+    try {
+        const res = await api.post('/api/v1/auth', formBody);
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+        userLoad(dispatch);
+    } catch (error) {
+        const errors = error.response.data.errors;
+        dispatch({ type: LOGIN_FAIL, payload: errors });
+    }
+}
+
+const userLogout = dispatch => dispatch({ type: LOGOUT });
+
+const clearAuthErrors = dispatch => dispatch({ type: CLEAR_AUTH_ERRORS });
+
 const AuthState = (props) => {
     const INITIAL_STATE = {
         token: localStorage.getItem('token'),
@@ -26,47 +56,18 @@ const AuthState = (props) => {
 
     const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
-    // API Requests
-    const userLoad = async () => {
-        setAuthToken(localStorage.token);
+    setAuthToken(state.token);
 
-        try {
-            const res = await api.get('/api/v1/auth');
-            dispatch({ type: USER_LOADED, payload: res.data });
-        } catch (error) {
-            dispatch({ type: AUTH_ERROR });
-        }
+    if (state.setLoading) {
+        userLoad(dispatch);
     }
 
-    const userLogin = async formBody => {
-        try {
-            const res = await api.post('/api/v1/auth', formBody);
-            dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-            userLoad();
-        } catch (error) {
-            const errors = error.response.data.errors;
-            dispatch({ type: LOGIN_FAIL, payload: errors });
-        }
-    }
-
-    const userLogout = () => dispatch({ type: LOGOUT });
-
-    const clearAuthErrors = () => dispatch({ type: CLEAR_AUTH_ERRORS });
+    useEffect(() => {
+        setAuthToken(state.token);
+    }, [state.token]);
 
     return (
-        <AuthContext.Provider
-            value={{
-                token: state.token,
-                isAuthenticated: state.isAuthenticated,
-                setLoading: state.setLoading,
-                user: state.user,
-                error: state.error,
-                userLoad,
-                userLogin,
-                userLogout,
-                clearAuthErrors
-            }}
-        >
+        <AuthContext.Provider value={{ state: state, dispatch }}>
             { props.children }
         </AuthContext.Provider>
     )

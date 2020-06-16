@@ -8,7 +8,8 @@ import {
     Segment,
     Icon 
 } from 'semantic-ui-react';
-import AuthContext from '../../../context/auth/authContext';
+
+import { useAuth, clearAuthErrors, userLogin } from '../../../context/auth/AuthState';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -16,8 +17,8 @@ const Toast = Swal.mixin({
 });
 
 const Login = (props) => {
-    const authContext = useContext(AuthContext);
-    const { userLogin, error, clearAuthErrors, isAuthenticated } = authContext;
+    const [authState, authDispatch] = useAuth();
+    const { error, isAuthenticated } = authState;
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -32,10 +33,9 @@ const Login = (props) => {
                     text: err.msg
                 });
             });
-            clearAuthErrors();
+            clearAuthErrors(authDispatch);
         }
-        // eslint-disable-next-line
-    }, [error, isAuthenticated, props.history])
+    }, [error, isAuthenticated, props.history, authDispatch]);
 
     const [user, setUser] = useState({ usermail: '', password: '' });
     const { usermail, password } = user;
@@ -45,7 +45,7 @@ const Login = (props) => {
     const onSubmit = e => {
         e.preventDefault();
 
-        userLogin({ usermail, password });
+        userLogin(authDispatch, { usermail, password });
     }
 
     return (
