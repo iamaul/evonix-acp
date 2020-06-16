@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 
 import api from '../../utils/api';
 import UserAppsContext from './userAppsContext';
