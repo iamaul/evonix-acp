@@ -23,7 +23,7 @@ export const useQuiz = () => {
 };
 
 // API Requests
-const getAllQuiz = async dispatch => {
+export const getAllQuiz = async dispatch => {
     try {
         const res = await api.get('/api/v1/quiz');
         dispatch({ type: GET_ALL_QUIZ, payload: res.data });
@@ -33,7 +33,7 @@ const getAllQuiz = async dispatch => {
     }
 }
 
-const addQuiz = async (dispatch, quiz) => {
+export const addQuiz = async (dispatch, quiz) => {
     try {
         const res = await api.post('/api/v1/quiz', quiz);
         dispatch({ type: ADD_QUIZ, payload: res.data });
@@ -44,7 +44,7 @@ const addQuiz = async (dispatch, quiz) => {
     }
 }
 
-const updateQuiz = async (dispatch, quiz) => {
+export const updateQuiz = async (dispatch, quiz) => {
     try {
         const res = await api.put(`/api/v1/quiz/${quiz.id}`, quiz);
         dispatch({ type: UPDATE_QUIZ, payload: res.data });
@@ -55,7 +55,7 @@ const updateQuiz = async (dispatch, quiz) => {
     }
 }
 
-const deleteQuiz = async (dispatch, id) => {
+export const deleteQuiz = async (dispatch, id) => {
     try {
         await api.delete(`/api/v1/quiz/${id}`);
         dispatch({ type: DELETE_QUIZ, payload: id });
@@ -65,19 +65,19 @@ const deleteQuiz = async (dispatch, id) => {
     }
 }
 
-const clearQuiz = dispatch => {
+export const clearQuiz = dispatch => {
     dispatch({ type: CLEAR_QUIZ });
 }
 
-const setCurrentQuiz = (dispatch, quiz) => {
+export const setCurrentQuiz = (dispatch, quiz) => {
     dispatch({ type: SET_CURRENT_QUIZ, payload: quiz });
 }
 
-const clearCurrentQuiz = dispatch => {
+export const clearCurrentQuiz = dispatch => {
     dispatch({ type: CLEAR_CURRENT_QUIZ });
 }
 
-const clearQuizErrors = dispatch => {
+export const clearQuizErrors = dispatch => {
     dispatch({ type: CLEAR_QUIZ_ERROR });
 }
 

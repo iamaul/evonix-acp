@@ -21,7 +21,7 @@ export const useAuth = () => {
 };
 
 // API Requests
-const userLoad = async dispatch => {
+export const userLoad = async dispatch => {
     try {
         const res = await api.get('/api/v1/auth');
         dispatch({ type: USER_LOADED, payload: res.data });
@@ -30,7 +30,7 @@ const userLoad = async dispatch => {
     }
 }
 
-const userLogin = async (dispatch, formBody) => {
+export const userLogin = async (dispatch, formBody) => {
     try {
         const res = await api.post('/api/v1/auth', formBody);
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -41,9 +41,9 @@ const userLogin = async (dispatch, formBody) => {
     }
 }
 
-const userLogout = dispatch => dispatch({ type: LOGOUT });
+export const userLogout = dispatch => dispatch({ type: LOGOUT });
 
-const clearAuthErrors = dispatch => dispatch({ type: CLEAR_AUTH_ERRORS });
+export const clearAuthErrors = dispatch => dispatch({ type: CLEAR_AUTH_ERRORS });
 
 const AuthState = (props) => {
     const INITIAL_STATE = {

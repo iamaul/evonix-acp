@@ -17,7 +17,7 @@ export const useBan = () => {
 };
 
 // API Requests
-const getBanlist = async dispatch => {
+export const getBanlist = async dispatch => {
     try {
         const res = await api.get('/api/v1/ban');
         dispatch({ type: GET_ALL_BAN_LIST, payload: res.data });
@@ -27,7 +27,7 @@ const getBanlist = async dispatch => {
     }
 }
 
-const deleteBan = async (dispatch, id) => {
+export const deleteBan = async (dispatch, id) => {
     try {
         await api.delete(`/api/v1/ban/${id}`);
         dispatch({ type: DELETE_BAN, payload: id });
@@ -37,7 +37,7 @@ const deleteBan = async (dispatch, id) => {
     }
 }
 
-const clearBanErrors = dispatch => {
+export const clearBanErrors = dispatch => {
     dispatch({ type: CLEAR_BAN_ERROR });
 }
 

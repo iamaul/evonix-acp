@@ -17,7 +17,7 @@ export const useUserApps = () => {
 };
 
 // API Requests
-const getAllUserApps = async dispatch => {
+export const getAllUserApps = async dispatch => {
     try {
         const res = await api.get('/api/v1/users/application');
         dispatch({ type: GET_ALL_USER_APPS, payload: res.data });
@@ -27,7 +27,7 @@ const getAllUserApps = async dispatch => {
     }
 }
 
-const updateUserApps = async (dispatch, status, id, user_id) => {
+export const updateUserApps = async (dispatch, status, id, user_id) => {
     try {
         const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
         dispatch({ type: UPDATE_USER_APPS, payload: res.data });
@@ -37,7 +37,7 @@ const updateUserApps = async (dispatch, status, id, user_id) => {
     }
 }
 
-const clearUserAppsErrors = dispatch => {
+export const clearUserAppsErrors = dispatch => {
     dispatch({ type: CLEAR_USER_APPS_ERROR });
 }
 

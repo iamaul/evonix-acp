@@ -23,7 +23,7 @@ export const useNews = () => {
 };
 
 // API Requests
-const getAllNews = async dispatch => {
+export const getAllNews = async dispatch => {
     try {
         const res = await api.get('/api/v1/news');
         dispatch({ type: GET_ALL_NEWS, payload: res.data });
@@ -33,7 +33,7 @@ const getAllNews = async dispatch => {
     }
 }
 
-const addNews = async (dispatch, news) => {
+export const addNews = async (dispatch, news) => {
     try {
         const res = await api.post('/api/v1/news', news);
         dispatch({ type: ADD_NEWS, payload: res.data });
@@ -44,7 +44,7 @@ const addNews = async (dispatch, news) => {
     }
 }
 
-const updateNews = async (dispatch, news) => {
+export const updateNews = async (dispatch, news) => {
     try {
         const res = await api.put(`/api/v1/news/${news.id}`, news);
         dispatch({ type: UPDATE_NEWS, payload: res.data });
@@ -55,7 +55,7 @@ const updateNews = async (dispatch, news) => {
     }
 }
 
-const deleteNews = async (dispatch, id) => {
+export const deleteNews = async (dispatch, id) => {
     try {
         await api.delete(`/api/v1/news/${id}`);
         dispatch({ type: DELETE_NEWS, payload: id });
@@ -65,19 +65,19 @@ const deleteNews = async (dispatch, id) => {
     }
 }
 
-const clearNews = dispatch => {
+export const clearNews = dispatch => {
     dispatch({ type: CLEAR_NEWS });
 }
 
-const setCurrentNews = (dispatch, news) => {
+export const setCurrentNews = (dispatch, news) => {
     dispatch({ type: SET_CURRENT_NEWS, payload: news });
 }
 
-const clearCurrentNews = dispatch => {
+export const clearCurrentNews = dispatch => {
     dispatch({ type: CLEAR_CURRENT_NEWS });
 }
 
-const clearNewsErrors = dispatch => {
+export const clearNewsErrors = dispatch => {
     dispatch({ type: CLEAR_NEWS_ERROR });
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { Editor } from '@tinymce/tinymce-react';
 import { Header, Form } from 'semantic-ui-react';
@@ -35,7 +35,6 @@ const NewsForm = () => {
             setTitle(title);
             setContent(content);
             setImage(image);
-            // setNews(current_news);
         } else {
             setId('');
             setTitle('');
