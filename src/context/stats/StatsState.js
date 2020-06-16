@@ -14,6 +14,66 @@ import {
     CLEAR_STATS_ERROR
 } from '../types';
 
+export const useStats = () => {
+    const { state, dispatch } = useContext(StatsContext);
+    return [state, dispatch];
+};
+
+// API Requests
+const getCountServerCharacters = async dispatch => {
+    try {
+        const res = await api.get('/api/v1/server/stats/characters');
+        dispatch({ type: COUNT_SERVER_CHARACTERS, payload: res.data });
+    } catch (error) {
+        const errors = error.response.data.errors;
+        dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
+    }
+}
+
+const getCountServerGroupByAssistances = async dispatch => {
+    try {
+        const res = await api.get('/api/v1/server/stats/assistances/admin');
+        dispatch({ type: GROUP_BY_ASSISTANCES, payload: res.data });
+    } catch (error) {
+        const errors = error.response.data.errors;
+        dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
+    }
+}
+
+const getCountServerAssistances = async dispatch => {
+    try {
+        const res = await api.get('/api/v1/server/stats/assistances');
+        dispatch({ type: COUNT_SERVER_ASSISTANCES, payload: res.data });
+    } catch (error) {
+        const errors = error.response.data.errors;
+        dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
+    }
+}
+
+const getCountServerGroupByReports = async dispatch => {
+    try {
+        const res = await api.get('/api/v1/server/stats/reports/admin');
+        dispatch({ type: GROUP_BY_REPORTS, payload: res.data });
+    } catch (error) {
+        const errors = error.response.data.errors;
+        dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
+    }
+}
+
+const getCountServerReports = async dispatch => {
+    try {
+        const res = await api.get('/api/v1/server/stats/reports');
+        dispatch({ type: COUNT_SERVER_REPORTS, payload: res.data });
+    } catch (error) {
+        const errors = error.response.data.errors;
+        dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
+    }
+}
+
+const clearStatsErrors = dispatch => {
+    dispatch({ type: CLEAR_STATS_ERROR });
+}
+
 const StatsState = (props) => {
     const INITIAL_STATE = {
         total_characters: null,
@@ -27,78 +87,8 @@ const StatsState = (props) => {
 
     const [state, dispatch] = useReducer(statsReducer, INITIAL_STATE);
 
-    // API Requests
-    const getCountServerCharacters = async () => {
-        try {
-            const res = await api.get('/api/v1/server/stats/characters');
-            dispatch({ type: COUNT_SERVER_CHARACTERS, payload: res.data });
-        } catch (error) {
-            const errors = error.response.data.errors;
-            dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
-        }
-    }
-
-    const getCountServerGroupByAssistances = async () => {
-        try {
-            const res = await api.get('/api/v1/server/stats/assistances/admin');
-            dispatch({ type: GROUP_BY_ASSISTANCES, payload: res.data });
-        } catch (error) {
-            const errors = error.response.data.errors;
-            dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
-        }
-    }
-
-    const getCountServerAssistances = async () => {
-        try {
-            const res = await api.get('/api/v1/server/stats/assistances');
-            dispatch({ type: COUNT_SERVER_ASSISTANCES, payload: res.data });
-        } catch (error) {
-            const errors = error.response.data.errors;
-            dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
-        }
-    }
-
-    const getCountServerGroupByReports = async () => {
-        try {
-            const res = await api.get('/api/v1/server/stats/reports/admin');
-            dispatch({ type: GROUP_BY_REPORTS, payload: res.data });
-        } catch (error) {
-            const errors = error.response.data.errors;
-            dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
-        }
-    }
-
-    const getCountServerReports = async () => {
-        try {
-            const res = await api.get('/api/v1/server/stats/reports');
-            dispatch({ type: COUNT_SERVER_REPORTS, payload: res.data });
-        } catch (error) {
-            const errors = error.response.data.errors;
-            dispatch({ type: COUNT_SERVER_ERROR, payload: errors });
-        }
-    }
-
-    const clearStatsErrors = () => {
-        dispatch({ type: CLEAR_STATS_ERROR });
-    }
-
     return (
-        <StatsContext.Provider
-            value={{
-                total_characters: state.total_characters,
-                total_assistances: state.total_assistances,
-                total_reports: state.total_reports,
-                group_by_assistances: state.group_by_assistances,
-                group_by_reports: state.group_by_reports,
-                error: state.error,
-                getCountServerCharacters,
-                getCountServerGroupByAssistances,
-                getCountServerAssistances,
-                getCountServerGroupByReports,
-                getCountServerReports,
-                clearStatsErrors
-            }}
-        >
+        <StatsContext.Provider value={{ state: state, dispatch }}>
             { props.children }
         </StatsContext.Provider>
     )

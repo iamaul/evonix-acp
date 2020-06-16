@@ -5,7 +5,13 @@ import Moment from 'react-moment';
 import parse from 'html-react-parser';
 import { Button, Image, Icon, Divider } from 'semantic-ui-react';
 
-import NewsContext from '../../../context/news/newsContext';
+import { 
+    useNews, 
+    getAllNews, 
+    deleteNews, 
+    setCurrentNews, 
+    clearCurrentNews 
+} from '../../../context/news/NewsState';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -21,17 +27,16 @@ const ExpandedData = ({ data }) => (
 );
 
 const News = () => {
-    const newsContext = useContext(NewsContext);
-    const { news, getAllNews, deleteNews, setCurrentNews, clearCurrentNews, setLoading } = newsContext;
+    const [newsState, newsDispatch] = useNews();
+    const { news, setLoading } = newsState;
     
     useEffect(() => {
-        getAllNews();
-        // eslint-disable-next-line
-    }, []);
+        getAllNews(newsDispatch);
+    }, [newsDispatch]);
 
     const onNewsDelete = useCallback((id) => {
-        deleteNews(id);
-        clearCurrentNews();
+        deleteNews(newsDispatch, id);
+        clearCurrentNews(newsDispatch);
         // eslint-disable-next-line
     }, []);
 

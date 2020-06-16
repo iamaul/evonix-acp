@@ -2,7 +2,13 @@ import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { Header, Form } from 'semantic-ui-react';
 
-import QuizContext from '../../../context/quiz/quizContext';
+import {
+    useQuiz,
+    addQuiz,
+    updateQuiz,
+    clearCurrentQuiz,
+    clearQuizErrors
+} from '../../../context/quiz/QuizState';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -10,17 +16,11 @@ const Toast = Swal.mixin({
 });
 
 const QuizForm = () => {
-    const quizContext = useContext(QuizContext);
+    const [quizState, quizDispatch] = useQuiz();
     const { 
-        addQuiz, 
-        updateQuiz, 
         current_quiz, 
-        clearCurrentQuiz, 
-        clearQuizErrors,
         error
-    } = quizContext;
-
-    // const imageFileRef = React.createRef();
+    } = quizState;
 
     const [quiz, setQuiz] = useState({ title: '', question: '', image: '' });
 
@@ -39,9 +39,9 @@ const QuizForm = () => {
                     text: err.msg
                 });
             });
-            clearQuizErrors();
+            clearQuizErrors(quizDispatch);
         }
-    }, [quizContext, current_quiz, clearQuizErrors, error])
+    }, [current_quiz, clearQuizErrors, error, quizDispatch]);
 
     const { title, question, image } = quiz;
     const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });
@@ -50,15 +50,15 @@ const QuizForm = () => {
         e.preventDefault();
 
         if (current_quiz === null) {
-            addQuiz(quiz);
+            addQuiz(quizDispatch, quiz);
         } else {
-            updateQuiz(quiz);
+            updateQuiz(quizDispatch, quiz);
         }
         clearQuiz();
     }
 
     const clearQuiz = () => {
-        clearCurrentQuiz();
+        clearCurrentQuiz(quizDispatch);
     }
     
     return (
@@ -91,20 +91,6 @@ const QuizForm = () => {
                     onChange={onChange}
                     fluid 
                 />
-                {/* <Form.Field>
-                    <Button 
-                        content={current_quiz ? image : 'Choose image'}
-                        labelPosition="left"
-                        icon="file image"
-                        onClick={() => imageFileRef.current.click()}
-                        /><br/>
-                    <input
-                        ref={imageFileRef}
-                        type="file"
-                        hidden
-                        onChange={onImageChange}
-                    />
-                </Form.Field> */}
                 <Form.Button color="red" size="small" content={current_quiz ? 'Edit' : 'Add'} />
                 {current_quiz && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearQuiz} />

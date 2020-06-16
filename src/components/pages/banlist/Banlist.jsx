@@ -3,21 +3,20 @@ import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import { Button, Icon } from 'semantic-ui-react';
 
-import BanContext from '../../../context/ban/banContext';
+import { useBan, getBanlist, deleteBan } from '../../../context/ban/BanState';
 
 import Loader from '../../layouts/loader/Loader';
 
 const Banlist = () => {
-    const banContext = useContext(BanContext);
-    const { banlist, getBanlist, deleteBan, setLoading } = banContext;
+    const [banState, banDispatch] = useBan();
+    const { banlist, setLoading } = banState;
 
     useEffect(() => {
-        getBanlist();
-        // eslint-disable-next-line
-    }, []);
+        getBanlist(banDispatch);
+    }, [banDispatch]);
 
     const onBanDelete = useCallback((id) => {
-        deleteBan(id);
+        deleteBan(banDispatch, id);
         // eslint-disable-next-line
     }, []);
 

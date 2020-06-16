@@ -4,7 +4,13 @@ import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import { Button, Image, Icon, Divider } from 'semantic-ui-react';
 
-import QuizContext from '../../../context/quiz/quizContext';
+import { 
+    useQuiz, 
+    getAllQuiz, 
+    deleteQuiz, 
+    setCurrentQuiz, 
+    clearCurrentQuiz 
+} from '../../../context/quiz/QuizState';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -20,17 +26,16 @@ const ExpandedData = ({ data }) => (
 );
 
 const Quiz = () => {
-    const quizContext = useContext(QuizContext);
-    const { quizzes, getAllQuiz, deleteQuiz, setCurrentQuiz, clearCurrentQuiz, setLoading } = quizContext;
+    const [quizState, quizDispatch] = useQuiz();
+    const { quizzes, setLoading } = quizState;
     
     useEffect(() => {
-        getAllQuiz();
-        // eslint-disable-next-line
-    }, []);
+        getAllQuiz(quizDispatch);
+    }, [quizDispatch]);
 
     const onQuizDelete = useCallback((id) => {
-        deleteQuiz(id);
-        clearCurrentQuiz();
+        deleteQuiz(quizDispatch, id);
+        clearCurrentQuiz(quizDispatch);
         // eslint-disable-next-line
     }, []);
 

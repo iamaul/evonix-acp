@@ -3,7 +3,11 @@ import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import { Modal, Button, Image, Header, Divider, Label, Icon } from 'semantic-ui-react';
 
-import UserAppsContext from '../../../context/userapps/userAppsContext';
+import {
+    useUserApps,
+    getAllUserApps,
+    updateUserApps
+} from '../../../context/userapps/UserAppsState';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -18,21 +22,20 @@ const ExpandedData = ({ data }) => (
 );
 
 const UserApps = () => {
-    const userAppsContext = useContext(UserAppsContext);
-    const { user_apps, getAllUserApps, updateUserApps, setLoading } = userAppsContext;
+    const [userAppsState, userAppsDispatch] = useUserApps();
+    const { user_apps, setLoading } = userAppsState;
 
     useEffect(() => {
-        getAllUserApps();
-        // eslint-disable-next-line
-    }, []);
+        getAllUserApps(userAppsDispatch);
+    }, [userAppsDispatch]);
 
     const onUserApprove = useCallback((status, id, user_id) => {
-        updateUserApps(status, id, user_id);
+        updateUserApps(userAppsDispatch, status, id, user_id);
         // eslint-disable-next-line
     }, []);
 
     const onUserDeny = useCallback((status, id, user_id) => {
-        updateUserApps(status, id, user_id);
+        updateUserApps(userAppsDispatch, status, id, user_id);
         // eslint-disable-next-line
     }, []);
 

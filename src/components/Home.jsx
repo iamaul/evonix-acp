@@ -11,34 +11,35 @@ import {
     Tooltip
 } from 'recharts';
 
-import StatsContext from '../context/stats/statsContext';
+import {
+    useStats,
+    getCountServerCharacters,
+    getCountServerGroupByAssistances,
+    getCountServerAssistances,
+    getCountServerGroupByReports,
+    getCountServerReports
+} from '../context/stats/StatsState';
 
 import Loader from '../components/layouts/loader/Loader';
 
 const Home = () => {
-    const statsContext = useContext(StatsContext);
+    const [statsState, statsDispatch] = useStats();
     const { 
-        getCountServerCharacters,
-        getCountServerGroupByAssistances,
-        getCountServerAssistances,
-        getCountServerGroupByReports,
-        getCountServerReports,
         total_characters,
         total_assistances,
         total_reports,
         group_by_assistances,
         group_by_reports,
         setLoading
-    } = statsContext;
+    } = statsState;
 
     useEffect(() => {
-        getCountServerCharacters();
-        getCountServerGroupByAssistances();
-        getCountServerAssistances();
-        getCountServerGroupByReports();
-        getCountServerReports();
-        // eslint-disable-next-line
-    }, []);
+        getCountServerCharacters(statsDispatch);
+        getCountServerGroupByAssistances(statsDispatch);
+        getCountServerAssistances(statsDispatch);
+        getCountServerGroupByReports(statsDispatch);
+        getCountServerReports(statsDispatch);
+    }, [statsDispatch]);
 
     return (
         <>

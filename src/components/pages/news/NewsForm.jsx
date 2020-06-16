@@ -3,7 +3,13 @@ import Swal from 'sweetalert2';
 import { Editor } from '@tinymce/tinymce-react';
 import { Header, Form } from 'semantic-ui-react';
 
-import NewsContext from '../../../context/news/newsContext';
+import { 
+    useNews, 
+    addNews, 
+    updateNews, 
+    clearCurrentNews, 
+    clearNewsErrors 
+} from '../../../context/news/NewsState';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -11,17 +17,11 @@ const Toast = Swal.mixin({
 });
 
 const NewsForm = () => {
-    const newsContext = useContext(NewsContext);
+    const [newsState, newsDispatch] = useNews();
     const { 
-        addNews, 
-        updateNews, 
         current_news, 
-        clearCurrentNews, 
-        clearNewsErrors,
         error
-    } = newsContext;
-
-    // const imageFileRef = React.createRef();
+    } = newsState;
 
     const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
@@ -51,9 +51,9 @@ const NewsForm = () => {
                     text: err.msg
                 });
             });
-            clearNewsErrors();
+            clearNewsErrors(newsDispatch);
         }
-    }, [newsContext, current_news, clearNewsErrors, error])
+    }, [current_news, clearNewsErrors, error, newsDispatch])
 
     const onTitleChange = e => setTitle(e.target.value); 
     const onEditorChange = content => setContent(content);
@@ -66,15 +66,15 @@ const NewsForm = () => {
         const newsUpdate = { id, title, content, image };
 
         if (current_news === null) {
-            addNews(newsAdd);
+            addNews(newsDispatch, newsAdd);
         } else {
-            updateNews(newsUpdate);
+            updateNews(newsDispatch, newsUpdate);
         }
         clearNews();
     }
 
     const clearNews = () => {
-        clearCurrentNews();
+        clearCurrentNews(newsDispatch);
     }
     
     return (
@@ -114,20 +114,6 @@ const NewsForm = () => {
                     onChange={onImageChange}
                     fluid 
                 />
-                {/* <Form.Field>
-                    <Button 
-                        content={current_news ? image : 'Choose image'}
-                        labelPosition="left"
-                        icon="file image"
-                        onClick={() => imageFileRef.current.click()}
-                        /><br/>
-                    <input
-                        ref={imageFileRef}
-                        type="file"
-                        hidden
-                        onChange={onImageChange}
-                    />
-                </Form.Field> */}
                 <Form.Button color="red" size="small" content={current_news ? 'Edit' : 'Add'} />
                 {current_news && (
                     <Form.Button color="red" size="small" content="Clear" onClick={clearNews} />
