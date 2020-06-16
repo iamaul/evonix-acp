@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { 
     Form, 
@@ -16,14 +15,13 @@ const Toast = Swal.mixin({
     position: 'top-end'
 });
 
-const Login = () => {
-    let history = useHistory();
+const Login = (props) => {
     const authContext = useContext(AuthContext);
     const { userLogin, error, clearAuthErrors, isAuthenticated } = authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
-            history.push('/dashboard');
+            props.history.push('/dashboard');
         }
 
         if (error) {
@@ -37,7 +35,7 @@ const Login = () => {
             clearAuthErrors();
         }
         // eslint-disable-next-line
-    }, [error, isAuthenticated])
+    }, [error, isAuthenticated, props.history])
 
     const [user, setUser] = useState({ usermail: '', password: '' });
     const { usermail, password } = user;
