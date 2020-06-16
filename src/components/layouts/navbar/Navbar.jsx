@@ -1,15 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Icon } from 'semantic-ui-react';
-import { useAuth, userLoad, userLogout } from '../../../context/auth/AuthState';
+import { useAuth, userLogout } from '../../../context/auth/AuthState';
 
 const Navbar = () => {
     const [authState, authDispatch] = useAuth();
     const { user } = authState;
-
-    useEffect(() => {
-        userLoad(authDispatch);
-    }, [authDispatch])
 
     const onLogout = () => {
         userLogout(authDispatch);
