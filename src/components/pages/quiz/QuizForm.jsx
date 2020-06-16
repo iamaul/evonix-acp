@@ -41,7 +41,7 @@ const QuizForm = () => {
             });
             clearQuizErrors(quizDispatch);
         }
-    }, [current_quiz, clearQuizErrors, error, quizDispatch]);
+    }, [current_quiz, error, quizDispatch]);
 
     const { title, question, image } = quiz;
     const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });

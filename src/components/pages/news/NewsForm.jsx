@@ -52,7 +52,7 @@ const NewsForm = () => {
             });
             clearNewsErrors(newsDispatch);
         }
-    }, [current_news, clearNewsErrors, error, newsDispatch])
+    }, [current_news, error, newsDispatch])
 
     const onTitleChange = e => setTitle(e.target.value); 
     const onEditorChange = content => setContent(content);

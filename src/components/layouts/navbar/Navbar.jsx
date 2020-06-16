@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Icon } from 'semantic-ui-react';
 import { useAuth, userLogout } from '../../../context/auth/AuthState';

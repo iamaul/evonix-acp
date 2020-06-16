@@ -38,7 +38,7 @@ const Login = () => {
             });
             clearAuthErrors(authDispatch);
         }
-    }, [error, isAuthenticated, authDispatch]);
+    }, [history, error, isAuthenticated, authDispatch]);
 
     const [user, setUser] = useState({ usermail: '', password: '' });
     const { usermail, password } = user;
