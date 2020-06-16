@@ -1,20 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Icon } from 'semantic-ui-react';
-import AuthContext from '../../../context/auth/authContext';
+import { useAuth, userLoad, userLogout } from '../../../context/auth/AuthState';
 
 const Navbar = () => {
-    const authContext = useContext(AuthContext);
-
-    const { user, userLoad, userLogout } = authContext;
+    const [authState, authDispatch] = useAuth();
+    const { user } = authState;
 
     useEffect(() => {
-        userLoad();
-        // eslint-disable-next-line
-    }, [])
+        userLoad(authDispatch);
+    }, [authDispatch])
 
     const onLogout = () => {
-        userLogout();
+        userLogout(authDispatch);
     }
 
     return (
