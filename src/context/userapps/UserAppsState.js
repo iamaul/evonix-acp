@@ -7,6 +7,7 @@ import userAppsReducer from './userAppsReducer';
 
 import {
     GET_ALL_USER_APPS,
+    REQUEST_USER_APPS_APPROVAL,
     UPDATE_USER_APPS,
     USER_APPS_ERROR,
     CLEAR_USER_APPS_ERROR
@@ -40,7 +41,7 @@ const UserAppsState = (props) => {
     const updateUserApps = async (status, id, user_id) => {
         try {
             // REQUEST START
-            dispatch({ type: REQUEST_APPROVAL_USER_APPS });
+            dispatch({ type: REQUEST_USER_APPS_APPROVAL });
 
             const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });

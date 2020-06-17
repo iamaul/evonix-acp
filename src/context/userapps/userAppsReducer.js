@@ -1,5 +1,6 @@
 import {
     GET_ALL_USER_APPS,
+    REQUEST_USER_APPS_APPROVAL,
     UPDATE_USER_APPS,
     USER_APPS_ERROR,
     CLEAR_USER_APPS_ERROR
@@ -9,7 +10,7 @@ export default (state, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case REQUEST_APPROVAL_USER_APPS:
+        case REQUEST_USER_APPS_APPROVAL:
             return {
                 ...state,
                 requestUserApps: true
