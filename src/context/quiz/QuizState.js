@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
 
 import history from '../../components/history';
 import api from '../../utils/api';
@@ -74,11 +74,8 @@ const QuizState = (props) => {
     const clearCurrentQuiz = () => dispatch({ type: CLEAR_CURRENT_QUIZ });
     const clearQuizErrors = () => dispatch({ type: CLEAR_QUIZ_ERROR });
 
-    const values = {
-        quizzes: state.quizzes,
-        current_quiz: state.current_quiz,
-        setLoading: state.setLoading,
-        error: state.error,
+    const values = useMemo(() => ({ 
+        state,
         getAllQuiz,
         addQuiz,
         deleteQuiz,
@@ -87,7 +84,7 @@ const QuizState = (props) => {
         setCurrentQuiz,
         clearCurrentQuiz,
         clearQuizErrors
-    }
+    }), [state]);
 
     return (
         <QuizContext.Provider value={values}>

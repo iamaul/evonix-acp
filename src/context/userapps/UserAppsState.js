@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
 
 import api from '../../utils/api';
 import UserAppsContext from './userAppsContext';
@@ -41,15 +41,8 @@ const UserAppsState = (props) => {
     }
     
     const clearUserAppsErrors = () => dispatch({ type: CLEAR_USER_APPS_ERROR });
-
-    const values = {
-        user_apps: state.user_apps,
-        setLoading: state.setLoading,
-        error: state.error,
-        getAllUserApps,
-        updateUserApps,
-        clearUserAppsErrors
-    }
+    
+    const values = useMemo(() => ({ state, getAllUserApps, updateUserApps, clearUserAppsErrors }), [state]);
 
     return (
         <UserAppsContext.Provider value={values}>

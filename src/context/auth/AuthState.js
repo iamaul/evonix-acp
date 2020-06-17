@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
 
 import api from '../../utils/api';
 import AuthContext from './authContext';
@@ -49,20 +49,9 @@ const AuthState = (props) => {
     }
 
     const userLogout = () => dispatch({ type: LOGOUT });
-
     const clearAuthErrors = () => dispatch({ type: CLEAR_AUTH_ERRORS });
 
-    const values = {
-        token: state.token,
-        isAuthenticated: state.isAuthenticated,
-        setLoading: state.setLoading,
-        user: state.user,
-        error: state.error,
-        userLoad,
-        userLogin,
-        userLogout,
-        clearAuthErrors
-    }
+    const values = useMemo(() => ({ state, userLoad, userLogin, userLogout, clearAuthErrors }), [state]);
 
     return (
         <AuthContext.Provider value={values}>

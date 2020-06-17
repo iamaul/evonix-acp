@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
 
 import api from '../../utils/api';
 import BanContext from './banContext';
@@ -42,14 +42,7 @@ const BanState = (props) => {
     
     const clearBanErrors = () => dispatch({ type: CLEAR_BAN_ERROR });
 
-    const values = {
-        banlist: state.banlist,
-        setLoading: state.setLoading,
-        error: state.error,
-        getBanlist,
-        deleteBan,
-        clearBanErrors
-    }
+    const values = useMemo(() => ({ state, getBanlist, deleteBan, clearBanErrors }), [state]);
 
     return (
         <BanContext.Provider value={values}>

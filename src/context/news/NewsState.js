@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
 
 import history from '../../components/history';
 import api from '../../utils/api';
@@ -74,11 +74,8 @@ const NewsState = (props) => {
     const clearCurrentNews = () => dispatch({ type: CLEAR_CURRENT_NEWS });
     const clearNewsErrors = () => dispatch({ type: CLEAR_NEWS_ERROR });
 
-    const values = {
-        news: state.news,
-        current_news: state.current_news,
-        setLoading: state.setLoading,
-        error: state.error,
+    const values = useMemo(() => ({ 
+        state,
         getAllNews,
         addNews,
         updateNews,
@@ -87,7 +84,7 @@ const NewsState = (props) => {
         setCurrentNews,
         clearCurrentNews,
         clearNewsErrors
-    }
+    }), [state]);
 
     return (
         <NewsContext.Provider value={values}>

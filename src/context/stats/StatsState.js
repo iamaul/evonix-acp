@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
 
 import api from '../../utils/api';
 import StatsContext from './statsContext';
@@ -79,21 +79,15 @@ const StatsState = (props) => {
     
     const clearStatsErrors = () => dispatch({ type: CLEAR_STATS_ERROR });
 
-    const values = {
-        total_characters: state.total_characters,
-        total_assistances: state.total_assistances,
-        total_reports: state.total_reports,
-        group_by_assistances: state.group_by_assistances,
-        group_by_reports: state.group_by_reports,
-        error: state.error,
-        setLoading: state.setLoading,
+    const values = useMemo(() => ({ 
+        state,
         getCountServerAssistances,
         getCountServerCharacters,
         getCountServerGroupByAssistances,
         getCountServerGroupByReports,
         getCountServerReports,
         clearStatsErrors
-    }
+    }), [state]);
 
     return (
         <StatsContext.Provider value={values}>
