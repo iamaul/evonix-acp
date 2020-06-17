@@ -102,10 +102,10 @@ const UserApps = () => {
                 row.status === 1 && (
                     <Button.Group size="small">
                         <Button color="green" onClick={() => onUserApprove(3, row.id, row.user_id)} loading={requestUserApps}>
-                            <Button.Content><Icon name="checkmark" /></Button.Content>
+                            <Icon name="checkmark" />
                         </Button>
                         <Button color="red" onClick={() => onUserDeny(2, row.id, row.user_id)} loading={requestUserApps}>
-                            <Button.Content><Icon name="delete" /></Button.Content>
+                            <Icon name="delete" />
                         </Button>
                     </Button.Group>
                 ) 
