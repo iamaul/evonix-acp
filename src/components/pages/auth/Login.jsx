@@ -18,7 +18,6 @@ const Toast = Swal.mixin({
 const Login = props => {
     const authContext = useContext(AuthContext);
     const { userLogin, isAuthenticated, clearAuthErrors, error } = authContext;
-    const history = useHistory();
 
     useEffect(() => {
         if (isAuthenticated) {
