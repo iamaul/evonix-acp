@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo } from 'react';
+import React, { useReducer } from 'react';
 
 import history from '../../components/history';
 import api from '../../utils/api';

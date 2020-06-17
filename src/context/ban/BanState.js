@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo } from 'react';
+import React, { useReducer } from 'react';
 
 import api from '../../utils/api';
 import BanContext from './banContext';
