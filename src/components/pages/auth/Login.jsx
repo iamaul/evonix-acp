@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { 
@@ -9,8 +9,7 @@ import {
     Segment,
     Icon 
 } from 'semantic-ui-react';
-
-import { useAuth, clearAuthErrors, userLogin } from '../../../context/auth/AuthState';
+import AuthContext from '../../../context/auth/authContext';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -18,8 +17,8 @@ const Toast = Swal.mixin({
 });
 
 const Login = () => {
-    const [authState, authDispatch] = useAuth();
-    const { error, isAuthenticated } = authState;
+    const authContext = useContext(AuthContext);
+    const { userLogin, isAuthenticated, clearAuthErrors, error } = authContext;
 
     const history = useHistory();
 
@@ -36,9 +35,9 @@ const Login = () => {
                     text: err.msg
                 });
             });
-            clearAuthErrors(authDispatch);
+            clearAuthErrors();
         }
-    }, [history, error, isAuthenticated, authDispatch]);
+    }, [history, error, isAuthenticated]);
 
     const [user, setUser] = useState({ usermail: '', password: '' });
     const { usermail, password } = user;
@@ -48,7 +47,7 @@ const Login = () => {
     const onSubmit = e => {
         e.preventDefault();
 
-        userLogin(authDispatch, { usermail, password });
+        userLogin({ usermail, password });
     }
 
     return (

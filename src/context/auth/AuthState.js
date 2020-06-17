@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from 'react';
+import React, { useReducer } from 'react';
 
 import api from '../../utils/api';
 import AuthContext from './authContext';
@@ -15,36 +15,6 @@ import {
 
 import setAuthToken from '../../utils/setAuthToken';
 
-export const useAuth = () => {
-    const { state, dispatch } = useContext(AuthContext);
-    return [state, dispatch];
-};
-
-// API Requests
-export const userLoad = async dispatch => {
-    try {
-        const res = await api.get('/api/v1/auth');
-        dispatch({ type: USER_LOADED, payload: res.data });
-    } catch (error) {
-        dispatch({ type: AUTH_ERROR });
-    }
-}
-
-export const userLogin = async (dispatch, formBody) => {
-    try {
-        const res = await api.post('/api/v1/auth', formBody);
-        dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-        userLoad(dispatch);
-    } catch (error) {
-        const errors = error.response.data.errors;
-        dispatch({ type: LOGIN_FAIL, payload: errors });
-    }
-}
-
-export const userLogout = dispatch => dispatch({ type: LOGOUT });
-
-export const clearAuthErrors = dispatch => dispatch({ type: CLEAR_AUTH_ERRORS });
-
 const AuthState = (props) => {
     const INITIAL_STATE = {
         token: localStorage.getItem('token'),
@@ -56,18 +26,44 @@ const AuthState = (props) => {
 
     const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
-    setAuthToken(state.token);
-
-    if (state.setLoading) {
-        userLoad(dispatch);
+    // API Requests
+    const userLoad = async () => {
+        setAuthToken(localStorage.token);
+        try {
+            const res = await api.get('/api/v1/auth');
+            dispatch({ type: USER_LOADED, payload: res.data });
+        } catch (error) {
+            dispatch({ type: AUTH_ERROR });
+        }
     }
 
-    useEffect(() => {
-        setAuthToken(state.token);
-    }, [state.token]);
+    const userLogin = async formBody => {
+        try {
+            const res = await api.post('/api/v1/auth', formBody);
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+            userLoad();
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: LOGIN_FAIL, payload: errors });
+        }
+    }
+
+    const userLogout = () => dispatch({ type: LOGOUT });
+
+    const clearAuthErrors = () => dispatch({ type: CLEAR_AUTH_ERRORS });
 
     return (
-        <AuthContext.Provider value={{ state: state, dispatch }}>
+        <AuthContext.Provider value={{
+            token: state.token,
+            isAuthenticated: state.isAuthenticated,
+            setLoading: state.setLoading,
+            user: state.user,
+            error: state.error,
+            userLoad,
+            userLogin,
+            userLogout,
+            clearAuthErrors
+        }}>
             { props.children }
         </AuthContext.Provider>
     )
