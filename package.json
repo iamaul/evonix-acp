@@ -17,7 +17,7 @@
     "react-moment": "^0.9.7",
     "react-number-format": "^4.4.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "^3.4.1",
     "react-spinners": "^0.8.3",
     "recharts": "^1.8.5",
     "semantic-ui-css": "^2.4.1",
@@ -46,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://api:5000"
+  "proxy": "https://dev.evonix-rp.com"
 }
