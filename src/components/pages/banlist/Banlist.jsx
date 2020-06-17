@@ -71,6 +71,7 @@ const Banlist = () => {
                     pagination
                     highlightOnHover
                     defaultSortField="timestamp"
+                    defaultSortAsc={false}
                 />
             ) : (
                 <Loader isLoading={setLoading} />

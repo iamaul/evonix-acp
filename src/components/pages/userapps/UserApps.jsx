@@ -101,13 +101,11 @@ const UserApps = () => {
             cell: (row) => (
                 row.status === 1 && (
                     <Button.Group size="small">
-                        <Button animated="fade" color="green" onClick={() => onUserApprove(3, row.id, row.user_id)} loading={requestUserApps}>
-                            <Button.Content visible><Icon name="checkmark" /></Button.Content>
-                            <Button.Content hidden>Approve</Button.Content>
+                        <Button color="green" onClick={() => onUserApprove(3, row.id, row.user_id)} loading={requestUserApps}>
+                            <Button.Content><Icon name="checkmark" /></Button.Content>
                         </Button>
-                        <Button animated="fade" color="red" onClick={() => onUserDeny(2, row.id, row.user_id)} loading={requestUserApps}>
-                            <Button.Content visible><Icon name="delete" /></Button.Content>
-                            <Button.Content hidden>Deny</Button.Content>
+                        <Button color="red" onClick={() => onUserDeny(2, row.id, row.user_id)} loading={requestUserApps}>
+                            <Button.Content><Icon name="delete" /></Button.Content>
                         </Button>
                     </Button.Group>
                 ) 
@@ -128,6 +126,7 @@ const UserApps = () => {
                     expandableRowsComponent={<ExpandedData />}
                     highlightOnHover
                     defaultSortField="created_at"
+                    defaultSortAsc={false}
                 />
             ) : (
                 <Loader isLoading={setLoading} />

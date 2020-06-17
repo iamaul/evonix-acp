@@ -109,6 +109,7 @@ const Quiz = () => {
                     expandableRowsComponent={<ExpandedData />}
                     highlightOnHover
                     defaultSortField="created_at"
+                    defaultSortAsc={false}
                     actions={actions}
                 />
             ) : (
