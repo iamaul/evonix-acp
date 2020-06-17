@@ -26,7 +26,6 @@ const AuthState = (props) => {
 
     const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
-    // API Requests
     const userLoad = async () => {
         setAuthToken(localStorage.token);
         try {
