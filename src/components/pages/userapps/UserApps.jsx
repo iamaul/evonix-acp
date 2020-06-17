@@ -19,7 +19,7 @@ const ExpandedData = ({ data }) => (
 
 const UserApps = () => {
     const userAppsContext = useContext(UserAppsContext);
-    const { useUserApps, getAllUserApps, updateUserApps, user_apps, setLoading } = userAppsContext;
+    const { getAllUserApps, updateUserApps, user_apps, requestUserApps, setLoading } = userAppsContext;
 
     useEffect(() => {
         getAllUserApps();
@@ -101,11 +101,11 @@ const UserApps = () => {
             cell: (row) => (
                 row.status === 1 && (
                     <Button.Group size="small">
-                        <Button animated="fade" color="green" onClick={() => onUserApprove(3, row.id, row.user_id)}>
+                        <Button animated="fade" color="green" onClick={() => onUserApprove(3, row.id, row.user_id)} loading={requestUserApps}>
                             <Button.Content visible><Icon name="checkmark" /></Button.Content>
                             <Button.Content hidden>Approve</Button.Content>
                         </Button>
-                        <Button animated="fade" color="red" onClick={() => onUserDeny(2, row.id, row.user_id)}>
+                        <Button animated="fade" color="red" onClick={() => onUserDeny(2, row.id, row.user_id)} loading={requestUserApps}>
                             <Button.Content visible><Icon name="delete" /></Button.Content>
                             <Button.Content hidden>Deny</Button.Content>
                         </Button>

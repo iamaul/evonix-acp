@@ -9,11 +9,17 @@ export default (state, action) => {
     const { type, payload } = action;
 
     switch (type) {
+        case REQUEST_APPROVAL_USER_APPS:
+            return {
+                ...state,
+                requestUserApps: true
+            }
         case GET_ALL_USER_APPS:
         case UPDATE_USER_APPS:
             return {
                 ...state,
                 user_apps: payload,
+                requestUserApps: false,
                 setLoading: false
             }
         case USER_APPS_ERROR:

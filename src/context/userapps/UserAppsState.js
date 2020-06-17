@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import Swal from 'sweetalert2';
 
 import api from '../../utils/api';
 import UserAppsContext from './userAppsContext';
@@ -11,9 +12,15 @@ import {
     CLEAR_USER_APPS_ERROR
 } from '../types';
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end'
+});
+
 const UserAppsState = (props) => {
     const INITIAL_STATE = {
         user_apps: null,
+        requestUserApps: false,
         setLoading: true,
         error: null
     }
@@ -32,8 +39,16 @@ const UserAppsState = (props) => {
     
     const updateUserApps = async (status, id, user_id) => {
         try {
+            // REQUEST START
+            dispatch({ type: REQUEST_APPROVAL_USER_APPS });
+
             const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });
+
+            Toast.fire({
+                icon: 'success',
+                text: `You have ${status === 2 ? 'denied' : 'approved'} the user's application`
+            });
         } catch (error) {
             const errors = error.response.data.errors;
             dispatch({ type: USER_APPS_ERROR, payload: errors });
@@ -44,6 +59,7 @@ const UserAppsState = (props) => {
     
     const values = {
         user_apps: state.user_apps,
+        requestUserApps: state.requestUserApps,
         setLoading: state.setLoading,
         error: state.error,
         getAllUserApps,

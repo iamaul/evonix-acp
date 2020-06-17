@@ -38,7 +38,7 @@ const AuthState = (props) => {
 
     const userLogin = async formBody => {
         try {
-            const res = await api.post('/api/v1/auth', formBody);
+            const res = await api.post('/api/v1/auth/admin', formBody);
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
             userLoad();
         } catch (error) {
