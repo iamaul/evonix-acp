@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Container, Statistic, Divider, Header, Grid } from 'semantic-ui-react';
 import NumberFormat from 'react-number-format';
 import {
@@ -11,35 +11,33 @@ import {
     Tooltip
 } from 'recharts';
 
-import {
-    useStats,
-    getCountServerCharacters,
-    getCountServerGroupByAssistances,
-    getCountServerAssistances,
-    getCountServerGroupByReports,
-    getCountServerReports
-} from '../context/stats/StatsState';
+import StatsContext from '../context/stats/statsContext';
 
 import Loader from '../components/layouts/loader/Loader';
 
 const Home = () => {
-    const [statsState, statsDispatch] = useStats();
+    const statsContext = useContext(StatsContext);
     const { 
+        getCountServerCharacters,
+        getCountServerGroupByAssistances,
+        getCountServerAssistances,
+        getCountServerGroupByReports,
+        getCountServerReports,
         total_characters,
         total_assistances,
         total_reports,
         group_by_assistances,
         group_by_reports,
         setLoading
-    } = statsState;
+    } = statsContext;
 
     useEffect(() => {
-        getCountServerCharacters(statsDispatch);
-        getCountServerGroupByAssistances(statsDispatch);
-        getCountServerAssistances(statsDispatch);
-        getCountServerGroupByReports(statsDispatch);
-        getCountServerReports(statsDispatch);
-    }, [statsDispatch]);
+        getCountServerCharacters();
+        getCountServerGroupByAssistances();
+        getCountServerAssistances();
+        getCountServerGroupByReports();
+        getCountServerReports();
+    }, []);
 
     return (
         <>
@@ -106,4 +104,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;
