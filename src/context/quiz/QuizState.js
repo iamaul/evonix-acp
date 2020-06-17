@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 
 import history from '../../components/history';
 import api from '../../utils/api';
@@ -17,70 +17,6 @@ import {
     CLEAR_QUIZ_ERROR
 } from '../types';
 
-export const useQuiz = () => {
-    const { state, dispatch } = useContext(QuizContext);
-    return [state, dispatch];
-};
-
-// API Requests
-export const getAllQuiz = async dispatch => {
-    try {
-        const res = await api.get('/api/v1/quiz');
-        dispatch({ type: GET_ALL_QUIZ, payload: res.data });
-    } catch (error) {
-        const errors = error.response.data.errors;
-        dispatch({ type: QUIZ_ERROR, payload: errors });
-    }
-}
-
-export const addQuiz = async (dispatch, quiz) => {
-    try {
-        const res = await api.post('/api/v1/quiz', quiz);
-        dispatch({ type: ADD_QUIZ, payload: res.data });
-        history.push('/quiz');
-    } catch (error) {
-        const errors = error.response.data.errors;
-        dispatch({ type: QUIZ_ERROR, payload: errors });
-    }
-}
-
-export const updateQuiz = async (dispatch, quiz) => {
-    try {
-        const res = await api.put(`/api/v1/quiz/${quiz.id}`, quiz);
-        dispatch({ type: UPDATE_QUIZ, payload: res.data });
-        history.push('/quiz');
-    } catch (error) {
-        const errors = error.response.data.errors;
-        dispatch({ type: QUIZ_ERROR, payload: errors });
-    }
-}
-
-export const deleteQuiz = async (dispatch, id) => {
-    try {
-        await api.delete(`/api/v1/quiz/${id}`);
-        dispatch({ type: DELETE_QUIZ, payload: id });
-    } catch (error) {
-        const errors = error.response.data.errors;
-        dispatch({ type: QUIZ_ERROR, payload: errors });
-    }
-}
-
-export const clearQuiz = dispatch => {
-    dispatch({ type: CLEAR_QUIZ });
-}
-
-export const setCurrentQuiz = (dispatch, quiz) => {
-    dispatch({ type: SET_CURRENT_QUIZ, payload: quiz });
-}
-
-export const clearCurrentQuiz = dispatch => {
-    dispatch({ type: CLEAR_CURRENT_QUIZ });
-}
-
-export const clearQuizErrors = dispatch => {
-    dispatch({ type: CLEAR_QUIZ_ERROR });
-}
-
 const QuizState = (props) => {
     const INITIAL_STATE = {
         quizzes: null,
@@ -91,8 +27,70 @@ const QuizState = (props) => {
 
     const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
 
+    const getAllQuiz = async () => {
+        try {
+            const res = await api.get('/api/v1/quiz');
+            dispatch({ type: GET_ALL_QUIZ, payload: res.data });
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: QUIZ_ERROR, payload: errors });
+        }
+    }
+    
+    const addQuiz = async quiz => {
+        try {
+            const res = await api.post('/api/v1/quiz', quiz);
+            dispatch({ type: ADD_QUIZ, payload: res.data });
+            history.push('/quiz');
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: QUIZ_ERROR, payload: errors });
+        }
+    }
+    
+    const updateQuiz = async quiz => {
+        try {
+            const res = await api.put(`/api/v1/quiz/${quiz.id}`, quiz);
+            dispatch({ type: UPDATE_QUIZ, payload: res.data });
+            history.push('/quiz');
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: QUIZ_ERROR, payload: errors });
+        }
+    }
+    
+    const deleteQuiz = async id => {
+        try {
+            await api.delete(`/api/v1/quiz/${id}`);
+            dispatch({ type: DELETE_QUIZ, payload: id });
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: QUIZ_ERROR, payload: errors });
+        }
+    }
+    
+    const clearQuiz = () => dispatch({ type: CLEAR_QUIZ });
+    const setCurrentQuiz = quiz => dispatch({ type: SET_CURRENT_QUIZ, payload: quiz });
+    const clearCurrentQuiz = () => dispatch({ type: CLEAR_CURRENT_QUIZ });
+    const clearQuizErrors = () => dispatch({ type: CLEAR_QUIZ_ERROR });
+
+    const values = {
+        quizzes: state.quizzes,
+        current_quiz: state.current_quiz,
+        setLoading: state.setLoading,
+        error: state.error,
+        getAllQuiz,
+        addQuiz,
+        deleteQuiz,
+        updateQuiz,
+        clearQuiz,
+        setCurrentQuiz,
+        clearCurrentQuiz,
+        clearQuizErrors
+    }
+
     return (
-        <QuizContext.Provider value={{ state: state, dispatch }}>
+        <QuizContext.Provider value={values}>
             { props.children }
         </QuizContext.Provider>
     )

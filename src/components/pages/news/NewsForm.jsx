@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { Editor } from '@tinymce/tinymce-react';
 import { Header, Form } from 'semantic-ui-react';
 
-import { 
-    useNews, 
-    addNews, 
-    updateNews, 
-    clearCurrentNews, 
-    clearNewsErrors 
-} from '../../../context/news/NewsState';
+import NewsContext from '../../../context/news/newsContext';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -17,11 +11,8 @@ const Toast = Swal.mixin({
 });
 
 const NewsForm = () => {
-    const [newsState, newsDispatch] = useNews();
-    const { 
-        current_news, 
-        error
-    } = newsState;
+    const newsContext = useContext(NewsContext);
+    const { addNews, updateNews, clearCurrentNews, clearNewsErrors, current_news, error } = newsContext;
 
     const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
@@ -50,9 +41,10 @@ const NewsForm = () => {
                     text: err.msg
                 });
             });
-            clearNewsErrors(newsDispatch);
+            clearNewsErrors();
         }
-    }, [current_news, error, newsDispatch])
+        // eslint-disable-next-line
+    }, [current_news, error])
 
     const onTitleChange = e => setTitle(e.target.value); 
     const onEditorChange = content => setContent(content);
@@ -65,16 +57,14 @@ const NewsForm = () => {
         const newsUpdate = { id, title, content, image };
 
         if (current_news === null) {
-            addNews(newsDispatch, newsAdd);
+            addNews(newsAdd);
         } else {
-            updateNews(newsDispatch, newsUpdate);
+            updateNews(newsUpdate);
         }
         clearNews();
     }
 
-    const clearNews = () => {
-        clearCurrentNews(newsDispatch);
-    }
+    const clearNews = () => clearCurrentNews();
     
     return (
         <>

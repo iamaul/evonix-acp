@@ -1,16 +1,10 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import { Button, Image, Icon, Divider } from 'semantic-ui-react';
 
-import { 
-    useQuiz, 
-    getAllQuiz, 
-    deleteQuiz, 
-    setCurrentQuiz, 
-    clearCurrentQuiz 
-} from '../../../context/quiz/QuizState';
+import QuizContext from '../../../context/quiz/quizContext';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -26,16 +20,17 @@ const ExpandedData = ({ data }) => (
 );
 
 const Quiz = () => {
-    const [quizState, quizDispatch] = useQuiz();
-    const { quizzes, setLoading } = quizState;
+    const quizContext = useContext(QuizContext);
+    const { getAllQuiz, deleteQuiz, setCurrentQuiz, clearCurrentQuiz, quizzes, setLoading } = quizContext;
     
     useEffect(() => {
-        getAllQuiz(quizDispatch);
-    }, [quizDispatch]);
+        getAllQuiz();
+        // eslint-disable-next-line
+    }, []);
 
     const onQuizDelete = useCallback((id) => {
-        deleteQuiz(quizDispatch, id);
-        clearCurrentQuiz(quizDispatch);
+        deleteQuiz(id);
+        clearCurrentQuiz();
         // eslint-disable-next-line
     }, []);
 

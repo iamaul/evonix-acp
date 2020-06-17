@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 
 import api from '../../utils/api';
 import UserAppsContext from './userAppsContext';
@@ -11,36 +11,6 @@ import {
     CLEAR_USER_APPS_ERROR
 } from '../types';
 
-export const useUserApps = () => {
-    const { state, dispatch } = useContext(UserAppsContext);
-    return [state, dispatch];
-};
-
-// API Requests
-export const getAllUserApps = async dispatch => {
-    try {
-        const res = await api.get('/api/v1/users/application');
-        dispatch({ type: GET_ALL_USER_APPS, payload: res.data });
-    } catch (error) {
-        const errors = error.response.data.errors;
-        dispatch({ type: USER_APPS_ERROR, payload: errors });
-    }
-}
-
-export const updateUserApps = async (dispatch, status, id, user_id) => {
-    try {
-        const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
-        dispatch({ type: UPDATE_USER_APPS, payload: res.data });
-    } catch (error) {
-        const errors = error.response.data.errors;
-        dispatch({ type: USER_APPS_ERROR, payload: errors });
-    }
-}
-
-export const clearUserAppsErrors = dispatch => {
-    dispatch({ type: CLEAR_USER_APPS_ERROR });
-}
-
 const UserAppsState = (props) => {
     const INITIAL_STATE = {
         user_apps: null,
@@ -50,8 +20,39 @@ const UserAppsState = (props) => {
 
     const [state, dispatch] = useReducer(userAppsReducer, INITIAL_STATE);
 
+    const getAllUserApps = async () => {
+        try {
+            const res = await api.get('/api/v1/users/application');
+            dispatch({ type: GET_ALL_USER_APPS, payload: res.data });
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: USER_APPS_ERROR, payload: errors });
+        }
+    }
+    
+    const updateUserApps = async (status, id, user_id) => {
+        try {
+            const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
+            dispatch({ type: UPDATE_USER_APPS, payload: res.data });
+        } catch (error) {
+            const errors = error.response.data.errors;
+            dispatch({ type: USER_APPS_ERROR, payload: errors });
+        }
+    }
+    
+    const clearUserAppsErrors = () => dispatch({ type: CLEAR_USER_APPS_ERROR });
+
+    const values = {
+        user_apps: state.user_apps,
+        setLoading: state.setLoading,
+        error: state.error,
+        getAllUserApps,
+        updateUserApps,
+        clearUserAppsErrors
+    }
+
     return (
-        <UserAppsContext.Provider value={{ state: state, dispatch }}>
+        <UserAppsContext.Provider value={values}>
             { props.children }
         </UserAppsContext.Provider>
     )

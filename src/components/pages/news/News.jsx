@@ -1,17 +1,11 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import parse from 'html-react-parser';
 import { Button, Image, Icon, Divider } from 'semantic-ui-react';
 
-import { 
-    useNews, 
-    getAllNews, 
-    deleteNews, 
-    setCurrentNews, 
-    clearCurrentNews 
-} from '../../../context/news/NewsState';
+import NewsContext from '../../../context/news/newsContext';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -27,16 +21,17 @@ const ExpandedData = ({ data }) => (
 );
 
 const News = () => {
-    const [newsState, newsDispatch] = useNews();
-    const { news, setLoading } = newsState;
+    const newsContext = useContext(NewsContext);
+    const { getAllNews, deleteNews, setCurrentNews, clearCurrentNews, news, setLoading } = newsContext;
     
     useEffect(() => {
-        getAllNews(newsDispatch);
-    }, [newsDispatch]);
+        getAllNews();
+        // eslint-disable-next-line
+    }, []);
 
     const onNewsDelete = useCallback((id) => {
-        deleteNews(newsDispatch, id);
-        clearCurrentNews(newsDispatch);
+        deleteNews(id);
+        clearCurrentNews();
         // eslint-disable-next-line
     }, []);
 

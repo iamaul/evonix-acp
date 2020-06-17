@@ -1,13 +1,9 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
 import { Modal, Button, Image, Header, Divider, Label, Icon } from 'semantic-ui-react';
 
-import {
-    useUserApps,
-    getAllUserApps,
-    updateUserApps
-} from '../../../context/userapps/UserAppsState';
+import UserAppsContext from '../../../context/userapps/userAppsContext';
 
 import Loader from '../../layouts/loader/Loader';
 
@@ -22,20 +18,21 @@ const ExpandedData = ({ data }) => (
 );
 
 const UserApps = () => {
-    const [userAppsState, userAppsDispatch] = useUserApps();
-    const { user_apps, setLoading } = userAppsState;
+    const userAppsContext = useContext(UserAppsContext);
+    const { useUserApps, getAllUserApps, updateUserApps, user_apps, setLoading } = userAppsContext;
 
     useEffect(() => {
-        getAllUserApps(userAppsDispatch);
-    }, [userAppsDispatch]);
+        getAllUserApps();
+        // eslint-disable-next-line
+    }, []);
 
     const onUserApprove = useCallback((status, id, user_id) => {
-        updateUserApps(userAppsDispatch, status, id, user_id);
+        updateUserApps(status, id, user_id);
         // eslint-disable-next-line
     }, []);
 
     const onUserDeny = useCallback((status, id, user_id) => {
-        updateUserApps(userAppsDispatch, status, id, user_id);
+        updateUserApps(status, id, user_id);
         // eslint-disable-next-line
     }, []);
 

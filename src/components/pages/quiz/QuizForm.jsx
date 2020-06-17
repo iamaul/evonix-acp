@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { Header, Form } from 'semantic-ui-react';
 
-import {
-    useQuiz,
-    addQuiz,
-    updateQuiz,
-    clearCurrentQuiz,
-    clearQuizErrors
-} from '../../../context/quiz/QuizState';
+import QuizContext from '../../../context/quiz/quizContext';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -16,11 +10,8 @@ const Toast = Swal.mixin({
 });
 
 const QuizForm = () => {
-    const [quizState, quizDispatch] = useQuiz();
-    const { 
-        current_quiz, 
-        error
-    } = quizState;
+    const quizContext = useContext(QuizContext);
+    const { addQuiz, updateQuiz, clearCurrentQuiz, clearQuizErrors, current_quiz, error } = quizContext;
 
     const [quiz, setQuiz] = useState({ title: '', question: '', image: '' });
 
@@ -39,9 +30,10 @@ const QuizForm = () => {
                     text: err.msg
                 });
             });
-            clearQuizErrors(quizDispatch);
+            clearQuizErrors();
         }
-    }, [current_quiz, error, quizDispatch]);
+        // eslint-disable-next-line
+    }, [current_quiz, error]);
 
     const { title, question, image } = quiz;
     const onChange = e => setQuiz({ ...quiz, [e.target.name]: e.target.value });
@@ -50,16 +42,14 @@ const QuizForm = () => {
         e.preventDefault();
 
         if (current_quiz === null) {
-            addQuiz(quizDispatch, quiz);
+            addQuiz(quiz);
         } else {
-            updateQuiz(quizDispatch, quiz);
+            updateQuiz(quiz);
         }
         clearQuiz();
     }
 
-    const clearQuiz = () => {
-        clearCurrentQuiz(quizDispatch);
-    }
+    const clearQuiz = () => clearCurrentQuiz();
     
     return (
         <>
