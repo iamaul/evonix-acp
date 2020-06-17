@@ -42,7 +42,14 @@ const UserAppsState = (props) => {
     
     const clearUserAppsErrors = () => dispatch({ type: CLEAR_USER_APPS_ERROR });
     
-    const values = useMemo(() => ({ state, getAllUserApps, updateUserApps, clearUserAppsErrors }), [state]);
+    const values = {
+        user_apps: state.user_apps,
+        setLoading: state.setLoading,
+        error: state.error,
+        getAllUserApps,
+        updateUserApps,
+        clearUserAppsErrors
+    }
 
     return (
         <UserAppsContext.Provider value={values}>

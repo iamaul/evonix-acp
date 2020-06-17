@@ -42,7 +42,14 @@ const BanState = (props) => {
     
     const clearBanErrors = () => dispatch({ type: CLEAR_BAN_ERROR });
 
-    const values = useMemo(() => ({ state, getBanlist, deleteBan, clearBanErrors }), [state]);
+    const values = {
+        banlist: state.banlist,
+        setLoading: state.setLoading,
+        error: state.error,
+        getBanlist,
+        deleteBan,
+        clearBanErrors
+    }
 
     return (
         <BanContext.Provider value={values}>
