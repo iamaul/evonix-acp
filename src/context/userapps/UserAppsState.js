@@ -38,12 +38,12 @@ const UserAppsState = (props) => {
         }
     }
     
-    const updateUserApps = async (status, id, user_id) => {
+    const updateUserApps = async (status, id, user_id, reason = null) => {
         try {
             // REQUEST START
             dispatch({ type: REQUEST_USER_APPS_APPROVAL });
 
-            const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}`);
+            const res = await api.put(`/api/v1/users/application/${status}/${id}/${user_id}/${reason}`);
             dispatch({ type: UPDATE_USER_APPS, payload: res.data });
 
             Toast.fire({

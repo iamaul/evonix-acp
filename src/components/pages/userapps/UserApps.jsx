@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useCallback, useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import Moment from 'react-moment';
+import Swal from 'sweetalert2';
 import { Modal, Button, Image, Header, Divider, Label, Icon } from 'semantic-ui-react';
 
 import UserAppsContext from '../../../context/userapps/userAppsContext';
@@ -32,7 +33,21 @@ const UserApps = () => {
     }, []);
 
     const onUserDeny = useCallback((status, id, user_id) => {
-        updateUserApps(status, id, user_id);
+        const { value: reason } = await Swal.fire({
+            input: 'text',
+            inputPlaceholder: 'Input reason to deny application',
+            inputValue: inputValue,
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Reason is required.'
+                }
+            }
+        });
+        
+        if (reason) {
+            updateUserApps(status, id, user_id, reason);
+        }
         // eslint-disable-next-line
     }, []);
 
