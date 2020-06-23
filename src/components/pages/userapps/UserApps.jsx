@@ -32,7 +32,7 @@ const UserApps = () => {
         // eslint-disable-next-line
     }, []);
 
-    const onUserDeny = useCallback((status, id, user_id) => {
+    const onUserDeny = useCallback(async (status, id, user_id) => {
         const { value: reason } = await Swal.fire({
             input: 'text',
             inputPlaceholder: 'Input reason to deny application',
