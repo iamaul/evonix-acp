@@ -36,7 +36,6 @@ const UserApps = () => {
         const { value: reason } = await Swal.fire({
             input: 'text',
             inputPlaceholder: 'Input reason to deny application',
-            inputValue: inputValue,
             showCancelButton: true,
             inputValidator: (value) => {
                 if (!value) {
