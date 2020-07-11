@@ -1,10 +1,8 @@
 import React, { useReducer } from 'react';
 import Swal from 'sweetalert2';
 
-import api from '../../utils/api';
 import UserAppsContext from './userAppsContext';
 import userAppsReducer from './userAppsReducer';
-
 import {
     GET_ALL_USER_APPS,
     REQUEST_USER_APPS_APPROVAL,
@@ -12,6 +10,8 @@ import {
     USER_APPS_ERROR,
     CLEAR_USER_APPS_ERROR
 } from '../types';
+
+import api from '../../utils/api';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -21,9 +21,9 @@ const Toast = Swal.mixin({
 const UserAppsState = (props) => {
     const INITIAL_STATE = {
         user_apps: null,
+        error: null,
         requestUserApps: false,
-        setLoading: true,
-        error: null
+        setLoading: true
     }
 
     const [state, dispatch] = useReducer(userAppsReducer, INITIAL_STATE);
@@ -60,9 +60,9 @@ const UserAppsState = (props) => {
     
     const values = {
         user_apps: state.user_apps,
+        error: state.error,
         requestUserApps: state.requestUserApps,
         setLoading: state.setLoading,
-        error: state.error,
         getAllUserApps,
         updateUserApps,
         clearUserAppsErrors

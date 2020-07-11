@@ -14,12 +14,11 @@ export default (state, action) => {
         case USER_LOADED:
             return {
                 ...state,
+                user: payload,
                 isAuthenticated: true,
-                setLoading: false,
-                user: payload
+                setLoading: false
             }
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', payload.token);
             return {
                 ...state,
                 ...payload,
@@ -29,14 +28,13 @@ export default (state, action) => {
         case AUTH_ERROR:
         case LOGIN_FAIL:
         case LOGOUT:
-            localStorage.removeItem('token');
             return {
                 ...state,
                 token: null,
-                isAuthenticated: false,
-                setLoading: false,
                 user: null,
-                error: payload
+                error: payload,
+                isAuthenticated: false,
+                setLoading: false
             }
         case CLEAR_AUTH_ERRORS:
             return {

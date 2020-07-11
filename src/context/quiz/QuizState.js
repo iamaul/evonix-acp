@@ -1,10 +1,9 @@
 import React, { useReducer } from 'react';
 
 import history from '../../components/history';
-import api from '../../utils/api';
+
 import QuizContext from './quizContext';
 import quizReducer from './quizReducer';
-
 import {
     GET_ALL_QUIZ,
     ADD_QUIZ,
@@ -17,12 +16,14 @@ import {
     CLEAR_QUIZ_ERROR
 } from '../types';
 
+import api from '../../utils/api';
+
 const QuizState = (props) => {
     const INITIAL_STATE = {
         quizzes: null,
         current_quiz: null,
-        setLoading: true,
-        error: null
+        error: null,
+        setLoading: true
     }
 
     const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
@@ -77,8 +78,8 @@ const QuizState = (props) => {
     const values = {
         quizzes: state.quizzes,
         current_quiz: state.current_quiz,
-        setLoading: state.setLoading,
         error: state.error,
+        setLoading: state.setLoading,
         getAllQuiz,
         addQuiz,
         deleteQuiz,

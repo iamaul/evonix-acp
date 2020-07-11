@@ -1,9 +1,7 @@
 import React, { useReducer } from 'react';
 
-import api from '../../utils/api';
 import StatsContext from './statsContext';
 import statsReducer from './statsReducer';
-
 import {
     COUNT_SERVER_CHARACTERS,
     COUNT_SERVER_ASSISTANCES,
@@ -13,6 +11,8 @@ import {
     COUNT_SERVER_ERROR,
     CLEAR_STATS_ERROR
 } from '../types';
+
+import api from '../../utils/api';
 
 const StatsState = (props) => {
     const INITIAL_STATE = {

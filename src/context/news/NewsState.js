@@ -1,10 +1,9 @@
 import React, { useReducer } from 'react';
 
 import history from '../../components/history';
-import api from '../../utils/api';
+
 import NewsContext from './newsContext';
 import newsReducer from './newsReducer';
-
 import {
     GET_ALL_NEWS,
     ADD_NEWS,
@@ -17,12 +16,14 @@ import {
     CLEAR_NEWS_ERROR
 } from '../types';
 
+import api from '../../utils/api';
+
 const NewsState = (props) => {
     const INITIAL_STATE = {
         news: null,
         current_news: null,
-        setLoading: true,
-        error: null
+        error: null,
+        setLoading: true
     }
 
     const [state, dispatch] = useReducer(newsReducer, INITIAL_STATE);
@@ -77,8 +78,8 @@ const NewsState = (props) => {
     const values = {
         news: state.news,
         current_news: state.current_news,
-        setLoading: state.setLoading,
         error: state.error,
+        setLoading: state.setLoading,
         getAllNews,
         addNews,
         updateNews,

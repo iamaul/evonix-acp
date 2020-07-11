@@ -14,8 +14,8 @@ import {
 const BanState = (props) => {
     const INITIAL_STATE = {
         banlist: null,
-        setLoading: true,
-        error: null
+        error: null,
+        setLoading: true
     }
 
     const [state, dispatch] = useReducer(banReducer, INITIAL_STATE);
@@ -44,8 +44,8 @@ const BanState = (props) => {
 
     const values = {
         banlist: state.banlist,
-        setLoading: state.setLoading,
         error: state.error,
+        setLoading: state.setLoading,
         getBanlist,
         deleteBan,
         clearBanErrors

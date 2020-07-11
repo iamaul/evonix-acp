@@ -8,6 +8,9 @@ import {
     Segment,
     Icon 
 } from 'semantic-ui-react';
+
+import history from '../../history';
+
 import AuthContext from '../../../context/auth/authContext';
 
 const Toast = Swal.mixin({
@@ -15,13 +18,13 @@ const Toast = Swal.mixin({
     position: 'top-end'
 });
 
-const Login = props => {
+const Login = () => {
     const authContext = useContext(AuthContext);
     const { userLogin, isAuthenticated, clearAuthErrors, error } = authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
-            props.history.push('/dashboard');
+            history.push('/dashboard');
         }
 
         if (error) {

@@ -1,9 +1,7 @@
 import React, { useReducer } from 'react';
 
-import api from '../../utils/api';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
-
 import {
     USER_LOADED,
     AUTH_ERROR,
@@ -13,15 +11,16 @@ import {
     CLEAR_AUTH_ERRORS
 } from '../types';
 
-import setAuthToken from '../../utils/setAuthToken';
+import api from '../../utils/api';
+import { setAuthToken } from '../../utils';
 
 const AuthState = (props) => {
     const INITIAL_STATE = {
         token: localStorage.getItem('token'),
-        isAuthenticated: null,
-        setLoading: true,
         user: null,
-        error: null
+        error: null,
+        isAuthenticated: null,
+        setLoading: true
     }
 
     const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
@@ -36,9 +35,9 @@ const AuthState = (props) => {
         }
     }
 
-    const userLogin = async formBody => {
+    const userLogin = async data => {
         try {
-            const res = await api.post('/api/v1/auth/admin', formBody);
+            const res = await api.post('/api/v1/auth/admin', data);
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
             userLoad();
         } catch (error) {
@@ -52,10 +51,10 @@ const AuthState = (props) => {
 
     const values = {
         token: state.token,
-        isAuthenticated: state.isAuthenticated,
-        setLoading: state.setLoading,
         user: state.user,
         error: state.error,
+        isAuthenticated: state.isAuthenticated,
+        setLoading: state.setLoading,
         userLoad,
         userLogin,
         userLogout,
