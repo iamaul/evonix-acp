@@ -37,7 +37,7 @@ const Home = () => {
         getCountServerAssistances();
         getCountServerGroupByReports();
         getCountServerReports();
-    }, []);
+    }, [getCountServerCharacters, getCountServerGroupByAssistances, getCountServerAssistances, getCountServerGroupByReports, getCountServerReports]);
 
     return (
         <>
