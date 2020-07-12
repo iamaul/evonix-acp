@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { 
     Form, 
@@ -17,13 +16,13 @@ const Toast = Swal.mixin({
     position: 'top-end'
 });
 
-const Login = () => {
+const Login = props => {
     const authContext = useContext(AuthContext);
     const { userLogin, isAuthenticated, clearAuthErrors, error } = authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
-            return <Redirect to="/dashboard" />;
+            props.history.push('/dashboard');
         }
 
         if (error) {
@@ -37,7 +36,7 @@ const Login = () => {
             clearAuthErrors();
         }
         // eslint-disable-next-line
-    }, [isAuthenticated, error]);
+    }, [props.history, isAuthenticated, error]);
 
     const [user, setUser] = useState({ usermail: '', password: '' });
     const { usermail, password } = user;
