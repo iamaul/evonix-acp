@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { 
     Form, 
@@ -8,8 +9,6 @@ import {
     Segment,
     Icon 
 } from 'semantic-ui-react';
-
-import history from '../../history';
 
 import AuthContext from '../../../context/auth/authContext';
 
@@ -24,7 +23,7 @@ const Login = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            history.push('/dashboard');
+            return <Redirect to="/dashboard" />;
         }
 
         if (error) {
@@ -38,7 +37,7 @@ const Login = () => {
             clearAuthErrors();
         }
         // eslint-disable-next-line
-    }, [isAuthenticated, history, error]);
+    }, [isAuthenticated, error]);
 
     const [user, setUser] = useState({ usermail: '', password: '' });
     const { usermail, password } = user;
