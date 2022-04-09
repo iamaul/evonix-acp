@@ -10,7 +10,7 @@
     "@tinymce/tinymce-react": "^3.6.0",
     "axios": "^0.21.1",
     "html-react-parser": "^0.10.5",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "react": "^16.13.1",
     "react-data-table-component": "^6.9.3",
     "react-dom": "^16.13.1",
